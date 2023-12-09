@@ -2,8 +2,8 @@ package logic;
 
 import entity.animal.Animal;
 import entity.base.Item;
-import entity.builing.FlowerPlot;
-import entity.builing.Plot;
+import entity.building.FlowerPlot;
+import entity.building.Plot;
 
 import java.util.ArrayList;
 

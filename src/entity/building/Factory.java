@@ -1,4 +1,4 @@
-package entity.builing;
+package entity.building;
 
 import entity.product.Bread;
 import entity.product.Product;
