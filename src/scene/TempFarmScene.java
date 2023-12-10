@@ -28,6 +28,8 @@ public class TempFarmScene extends StackPane {
     private GameButton shopButton;
     private GameButton martButton;
 
+    private GameButton cageButton;
+
     private VBox container;
 
     private OrbitFontText title;
@@ -68,13 +70,14 @@ public class TempFarmScene extends StackPane {
         factButtonSetup();
         shopButtonSetup();
         martButtonSetup();
+        cageButtonSetup();
 
 
         // buttonContainer setup
         buttonContainer = new VBox();
         buttonContainer.setPadding(new Insets(20,0,0,0));
         buttonContainer.setSpacing(5);
-        buttonContainer.getChildren().addAll(barnButton,plotButton,factButton,shopButton,martButton);
+        buttonContainer.getChildren().addAll(barnButton,plotButton,factButton,shopButton,martButton,cageButton);
 
         // container setup
         container.getChildren().add(buttonContainer);
@@ -147,6 +150,16 @@ public class TempFarmScene extends StackPane {
         martButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 HomeMenuScene.getRoot().getChildren().add(new MinimartScene());
+            }
+        });
+    }
+
+    public void cageButtonSetup(){
+        cageButton = new GameButton(200,50,40,Color.rgb(124,153,182));
+        cageButton.addText("Cage",30,Color.WHITE);
+        cageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent e) {
+                HomeMenuScene.getRoot().getChildren().add(new CageScene(gameInstance));
             }
         });
     }
