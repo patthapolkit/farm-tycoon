@@ -36,7 +36,10 @@ public class FactoryScene extends StackPane {
 
     private HBox mainContainer;
 
-    public FactoryScene(GameInstance gameInstance) {
+
+    private CashDisplay cashDisplay;
+
+    public FactoryScene(GameInstance gameInstance){
         this.gameInstance = gameInstance;
 
         // stackPane(this) setup
@@ -53,7 +56,12 @@ public class FactoryScene extends StackPane {
         topContainer = new StackPane();
         topContainer.setAlignment(Pos.CENTER_LEFT);
         topContainer.setPadding(new Insets(15, 30, 0, 30));
-        topContainer.getChildren().addAll(titleContainer, new NavMenu());
+
+        // EDIT ME
+        cashDisplay = new CashDisplay(100);
+        // This constructor should receive player's currentCash
+
+        topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
 
         // infoPane & vScroll setup
         craftPaneSetup();

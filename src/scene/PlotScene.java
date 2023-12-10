@@ -33,6 +33,8 @@ public class PlotScene extends StackPane {
     private PlotGrid plotGrid;
     private PlotControl plotControl;
 
+    private CashDisplay cashDisplay;
+
     public PlotScene(GameInstance gameInstance) {
         this.gameInstance = gameInstance;
 
@@ -50,11 +52,16 @@ public class PlotScene extends StackPane {
         topContainer = new StackPane();
         topContainer.setAlignment(Pos.CENTER_LEFT);
         topContainer.setPadding(new Insets(15, 30, 0, 30));
-        topContainer.getChildren().addAll(titleContainer, new NavMenu());
+
+        // EDIT ME
+        cashDisplay = new CashDisplay(100);
+        // This constructor should receive player's currentCash
+
+
+        topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
 
 
         loadUnlockedSeed();
-
         loadPlots();
 
         // container setup
@@ -98,7 +105,15 @@ public class PlotScene extends StackPane {
 
     }
 
-    public void loadUnlockedSeed() {
+
+
+    private void updateCashText(int x){
+        cashDisplay.setCashText(x);
+    }
+
+    public void loadUnlockedSeed(){
+
+        // Sample ArrayList<Seed>
         ArrayList<Seed> unlockedSeed = gameInstance.getShop().getUnlockedSeed();
         plotControl = new PlotControl(unlockedSeed);
     }

@@ -79,6 +79,9 @@ public class Utility {
         else if (s.equals("Poppy")) {return new Poppy();}
         else if (s.equals("Pumpkin")) {return new Pumpkin();}
         else if (s.equals("Tulip")) {return new Tulip();}
+        else if (s.equals("Bread")) {return new Bread();}
+        else if (s.equals("Carrot Pie")) {return new CarrotPie();}
+        else if (s.equals("Pumpkin Pie")) {return new PumpkinPie();}
         return null;
     }
 
