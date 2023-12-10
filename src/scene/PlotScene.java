@@ -56,11 +56,17 @@ public class PlotScene extends StackPane {
         container.getChildren().addAll(topContainer, plotGrid, plotControl);
         getChildren().add(container);
 
+        // plotSquare setup
+        plotSquareEvents();
+
+    }
+
+
+    public void plotSquareEvents(){
         for (Node i: plotGrid.getGrid().getChildren()){
             if (i instanceof PlotSquare){
                 i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     public void handle(MouseEvent e) {
-
                         if (((PlotSquare) i).isPlanted()){
                             if (plotControl.getSelectedTool() != null){
                                 System.out.println("Applied " + plotControl.getSelectedTool());
@@ -77,9 +83,7 @@ public class PlotScene extends StackPane {
                                 System.out.println("Applied " + plotControl.getSelectedSeed());
                                 ((PlotSquare) i).setSeed(stringToSeed(plotControl.getSelectedSeed()));
                             }
-
                         }
-
                     }
                 });
             }
