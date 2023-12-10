@@ -3,49 +3,54 @@ package logic;
 import entity.building.Factory;
 import entity.building.Market;
 import entity.building.Shop;
+import entity.material.Pumpkin;
+import entity.material.Wheat;
 
-public class GameLogic {
-    static Market market;
-    static Shop shop;
-    static Factory factory;
-    static Player player;
+public class GameInstance {
+    private Market market;
+    private Shop shop;
+    private Factory factory;
+    private Player player;
 
-    public GameLogic() {
+    public GameInstance() {
         market = new Market();
         shop = new Shop();
         factory = new Factory();
-        player = new Player("playerName");
+        player = new Player();
+
+        player.addItem(new Wheat(), 5);
+        player.addItem(new Pumpkin(), 5);
     }
 
-    public static Market getMarket() {
+    public Market getMarket() {
         return market;
     }
 
-    public static void setMarket(Market market) {
-        GameLogic.market = market;
+    public void setMarket(Market market) {
+        this.market = market;
     }
 
-    public static Shop getShop() {
+    public Shop getShop() {
         return shop;
     }
 
-    public static void setShop(Shop shop) {
-        GameLogic.shop = shop;
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
-    public static Factory getFactory() {
+    public Factory getFactory() {
         return factory;
     }
 
-    public static void setFactory(Factory factory) {
-        GameLogic.factory = factory;
+    public void setFactory(Factory factory) {
+        this.factory = factory;
     }
 
-    public static Player getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
-    public static void setPlayer(Player player) {
-        GameLogic.player = player;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }
