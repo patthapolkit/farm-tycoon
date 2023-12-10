@@ -25,7 +25,7 @@ public class BarnScene extends StackPane {
     private OrbitFontText title;
 
 
-    public BarnScene(){
+    public BarnScene(ArrayList<ItemCounter> inventory){
 
         // stackPane(this) setup
         setPrefSize(800,450);
@@ -44,19 +44,6 @@ public class BarnScene extends StackPane {
         topContainer.getChildren().addAll(titleContainer, new NavMenu());
         
         // inventoryGrid setup
-        ArrayList<ItemCounter> inventory = new ArrayList<ItemCounter>();
-        inventory.add(new ItemCounter(new Wheat(),10));
-        inventory.add(new ItemCounter(new Carrot(),10));
-        inventory.add(new ItemCounter(new Beetroot(),53));
-        inventory.add(new ItemCounter(new Milk(),79));
-        inventory.add(new ItemCounter(new Egg(),3));
-        inventory.add(new ItemCounter(new Berry(),1));
-        inventory.add(new ItemCounter(new Cake(),1));
-        inventory.add(new ItemCounter(new Wool(),1));
-        inventory.add(new ItemCounter(new PumpkinPie(),13));
-        inventory.add(new ItemCounter(new Sweater(),1));
-        inventory.add(new ItemCounter(new CarrotPie(),12));
-        inventory.add(new ItemCounter(new Bread(),133));
         inventoryGrid = new InventoryGrid(inventory);
         
         // container setup

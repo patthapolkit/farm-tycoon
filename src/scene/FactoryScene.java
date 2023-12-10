@@ -1,6 +1,7 @@
 package scene;
 
 import component.*;
+import entity.base.Item;
 import entity.product.Recipe;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -12,7 +13,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import logic.ItemCounter;
 import resource.ImageLoader;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+import static entity.product.Recipe.getRecipe;
 import static resource.ImageLoader.*;
 import static utility.Utility.stringToProduct;
 
@@ -35,6 +39,7 @@ public class FactoryScene extends StackPane {
     private HBox mainContainer;
 
     public FactoryScene(){
+
         // stackPane(this) setup
         setPrefSize(800, 450);
         setBackground(new Background(new BackgroundFill(Color.rgb(127, 127, 127), null, null)));
@@ -51,13 +56,26 @@ public class FactoryScene extends StackPane {
         topContainer.setPadding(new Insets(15, 30, 0, 30));
         topContainer.getChildren().addAll(titleContainer, new NavMenu());
 
+        // craftingPane & vScroll setup
+        craftPaneSetup();
+        vScrollSetup();
 
-        craftingPane = new CraftingPane();
-        craftingPane.getCraftButton().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent e) {
-                craftPressed();
-            }
-        });
+        // mainContainer setup
+        mainContainer = new HBox();
+        mainContainer.getChildren().addAll(recipeSelector, craftingPane);
+        mainContainer.setAlignment(Pos.CENTER);
+        mainContainer.setSpacing(15);
+
+        // container setup
+        container = new VBox();
+        container.setSpacing(15);
+        container.getChildren().addAll(topContainer, mainContainer);
+        getChildren().add(container);
+
+    }
+
+
+    private void vScrollSetup(){
 
         recipeSelector = new VScroll();
 
@@ -79,30 +97,27 @@ public class FactoryScene extends StackPane {
             }
         }
 
-
-
-        // mainContainer setup
-        mainContainer = new HBox();
-        mainContainer.getChildren().addAll(recipeSelector, craftingPane);
-        mainContainer.setAlignment(Pos.CENTER);
-        mainContainer.setSpacing(15);
-
-        // container setup
-        container = new VBox();
-        container.setSpacing(15);
-        container.getChildren().addAll(topContainer, mainContainer);
-        getChildren().add(container);
-
         setSelectedRecipe(vb1);
 
     }
+
+    private void craftPaneSetup(){
+        craftingPane = new CraftingPane();
+        craftingPane.getCraftButton().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent e) {
+                craftPressed();
+            }
+        });
+    }
+
+
     private void setSelectedRecipe(Node vb){
         selectedRecipe = ((VScrollButton) vb).getButtonId();
         System.out.println(selectedRecipe);
         recipeSelector.updateSelected(selectedRecipe);
         craftingPane.setItemNameText(selectedRecipe);
         craftingPane.setItemImage(getImage(itemToLoad(stringToProduct(selectedRecipe))));
-        Recipe r = Recipe.getRecipe(selectedRecipe);
+        Recipe r = getRecipe(selectedRecipe);
         craftingPane.getItemDisContainer().getChildren().clear();
         for (ItemCounter i: r.getIngredient()){
             ItemDisplay j = new ItemDisplay(i);
@@ -111,7 +126,15 @@ public class FactoryScene extends StackPane {
     }
 
     private void craftPressed(){
+
+        Item craftedItem = stringToProduct(selectedRecipe);
+        ArrayList<ItemCounter> ingredient = getRecipe(selectedRecipe).getIngredient();
+
+        // EDIT HERE
+
+
         System.out.println("Crafted " + selectedRecipe);
+
     }
 
 }
