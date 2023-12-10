@@ -2,23 +2,17 @@ package entity.animal;
 
 import entity.base.Collectable;
 import entity.material.Egg;
-import logic.NotEnoughBalanceException;
 import logic.Player;
 
 public class Chicken extends Animal implements Collectable {
 
     public Chicken() {
-        super("Chicken", 100);
+        super("Chicken", 1000);
     }
 
     @Override
-    public void feed(Player player) throws NotEnoughBalanceException {
-        if (player.getBalance() >= 20) {
-            increaseFoodLevel(5);
-            player.chargeMoney(20);
-        } else {
-            throw new NotEnoughBalanceException();
-        }
+    public void feed(Player player) {
+        increaseFoodLevel(25);
     }
 
     @Override

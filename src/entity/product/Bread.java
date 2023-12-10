@@ -3,19 +3,19 @@ package entity.product;
 import entity.material.Wheat;
 import logic.Player;
 
-public class Bread extends Product{
+public class Bread extends Product {
     public Bread() {
-        super("Bread", 50);
+        super("Bread", 100);
     }
 
     @Override
     public boolean canCraft(Player player) {
-        return player.existsInInventory(new Wheat(), 5);
+        return player.existsInInventory(new Wheat(), 3);
     }
 
     @Override
     public void craft(Player player) {
-        player.removeItem(new Wheat(), 5);
+        player.removeItem(new Wheat(), 3);
         player.addItem(new Bread(), 1);
     }
 }

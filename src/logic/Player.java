@@ -2,27 +2,24 @@ package logic;
 
 import entity.animal.Animal;
 import entity.base.Item;
-import entity.building.FlowerPlot;
 import entity.building.Plot;
+import entity.seed.Seed;
 
 import java.util.ArrayList;
 
 public class Player {
-    private String name;
     private int balance;
     private ArrayList<ItemCounter> inventory;
+    private ArrayList<Seed> unlockedSeeds;
     private ArrayList<Plot> plots;
-    private ArrayList<FlowerPlot> flowerPlots;
     private ArrayList<Animal> cage;
 
-    public Player(String name) {
-        this.name = name;
+    public Player() {
         this.balance = 1000;
         this.inventory = new ArrayList<>();
         this.cage = new ArrayList<>();
         this.plots = new ArrayList<>();
-        this.flowerPlots = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 16; i++) {
             plots.add(new Plot());
         }
     }
@@ -84,14 +81,6 @@ public class Player {
         }
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void chargeMoney(int amount) {
         this.balance -= amount;
     }
@@ -111,14 +100,6 @@ public class Player {
 
     public void setPlots(ArrayList<Plot> plots) {
         this.plots = plots;
-    }
-
-    public ArrayList<FlowerPlot> getFlowerPlots() {
-        return flowerPlots;
-    }
-
-    public void setFlowerPlots(ArrayList<FlowerPlot> flowerPlots) {
-        this.flowerPlots = flowerPlots;
     }
 
     public ArrayList<ItemCounter> getInventory() {

@@ -9,10 +9,12 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import logic.GameInstance;
 
 import static utility.Utility.stringToSeed;
 
 public class PlotScene extends StackPane {
+    private GameInstance gameInstance;
 
     private VBox container;
 
@@ -30,7 +32,8 @@ public class PlotScene extends StackPane {
     private HBox bottomContainer;
 
 
-    public PlotScene() {
+    public PlotScene(GameInstance gameInstance) {
+        this.gameInstance = gameInstance;
 
         // stackPane(this) setup
         setPrefSize(800, 450);

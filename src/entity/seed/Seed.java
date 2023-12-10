@@ -1,7 +1,6 @@
 package entity.seed;
 
 import entity.base.Collectable;
-import logic.NotEnoughBalanceException;
 import logic.Player;
 
 public abstract class Seed implements Collectable {
@@ -15,10 +14,11 @@ public abstract class Seed implements Collectable {
         setHumidityLevel(humidityLevel);
     }
 
-    public abstract void water(Player player) throws NotEnoughBalanceException;
-
-    public boolean isReadyForHarvest() {
-        return humidityLevel >= 100;
+    public void water(Player player){
+        if (player.getBalance() >= 5 && humidityLevel != 100) {
+            increaseHumidity(25);
+            player.chargeMoney(5);
+        }
     }
 
     @Override

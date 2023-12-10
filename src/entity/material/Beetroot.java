@@ -2,6 +2,6 @@ package entity.material;
 
 public class Beetroot extends Material {
     public Beetroot() {
-        super("Beetroot", 10);
+        super("Beetroot", 50);
     }
 }

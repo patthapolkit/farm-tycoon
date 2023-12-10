@@ -1,7 +1,7 @@
 package entity.building;
 
 import entity.animal.Animal;
-import entity.animal.Cat;
+import entity.animal.Sheep;
 import entity.animal.Chicken;
 import entity.animal.Cow;
 import entity.seed.CarrotSeed;
@@ -27,7 +27,7 @@ public class Shop {
         allAnimal = new ArrayList<>();
         allAnimal.add(new Chicken());
         allAnimal.add(new Cow());
-        allAnimal.add(new Cat());
+        allAnimal.add(new Sheep());
     }
 
     public boolean isUnlocked(Seed seed) {
@@ -50,9 +50,6 @@ public class Shop {
         if (player.getBalance() >= animal.getPrice() && player.canAddToCage(animal, 5)) {
             player.getCage().add(animal);
             player.chargeMoney(animal.getPrice());
-            if (animal.getName().equals("Cat")) {
-                player.getFlowerPlots().add(new FlowerPlot());
-            }
         }
 
     }

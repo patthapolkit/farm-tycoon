@@ -1,19 +1,18 @@
 package entity.seed;
 
-import logic.NotEnoughBalanceException;
+import entity.material.Beetroot;
 import logic.Player;
 
-public class BeetrootSeed extends Seed{
+public class BeetrootSeed extends Seed {
 
-    public BeetrootSeed(){
-        super("Beetroot Seed", 0, 0, true);
+    public BeetrootSeed() {
+        super("Beetroot Seed", 500, 0);
     }
 
     @Override
     public void collect(Player player) {
-    }
-
-    @Override
-    public void water(Player player) throws NotEnoughBalanceException {
+        if (getHumidityLevel() == 100) {
+            player.addItem(new Beetroot(), 1);
+        }
     }
 }
