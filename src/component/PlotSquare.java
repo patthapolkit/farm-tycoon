@@ -15,7 +15,6 @@ import static utility.Utility.seedToProduct;
 
 public class PlotSquare extends StackPane {
 
-    private Boolean locked;
     private ImageView background;
 
     private ImageView foreground;
@@ -27,7 +26,6 @@ public class PlotSquare extends StackPane {
     private Plot plot;
 
     public PlotSquare(){
-        locked = false;
         seed = null;
         currentStage = 0;
         background = new ImageView();
@@ -67,7 +65,6 @@ public class PlotSquare extends StackPane {
             foreground.setFitWidth(65);
             getChildren().addAll(foreground);
     }
-
     public void nextStage(){
             if (!seed.equals(null)){
                 if (seed instanceof WheatSeed){
@@ -111,7 +108,6 @@ public class PlotSquare extends StackPane {
                 }
             }
     }
-
     public Boolean isReady(){
         return (currentStage == 4);
     }
@@ -126,13 +122,11 @@ public class PlotSquare extends StackPane {
             getChildren().remove(foreground);
         }
     }
-
     public void harvest(){
         if (isReady()){
             clear();
         }
     }
-
 
     public Boolean isPlanted() {
         return !(seed == null);

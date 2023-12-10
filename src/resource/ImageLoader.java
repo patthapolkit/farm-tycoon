@@ -98,6 +98,13 @@ public enum ImageLoader {
     SHEEP4("Sheep4"),
     SHEEP5("Sheep5"),
 
+    ANIMAL_SQUARE("AnimalSquare"),
+
+
+    HAND("Hand"),
+
+    CHICKEN_FOOD("ChickenFood")
+
 
 
     ;
