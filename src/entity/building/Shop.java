@@ -38,8 +38,8 @@ public class Shop {
     }
 
     public void buy(Player player, Animal animal) {
-        if (player.getBalance() >= animal.getPrice() && player.canAddToCage(animal, 5)) {
-            player.getCage().add(animal);
+        if (player.getBalance() >= animal.getPrice() && player.canAddToCage(animal, 4)) {
+            player.addToCage(animal);
             player.chargeMoney(animal.getPrice());
         } else {
             System.out.println("Can't buy " + animal.getName());

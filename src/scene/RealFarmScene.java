@@ -19,22 +19,24 @@ import java.util.ArrayList;
 import static resource.ImageLoader.getImage;
 
 public class RealFarmScene extends Pane {
-
-
+    private GameInstance gameInstance;
     private CashDisplay cashDisplay;
 
-    public RealFarmScene(){
+    public RealFarmScene(GameInstance gameInstance) {
+        this.gameInstance = gameInstance;
+
         setPrefSize(800, 450);
         setBackground(new Background(
                 new BackgroundImage(getImage(ImageLoader.MAIN_BACKGROUND), BackgroundRepeat.NO_REPEAT,
                         BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(
                         800, 450, false, false, false, false))));
 
-        cashDisplay = new CashDisplay(100);
+        cashDisplay = new CashDisplay(gameInstance.getPlayer().getBalance());
 //        navMenu = new NavMenu();
-        getChildren().addAll( cashDisplay);
+        getChildren().addAll(cashDisplay);
         cashDisplay.setLayoutX(670);
         cashDisplay.setLayoutY(20);
+        cashDisplay.setCashText(gameInstance.getPlayer().getBalance());
 //        navMenu.setLayoutX(30);
 //        navMenu.setLayoutY(20);
 
@@ -77,18 +79,17 @@ public class RealFarmScene extends Pane {
         cage.setCursor(Cursor.HAND);
         fact.setCursor(Cursor.HAND);
 
-        barn.relocate(0,250);
-        shop.relocate(130,255);
-        mart.relocate(200,305);
-        plot.relocate(415,350);
-        cage.relocate(570,310);
-        fact.relocate(415,130);
-
-        GameInstance gameInstance = new GameInstance();
+        barn.relocate(0, 250);
+        shop.relocate(130, 255);
+        mart.relocate(200, 305);
+        plot.relocate(415, 350);
+        cage.relocate(570, 310);
+        fact.relocate(415, 130);
 
         barn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             ArrayList<ItemCounter> playerInventory = gameInstance.getPlayer().getInventory();
-            HomeMenuScene.getRoot().getChildren().add(new BarnScene(playerInventory));
+            int balance = gameInstance.getPlayer().getBalance();
+            HomeMenuScene.getRoot().getChildren().add(new BarnScene(playerInventory, balance));
         });
         shop.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             HomeMenuScene.getRoot().getChildren().add(new ShopScene(gameInstance));
@@ -107,9 +108,7 @@ public class RealFarmScene extends Pane {
         });
 
 
-
     }
-
 
 
 }

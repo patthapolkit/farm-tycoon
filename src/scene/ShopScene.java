@@ -12,12 +12,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import logic.GameInstance;
+
 import static resource.ImageLoader.*;
 import static utility.Utility.*;
 
 public class ShopScene extends StackPane {
     private GameInstance gameInstance;
-
 
     private VBox container;
 
@@ -37,7 +37,8 @@ public class ShopScene extends StackPane {
     private CashDisplay cashDisplay;
 
 
-    public ShopScene(GameInstance gameInstance){
+    public ShopScene(GameInstance gameInstance) {
+        this.gameInstance = gameInstance;
 
         // stackPane(this) setup
         setPrefSize(800, 450);
@@ -54,11 +55,8 @@ public class ShopScene extends StackPane {
         topContainer.setAlignment(Pos.CENTER_LEFT);
         topContainer.setPadding(new Insets(15, 30, 0, 30));
 
-        // EDIT ME
-        cashDisplay = new CashDisplay(100);
-        // This constructor should receive player's currentCash
-
-        topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
+        cashDisplay = new CashDisplay(gameInstance.getPlayer().getBalance());
+        topContainer.getChildren().addAll(titleContainer, cashDisplay, new NavMenu());
 
         // infoPane & vScroll setup
         infoPaneSetup();
@@ -79,10 +77,11 @@ public class ShopScene extends StackPane {
     }
 
 
-    private void updateCashText(int x){
+    private void updateCashText(int x) {
         cashDisplay.setCashText(x);
     }
-    private void vScrollSetup(){
+
+    private void vScrollSetup() {
 
 
         itemSelector = new VScroll(Color.rgb(199, 211, 214));
@@ -143,8 +142,6 @@ public class ShopScene extends StackPane {
     }
 
     private void purchase() {
-
-
         if ((selectedItem == "Cow") || (selectedItem == "Chicken") || (selectedItem == "Sheep")) {
             Animal purchasedAnimal = stringToAnimal(selectedItem);
             gameInstance.getShop().buy(gameInstance.getPlayer(), purchasedAnimal);
@@ -154,6 +151,7 @@ public class ShopScene extends StackPane {
             gameInstance.getShop().unlock(gameInstance.getPlayer(), unlockedSeed);
             System.out.println("Unlocked " + unlockedSeed.getName());
         }
+        updateCashText(gameInstance.getPlayer().getBalance());
     }
 
 }

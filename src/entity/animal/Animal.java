@@ -1,8 +1,9 @@
 package entity.animal;
 
+import entity.base.Collectable;
 import logic.Player;
 
-public abstract class Animal {
+public abstract class Animal implements Collectable {
     private String name;
     private int foodLevel;
     private int price;
@@ -14,10 +15,6 @@ public abstract class Animal {
     }
 
     public abstract void feed(Player player);
-
-    public boolean canBuy(Player player) {
-        return player.getBalance() >= this.price;
-    }
 
     public String getName() {
         return name;

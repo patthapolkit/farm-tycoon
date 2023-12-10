@@ -2,10 +2,6 @@ package scene;
 
 import component.*;
 import entity.animal.*;
-import entity.building.Plot;
-import entity.material.*;
-import entity.product.*;
-import entity.seed.*;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,11 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import logic.GameInstance;
-import logic.ItemCounter;
 
 import java.util.ArrayList;
-
-import static utility.Utility.stringToSeed;
 
 public class CageScene extends StackPane {
     private GameInstance gameInstance;
@@ -54,11 +47,8 @@ public class CageScene extends StackPane {
         topContainer.setAlignment(Pos.CENTER_LEFT);
         topContainer.setPadding(new Insets(15, 30, 0, 30));
 
-        // EDIT ME
-        cashDisplay = new CashDisplay(100);
-        // This constructor should receive player's currentCash
-
-        topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
+        cashDisplay = new CashDisplay(gameInstance.getPlayer().getBalance());
+        topContainer.getChildren().addAll(titleContainer, cashDisplay, new NavMenu());
 
         loadAnimal();
         animalControl = new AnimalControl();
@@ -72,28 +62,27 @@ public class CageScene extends StackPane {
         animalSquareEvents();
 
     }
-    public void animalSquareEvents(){
-        for (Node i: animalGrid.getGrid().getChildren()){
-            if (i instanceof AnimalSquare){
+
+    public void animalSquareEvents() {
+        for (Node i : animalGrid.getGrid().getChildren()) {
+            if (i instanceof AnimalSquare) {
                 i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     public void handle(MouseEvent e) {
-                        if (((AnimalSquare) i).isOccupied()){
-                            if (animalControl.getSelectedTool() != null){
+                        if (((AnimalSquare) i).isOccupied()) {
+                            if (animalControl.getSelectedTool() != null) {
                                 System.out.println("Applied " + animalControl.getSelectedTool());
-                                if (animalControl.getSelectedTool() == "Hand"){
-                                    if (((AnimalSquare) i).isReady()){
+                                if (animalControl.getSelectedTool() == "Hand") {
+                                    if (((AnimalSquare) i).isReady()) {
                                         ((AnimalSquare) i).harvest();
                                         animalCollected(((AnimalSquare) i).getAnimal());
                                     }
-                                }
-                                else if (animalControl.getSelectedTool() == "Wheat"){
-                                    if (!((AnimalSquare) i).isReady() && (((AnimalSquare) i).eatWheat())){
+                                } else if (animalControl.getSelectedTool() == "Wheat") {
+                                    if (!((AnimalSquare) i).isReady() && (((AnimalSquare) i).eatWheat())) {
                                         ((AnimalSquare) i).nextStage();
                                         animalFed(((AnimalSquare) i).getAnimal());
                                     }
-                                }
-                                else if (animalControl.getSelectedTool() == "ChickenFood"){
-                                    if (!((AnimalSquare) i).isReady() && !(((AnimalSquare) i).eatWheat())){
+                                } else if (animalControl.getSelectedTool() == "ChickenFood") {
+                                    if (!((AnimalSquare) i).isReady() && !(((AnimalSquare) i).eatWheat())) {
                                         ((AnimalSquare) i).nextStage();
                                         animalFed(((AnimalSquare) i).getAnimal());
                                     }
@@ -107,42 +96,21 @@ public class CageScene extends StackPane {
 
     }
 
-    public void loadAnimal(){
-
-
-        // Sample ArrayList<Plot>
-        // Note: Its size will always be 12 as shown
-        ArrayList<Animal> animal = new ArrayList<Animal>();
-        animal.add(new Cow());
-        animal.add(new Chicken());
-        animal.add(new Sheep());
-        for (int i=1;i<=9;i++){
-            animal.add(new NullAnimal());
-        }
-
-        // EDIT HERE
-
-        // Send an ArrayList<Plot> to the PlotGrid constructor
+    public void loadAnimal() {
+        ArrayList<Animal> animal = gameInstance.getPlayer().getCage();
         animalGrid = new AnimalGrid(animal);
     }
 
-    public void animalCollected(Animal animal){
-
-        // This function will be called when the input animal has been harvested
+    public void animalCollected(Animal animal) {
         System.out.println("Animal Collected");
         System.out.println(animal.getName());
-
-        // EDIT HERE
-
+        animal.collect(gameInstance.getPlayer());
     }
 
-    public void animalFed(Animal animal){
-
-        // This function will be called when the input plot has been fed
+    public void animalFed(Animal animal) {
         System.out.println("Animal Fed");
         System.out.println(animal.getName());
-
-        // EDIT HERE
+        animal.feed(gameInstance.getPlayer());
     }
 
 }

@@ -36,7 +36,8 @@ public class MinimartScene extends StackPane {
     private CashDisplay cashDisplay;
 
 
-    public MinimartScene(GameInstance gameInstance){
+    public MinimartScene(GameInstance gameInstance) {
+        this.gameInstance = gameInstance;
 
         // stackPane(this) setup
         setPrefSize(800, 450);
@@ -53,12 +54,8 @@ public class MinimartScene extends StackPane {
         topContainer.setAlignment(Pos.CENTER_LEFT);
         topContainer.setPadding(new Insets(15, 30, 0, 30));
 
-        // EDIT ME
-        cashDisplay = new CashDisplay(100);
-        // This constructor should receive player's currentCash
-
-
-        topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
+        cashDisplay = new CashDisplay(gameInstance.getPlayer().getBalance());
+        topContainer.getChildren().addAll(titleContainer, cashDisplay, new NavMenu());
 
         // infoPane & vScroll setup
         infoPaneSetup();
@@ -77,7 +74,8 @@ public class MinimartScene extends StackPane {
         getChildren().add(container);
 
     }
-    private void updateCashText(int x){
+
+    private void updateCashText(int x) {
         cashDisplay.setCashText(x);
     }
 
@@ -149,7 +147,8 @@ public class MinimartScene extends StackPane {
         } else {
             soldItem = stringToItem(selectedItem);
         }
-        gameInstance.getMarket().sell(gameInstance.getPlayer(), soldItem, 1);
+        gameInstance.getMinimart().sell(gameInstance.getPlayer(), soldItem, 1);
+        updateCashText(gameInstance.getPlayer().getBalance());
         System.out.println("Sold " + soldItem.getName());
     }
 }

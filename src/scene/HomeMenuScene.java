@@ -34,7 +34,6 @@ public class HomeMenuScene {
     private static StackPane root;
 
     public HomeMenuScene(Stage stage) {
-
         // stage setup
         this.stage = stage;
 
@@ -79,7 +78,7 @@ public class HomeMenuScene {
         // buttons event handling
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
-                root.getChildren().add(new RealFarmScene());
+                root.getChildren().add(new RealFarmScene(gameInstance));
             }
         });
 

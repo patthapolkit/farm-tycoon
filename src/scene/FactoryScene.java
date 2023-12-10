@@ -39,7 +39,7 @@ public class FactoryScene extends StackPane {
 
     private CashDisplay cashDisplay;
 
-    public FactoryScene(GameInstance gameInstance){
+    public FactoryScene(GameInstance gameInstance) {
         this.gameInstance = gameInstance;
 
         // stackPane(this) setup
@@ -57,11 +57,8 @@ public class FactoryScene extends StackPane {
         topContainer.setAlignment(Pos.CENTER_LEFT);
         topContainer.setPadding(new Insets(15, 30, 0, 30));
 
-        // EDIT ME
-        cashDisplay = new CashDisplay(100);
-        // This constructor should receive player's currentCash
-
-        topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
+        cashDisplay = new CashDisplay(gameInstance.getPlayer().getBalance());
+        topContainer.getChildren().addAll(titleContainer, cashDisplay, new NavMenu());
 
         // infoPane & vScroll setup
         craftPaneSetup();

@@ -11,4 +11,9 @@ public class NullAnimal extends Animal {
     @Override
     public void feed(Player player) {
     }
+
+    @Override
+    public void collect(Player player) {
+
+    }
 }

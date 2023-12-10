@@ -1,33 +1,37 @@
 package logic;
 
 import entity.building.Factory;
-import entity.building.Market;
+import entity.building.Minimart;
 import entity.building.Shop;
+import entity.material.Milk;
 import entity.material.Pumpkin;
 import entity.material.Wheat;
+import entity.material.Wool;
 
 public class GameInstance {
-    private Market market;
+    private Minimart minimart;
     private Shop shop;
     private Factory factory;
     private Player player;
 
     public GameInstance() {
-        market = new Market();
+        minimart = new Minimart();
         shop = new Shop();
         factory = new Factory();
         player = new Player();
 
         player.addItem(new Wheat(), 5);
         player.addItem(new Pumpkin(), 5);
+        player.addItem(new Milk(), 5);
+        player.addItem(new Wool(), 5);
     }
 
-    public Market getMarket() {
-        return market;
+    public Minimart getMinimart() {
+        return minimart;
     }
 
-    public void setMarket(Market market) {
-        this.market = market;
+    public void setMinimart(Minimart minimart) {
+        this.minimart = minimart;
     }
 
     public Shop getShop() {

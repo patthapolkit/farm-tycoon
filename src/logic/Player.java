@@ -1,6 +1,7 @@
 package logic;
 
 import entity.animal.Animal;
+import entity.animal.NullAnimal;
 import entity.base.Item;
 import entity.building.Plot;
 import entity.seed.Seed;
@@ -10,14 +11,16 @@ import java.util.ArrayList;
 public class Player {
     private int balance;
     private ArrayList<ItemCounter> inventory;
-    private ArrayList<Seed> unlockedSeeds;
     private ArrayList<Plot> plots;
     private ArrayList<Animal> cage;
 
     public Player() {
-        this.balance = 1000;
+        this.balance = 10;
         this.inventory = new ArrayList<>();
         this.cage = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            cage.add(new NullAnimal());
+        }
         this.plots = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
             plots.add(new Plot());
@@ -45,31 +48,36 @@ public class Player {
         return count < amount;
     }
 
-    public void addItem(Item newItem, int count) {
-        if (count > 0) {
+    public void addToCage(Animal animal) {
+        cage.remove(11);
+        cage.add(0, animal);
+    }
+
+    public void addItem(Item newItem, int amount) {
+        if (amount > 0) {
             boolean isExist = false;
             for (ItemCounter itemCounter : this.inventory) {
                 if (itemCounter.getItem().getName().equals(newItem.getName())) {
                     isExist = true;
-                    itemCounter.setCount(itemCounter.getCount() + count);
+                    itemCounter.setCount(itemCounter.getCount() + amount);
                     break;
                 }
             }
             if (!isExist) {
-                ItemCounter itemCounter = new ItemCounter(newItem, count);
+                ItemCounter itemCounter = new ItemCounter(newItem, amount);
                 this.inventory.add(itemCounter);
             }
         }
     }
 
-    public void removeItem(Item toRemove, int count) {
-        if (count <= 0)
+    public void removeItem(Item toRemove, int amount) {
+        if (amount <= 0)
             return;
 
         ItemCounter itemRemoved = null;
         for (ItemCounter itemCounter : this.inventory) {
             if (itemCounter.getItem().getName().equals(toRemove.getName())) {
-                itemCounter.setCount(itemCounter.getCount() - count);
+                itemCounter.setCount(itemCounter.getCount() - amount);
                 itemRemoved = itemCounter;
                 break;
             }

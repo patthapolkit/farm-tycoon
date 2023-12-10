@@ -26,7 +26,7 @@ public class BarnScene extends StackPane {
     private CashDisplay cashDisplay;
 
 
-    public BarnScene(ArrayList<ItemCounter> inventory) {
+    public BarnScene(ArrayList<ItemCounter> inventory, int balance) {
 
         // stackPane(this) setup
         setPrefSize(800, 450);
@@ -42,13 +42,11 @@ public class BarnScene extends StackPane {
         topContainer = new StackPane();
         topContainer.setAlignment(Pos.CENTER_LEFT);
 
-        topContainer.setPadding(new Insets(15,30,0,30));
+        topContainer.setPadding(new Insets(15, 30, 0, 30));
 
-        // EDIT ME
-        cashDisplay = new CashDisplay(100);
-        // This constructor should receive player's currentCash
+        cashDisplay = new CashDisplay(balance);
 
-        topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
+        topContainer.getChildren().addAll(titleContainer, cashDisplay, new NavMenu());
 
         // inventoryGrid setup
         inventoryGrid = new InventoryGrid(inventory);

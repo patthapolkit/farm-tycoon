@@ -3,8 +3,8 @@ package entity.building;
 import entity.base.Item;
 import logic.Player;
 
-public class Market {
-    public Market() {
+public class Minimart {
+    public Minimart() {
     }
 
     public void sell(Player player, Item item, int amount) {

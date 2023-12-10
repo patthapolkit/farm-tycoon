@@ -32,7 +32,8 @@ public class CashDisplay extends HBox {
 
     }
     public void setCashText(int cash){
-        cashText.setText(Integer.toString(cash));
+        String cashSting = Integer.toString(cash);
+        cashText.setText("$" + cashSting);
     }
 
 }
