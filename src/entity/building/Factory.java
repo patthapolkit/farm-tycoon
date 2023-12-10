@@ -18,6 +18,8 @@ public class Factory {
     public void craft(Player player, Product product) {
         if (product.canCraft(player)) {
             product.craft(player);
+        } else {
+            System.out.println("Can't craft " + product.getName());
         }
     }
 

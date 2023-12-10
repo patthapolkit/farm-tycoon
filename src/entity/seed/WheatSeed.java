@@ -12,6 +12,8 @@ public class WheatSeed extends Seed {
     public void collect(Player player) {
         if (getHumidityLevel() == 100) {
             player.addItem(new Wheat(), 1);
+        } else {
+            System.out.println("Can't collect " + getName());
         }
     }
 }

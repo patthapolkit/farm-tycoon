@@ -6,10 +6,6 @@ import entity.seed.Seed;
 public class Plot {
     private Seed seed;
 
-    public Plot(Seed seed) {
-        this.seed = seed;
-    }
-
     public Plot(){
         this.seed = new NullSeed();
     }

@@ -12,22 +12,11 @@ import logic.Player;
 import java.util.ArrayList;
 
 public class Shop {
-    private ArrayList<Seed> allSeed;
     private ArrayList<Seed> unlockedSeed;
-    private ArrayList<Animal> allAnimal;
 
     public Shop() {
-        allSeed = new ArrayList<>();
-        allSeed.add(new WheatSeed());
-        allSeed.add(new CarrotSeed());
-
         unlockedSeed = new ArrayList<>();
         unlockedSeed.add(new WheatSeed());
-
-        allAnimal = new ArrayList<>();
-        allAnimal.add(new Chicken());
-        allAnimal.add(new Cow());
-        allAnimal.add(new Sheep());
     }
 
     public boolean isUnlocked(Seed seed) {
@@ -43,6 +32,8 @@ public class Shop {
         if (player.getBalance() >= seed.getPrice() && !isUnlocked(seed)) {
             unlockedSeed.add(seed);
             player.chargeMoney(seed.getPrice());
+        } else {
+            System.out.println("Can't unlock " + seed.getName());
         }
     }
 
@@ -50,8 +41,9 @@ public class Shop {
         if (player.getBalance() >= animal.getPrice() && player.canAddToCage(animal, 5)) {
             player.getCage().add(animal);
             player.chargeMoney(animal.getPrice());
+        } else {
+            System.out.println("Can't buy " + animal.getName());
         }
-
     }
 
     public ArrayList<Seed> getUnlockedSeed() {
@@ -60,21 +52,5 @@ public class Shop {
 
     public void setUnlockedSeed(ArrayList<Seed> unlockedSeed) {
         this.unlockedSeed = unlockedSeed;
-    }
-
-    public ArrayList<Seed> getAllSeed() {
-        return allSeed;
-    }
-
-    public void setAllSeed(ArrayList<Seed> allSeed) {
-        this.allSeed = allSeed;
-    }
-
-    public ArrayList<Animal> getAllAnimal() {
-        return allAnimal;
-    }
-
-    public void setAllAnimal(ArrayList<Animal> allAnimal) {
-        this.allAnimal = allAnimal;
     }
 }

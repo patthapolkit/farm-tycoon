@@ -12,6 +12,8 @@ public class OrchidSeed extends Seed {
     public void collect(Player player) {
         if (getHumidityLevel() == 100) {
             player.addItem(new Orchid(), 1);
+        } else {
+            System.out.println("Can't collect " + getName());
         }
     }
 }

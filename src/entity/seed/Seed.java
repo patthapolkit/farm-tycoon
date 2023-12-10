@@ -14,16 +14,13 @@ public abstract class Seed implements Collectable {
         setHumidityLevel(humidityLevel);
     }
 
-    public void water(Player player){
+    public void water(Player player) {
         if (player.getBalance() >= 5 && humidityLevel != 100) {
             increaseHumidity(25);
             player.chargeMoney(5);
+        } else {
+            System.out.println("Can't water plant. Not enough money.");
         }
-    }
-
-    @Override
-    public String toString() {
-        return name + "| humidity: " + humidityLevel;
     }
 
     public String getName() {

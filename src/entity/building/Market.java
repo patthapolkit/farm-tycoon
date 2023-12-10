@@ -11,6 +11,8 @@ public class Market {
         if (player.existsInInventory(item, amount)) {
             player.removeItem(item, amount);
             player.setBalance(player.getBalance() + (item.getPrice() * amount));
+        } else {
+            System.out.println(item.getName() + " doesn't exists");
         }
     }
 }
