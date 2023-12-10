@@ -3,8 +3,6 @@ package scene;
 import component.*;
 import entity.base.Item;
 import entity.building.MartItem;
-import entity.building.ShopItem;
-import entity.product.Recipe;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,15 +10,13 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import logic.ItemCounter;
+import logic.GameInstance;
 
-import java.util.ArrayList;
-
-import static entity.product.Recipe.getRecipe;
 import static resource.ImageLoader.*;
 import static utility.Utility.*;
 
 public class MinimartScene extends StackPane {
+    private GameInstance gameInstance;
 
     private VBox container;
 
@@ -38,7 +34,8 @@ public class MinimartScene extends StackPane {
 
     private HBox mainContainer;
 
-    public MinimartScene(){
+    public MinimartScene(GameInstance gameInstance) {
+        this.gameInstance = gameInstance;
 
         // stackPane(this) setup
         setPrefSize(800, 450);
@@ -75,10 +72,10 @@ public class MinimartScene extends StackPane {
     }
 
 
-    private void vScrollSetup(){
+    private void vScrollSetup() {
 
-        itemSelector = new VScroll(Color.rgb(199,211,214));
-        itemSelector.setBackground(Color.rgb(251,240,190),"#FBF0BE");
+        itemSelector = new VScroll(Color.rgb(199, 211, 214));
+        itemSelector.setBackground(Color.rgb(251, 240, 190), "#FBF0BE");
 
         VScrollButton vb1 = new VScrollButton(getImageView(EGG), "Egg", "Egg");
         VScrollButton vb2 = new VScrollButton(getImageView(MILK), "Milk", "Milk");
@@ -97,11 +94,11 @@ public class MinimartScene extends StackPane {
         VScrollButton vb15 = new VScrollButton(getImageView(POPPY), "Poppy", "Poppy");
         VScrollButton vb16 = new VScrollButton(getImageView(ORCHID), "Orchid", "Orchid");
         VScrollButton vb17 = new VScrollButton(getImageView(TULIP), "Tulip", "Tulip");
-        itemSelector.getButtonContainer().getChildren().addAll(vb1,vb2,vb3,vb4,vb5,vb6,vb7,vb8,vb9);
-        itemSelector.getButtonContainer().getChildren().addAll(vb10,vb11,vb12,vb13,vb14,vb15,vb16,vb17);
+        itemSelector.getButtonContainer().getChildren().addAll(vb1, vb2, vb3, vb4, vb5, vb6, vb7, vb8, vb9);
+        itemSelector.getButtonContainer().getChildren().addAll(vb10, vb11, vb12, vb13, vb14, vb15, vb16, vb17);
 
-        for (Node i : itemSelector.getButtonContainer().getChildren()){
-            if (i instanceof VScrollButton){
+        for (Node i : itemSelector.getButtonContainer().getChildren()) {
+            if (i instanceof VScrollButton) {
                 i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     public void handle(MouseEvent e) {
                         setSelectedItem(i);
@@ -113,9 +110,9 @@ public class MinimartScene extends StackPane {
 
     }
 
-    private void infoPaneSetup(){
-        infoPane = new InfoPane("Sell",false);
-        infoPane.setBackground(Color.rgb(251,240,190));
+    private void infoPaneSetup() {
+        infoPane = new InfoPane("Sell", false);
+        infoPane.setBackground(Color.rgb(251, 240, 190));
         infoPane.getCraftButton().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 sell();
@@ -124,7 +121,7 @@ public class MinimartScene extends StackPane {
     }
 
 
-    private void setSelectedItem(Node vb){
+    private void setSelectedItem(Node vb) {
         selectedItem = ((VScrollButton) vb).getButtonId();
         System.out.println(selectedItem);
         itemSelector.updateSelected(selectedItem);
@@ -135,22 +132,15 @@ public class MinimartScene extends StackPane {
         infoPane.setDescText(s.getDescription() + "\nCan be sold for " + s.getSellPrice() + "\n");
     }
 
-    private void sell(){
+    private void sell() {
         Item soldItem;
-
         if ((selectedItem == "Bread") || (selectedItem == "Cake") || (selectedItem == "Pumpkin Pie")
-                || (selectedItem == "Carrot Pie") || (selectedItem == "Sweater")){
+                || (selectedItem == "Carrot Pie") || (selectedItem == "Sweater")) {
             soldItem = stringToProduct(selectedItem);
-        }
-        else {
+        } else {
             soldItem = stringToItem(selectedItem);
         }
-
-        // EDIT HERE
-        // For seed, if already unlocked please do nothing
-        // For animal, if already reached maximum allowed (4) please do nothing
-
+        gameInstance.getMarket().sell(gameInstance.getPlayer(), soldItem, 1);
         System.out.println("Sold " + soldItem.getName());
     }
-
 }

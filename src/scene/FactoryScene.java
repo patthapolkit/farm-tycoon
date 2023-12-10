@@ -1,7 +1,6 @@
 package scene;
 
 import component.*;
-import entity.base.Item;
 import entity.product.Product;
 import entity.product.Recipe;
 import javafx.event.EventHandler;
@@ -13,8 +12,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import logic.GameInstance;
 import logic.ItemCounter;
-
-import java.util.ArrayList;
 
 import static entity.product.Recipe.getRecipe;
 import static resource.ImageLoader.*;
@@ -39,7 +36,7 @@ public class FactoryScene extends StackPane {
 
     private HBox mainContainer;
 
-    public FactoryScene(GameInstance gameInstance){
+    public FactoryScene(GameInstance gameInstance) {
         this.gameInstance = gameInstance;
 
         // stackPane(this) setup
@@ -77,9 +74,9 @@ public class FactoryScene extends StackPane {
     }
 
 
-    private void vScrollSetup(){
+    private void vScrollSetup() {
 
-        recipeSelector = new VScroll(Color.rgb(238,209,116));
+        recipeSelector = new VScroll(Color.rgb(238, 209, 116));
 
         VScrollButton vb1 = new VScrollButton(getImageView(BREAD), "Bread", "Bread");
         VScrollButton vb2 = new VScrollButton(getImageView(SWEATER), "Sweater", "Sweater");
@@ -87,10 +84,10 @@ public class FactoryScene extends StackPane {
         VScrollButton vb4 = new VScrollButton(getImageView(PUMPKIN_PIE), "Pumpkin Pie", "Pumpkin Pie");
         VScrollButton vb5 = new VScrollButton(getImageView(CARROT_PIE), "Carrot Pie", "Carrot Pie");
 
-        recipeSelector.getButtonContainer().getChildren().addAll(vb1,vb2,vb3,vb4,vb5);
+        recipeSelector.getButtonContainer().getChildren().addAll(vb1, vb2, vb3, vb4, vb5);
 
-        for (Node i : recipeSelector.getButtonContainer().getChildren()){
-            if (i instanceof VScrollButton){
+        for (Node i : recipeSelector.getButtonContainer().getChildren()) {
+            if (i instanceof VScrollButton) {
                 i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     public void handle(MouseEvent e) {
                         setSelectedRecipe(i);
@@ -103,8 +100,8 @@ public class FactoryScene extends StackPane {
 
     }
 
-    private void craftPaneSetup(){
-        infoPane = new InfoPane("Craft",true);
+    private void craftPaneSetup() {
+        infoPane = new InfoPane("Craft", true);
         infoPane.getCraftButton().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 craftPressed();
@@ -113,7 +110,7 @@ public class FactoryScene extends StackPane {
     }
 
 
-    private void setSelectedRecipe(Node vb){
+    private void setSelectedRecipe(Node vb) {
         selectedRecipe = ((VScrollButton) vb).getButtonId();
         System.out.println(selectedRecipe);
         recipeSelector.updateSelected(selectedRecipe);
@@ -121,23 +118,17 @@ public class FactoryScene extends StackPane {
         infoPane.setItemImage(getImage(itemToLoad(stringToProduct(selectedRecipe))));
         Recipe r = getRecipe(selectedRecipe);
         infoPane.getItemDisContainer().getChildren().clear();
-        for (ItemCounter i: r.getIngredient()){
+        for (ItemCounter i : r.getIngredient()) {
             ItemDisplay j = new ItemDisplay(i);
             infoPane.getItemDisContainer().getChildren().add(j);
         }
         infoPane.setDescText(r.getDescription());
     }
 
-    private void craftPressed(){
-
+    private void craftPressed() {
         Product craftedItem = stringToProduct(selectedRecipe);
-//        ArrayList<ItemCounter> ingredient = getRecipe(selectedRecipe).getIngredient();
-
-        // EDIT HERE
-        gameInstance.getFactory().craft(gameInstance.getPlayer(),craftedItem);
-
+        gameInstance.getFactory().craft(gameInstance.getPlayer(), craftedItem);
         System.out.println("Crafted " + selectedRecipe);
-
     }
 
 }

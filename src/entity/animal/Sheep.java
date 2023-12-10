@@ -26,7 +26,4 @@ public class Sheep extends Animal implements Collectable {
             setFoodLevel(0);
         }
     }
-
 }
-
-

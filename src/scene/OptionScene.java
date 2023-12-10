@@ -1,6 +1,5 @@
 package scene;
 
-import component.InventoryGrid;
 import component.NavMenu;
 import component.OrbitFontText;
 import javafx.geometry.Insets;
