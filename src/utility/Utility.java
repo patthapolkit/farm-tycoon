@@ -1,5 +1,9 @@
 package utility;
 
+import entity.animal.Animal;
+import entity.animal.Chicken;
+import entity.animal.Cow;
+import entity.animal.Sheep;
 import entity.base.Item;
 import entity.flower.Dandelion;
 import entity.flower.Orchid;
@@ -26,15 +30,15 @@ public class Utility {
     }
 
     public static Seed stringToSeed(String s){
-        if (s.equals("Wheat")) {return new WheatSeed();}
-        else if (s.equals("Beetroot")) {return new BeetrootSeed();}
-        else if (s.equals("Berry")) {return new BerrySeed();}
-        else if (s.equals("Carrot")) {return new CarrotSeed();}
-        else if (s.equals("Dandelion")) {return new DandelionSeed();}
-        else if (s.equals("Orchid")) {return new OrchidSeed();}
-        else if (s.equals("Poppy")) {return new PoppySeed();}
-        else if (s.equals("Pumpkin")) {return new PumpkinSeed();}
-        else if (s.equals("Tulip")) {return new TulipSeed();}
+        if (s.equals("Wheat") || s.equals("Wheat Seed")) {return new WheatSeed();}
+        else if (s.equals("Beetroot") || s.equals("Beetroot Seed")) {return new BeetrootSeed();}
+        else if (s.equals("Berry") || s.equals("Berry Seed")) {return new BerrySeed();}
+        else if (s.equals("Carrot") || s.equals("Carrot Seed")) {return new CarrotSeed();}
+        else if (s.equals("Dandelion") || s.equals("Dandelion Seed")) {return new DandelionSeed();}
+        else if (s.equals("Orchid") || s.equals("Orchid Seed")) {return new OrchidSeed();}
+        else if (s.equals("Poppy") || s.equals("Poppy Seed")) {return new PoppySeed();}
+        else if (s.equals("Pumpkin") || s.equals("Pumpkin Seed")) {return new PumpkinSeed();}
+        else if (s.equals("Tulip") || s.equals("Tulip Seed")) {return new TulipSeed();}
         return null;
     }
 
@@ -59,4 +63,32 @@ public class Utility {
         else if (s.equals("Cake")) {return new Cake();}
         return null;
     }
+
+    public static Item stringToItem(String s){
+        if (s.equals("Egg")) {return new Egg();}
+        else if (s.equals("Milk")) {return new Milk();}
+        else if (s.equals("Wool")) {return new Wool();}
+        else if (s.equals("Sweater")) {return new Sweater();}
+        else if (s.equals("Cake")) {return new Cake();}
+        else if (s.equals("Wheat")) {return new Wheat();}
+        else if (s.equals("Beetroot")) {return new Beetroot();}
+        else if (s.equals("Berry")) {return new Berry();}
+        else if (s.equals("Carrot")) {return new Carrot();}
+        else if (s.equals("Dandelion")) {return new Dandelion();}
+        else if (s.equals("Orchid")) {return new Orchid();}
+        else if (s.equals("Poppy")) {return new Poppy();}
+        else if (s.equals("Pumpkin")) {return new Pumpkin();}
+        else if (s.equals("Tulip")) {return new Tulip();}
+        return null;
+    }
+
+
+
+    public static Animal stringToAnimal(String s){
+        if (s.equals("Chicken")) {return new Chicken();}
+        else if (s.equals("Cow")) {return new Cow();}
+        else if (s.equals("Sheep")) {return new Sheep();}
+        return null;
+    }
+
 }

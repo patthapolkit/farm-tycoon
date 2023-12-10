@@ -8,7 +8,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+
 import resource.ImageLoader;
 
 import static resource.ImageLoader.getImageView;
@@ -23,7 +25,12 @@ public class VScroll extends StackPane {
 
     private String selected;
 
-    public VScroll(){
+    private Paint clickedColor;
+
+    public VScroll(Paint clickedColor){
+
+        this.clickedColor = clickedColor;
+
         background = new Rectangle(220,330, Color.rgb(199,211,214));
         background.setArcHeight(40);
         background.setArcWidth(40);
@@ -33,10 +40,6 @@ public class VScroll extends StackPane {
         buttonContainer.setSpacing(18);
         buttonContainer.setAlignment(Pos.CENTER);
 
-//        for (int i=1;i<=6;i++){
-////            buttonContainer.getChildren().add(new GameButton(160,50,20,Color.WHITE));
-//            buttonContainer.getChildren().add(new VScrollButton(getImageView(ImageLoader.BERRY),"Berry","Berry"));
-//        }
 
         scrollPane = new ScrollPane();
         scrollPane.setPadding(new Insets(10,10,10,10));
@@ -62,13 +65,18 @@ public class VScroll extends StackPane {
             if (i instanceof VScrollButton){
                 String buttonId = ((VScrollButton) i).getButtonId();
                 if (buttonId == selected){
-                    ((VScrollButton) i).setColor(Color.rgb(238,209,116));
+                    ((VScrollButton) i).setColor(clickedColor);
                 }
                 else {
                     ((VScrollButton) i).setColor(Color.WHITE);
                 }
             }
         }
+    }
+
+    public void setBackground(Paint paint, String s){
+        background.setFill(paint);
+        scrollPane.setStyle("-fx-background: "+s+"; -fx-border-color: "+s+";");
     }
 }
 

@@ -13,24 +13,25 @@ public enum Recipe {
 
 
     BREAD(new ArrayList<>(Arrays.asList(new ItemCounter(new Wheat(),3))),
-            "Description DescriptionDescri ptionDescriptionDescripti onDescrip tionDescription"
+            "Oui! Yum!"
     ),
 
     SWEATER(new ArrayList<>(Arrays.asList(new ItemCounter(new Wool(),5))),
-            "Description DescriptionDescri ptionDescriptionDescripti onDescrip tionDescription"
+            "A good friend of you, especially in winter!"
             ),
 
     CAKE(new ArrayList<>(Arrays.asList(new ItemCounter(new Berry(),5),
             new ItemCounter(new Milk(),5),new ItemCounter(new Egg(),5))),
-            "Description DescriptionDescri ptionDescriptionDescripti onDescrip tionDescription"
+            "A lovely cake topped with sour berry! It was believed to boost your Java " +
+                    "programming speed. "
     ),
     PUMPKIN_PIE(new ArrayList<>(Arrays.asList(new ItemCounter(new Pumpkin(),5),
             new ItemCounter(new Milk(),5),new ItemCounter(new Egg(),5))),
-            "Description DescriptionDescri ptionDescriptionDescripti onDescrip tionDescription"
+            "A mouth-watering carrot pie. "
     ),
     CARROT_PIE(new ArrayList<>(Arrays.asList(new ItemCounter(new Carrot(),5),
             new ItemCounter(new Milk(),5),new ItemCounter(new Egg(),5))),
-            "Description DescriptionDescri ptionDescriptionDescripti onDescrip tionDescription"
+            "A delicious carrot pie a day keeps bad luck away!"
     );
 
     private final ArrayList<ItemCounter> ingredient;
@@ -58,6 +59,5 @@ public enum Recipe {
         else if (s.equals("Sweater")) {return SWEATER;}
         else if (s.equals("Cake")) {return CAKE;}
         return null;
-
     }
 }

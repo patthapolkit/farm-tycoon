@@ -1,5 +1,6 @@
 package entity.animal;
 
+
 import entity.base.Collectable;
 import entity.material.Wheat;
 import entity.material.Wool;
@@ -23,6 +24,5 @@ public class Sheep extends Animal implements Collectable {
         if (getFoodLevel() == 100) {
             player.addItem(new Wool(), 1);
             setFoodLevel(0);
-        }
-    }
-}
+
+

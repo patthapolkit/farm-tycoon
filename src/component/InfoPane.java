@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import logic.ItemCounter;
@@ -16,7 +17,11 @@ import javafx.scene.layout.HBox;
 
 import static resource.ImageLoader.getImageView;
 
-public class CraftingPane extends StackPane {
+public class InfoPane extends StackPane {
+
+
+
+    private Boolean isCrafting;
 
     private Rectangle background;
 
@@ -37,7 +42,12 @@ public class CraftingPane extends StackPane {
 
     private GameButton craftButton;
 
-    public CraftingPane(){
+    private String action;
+
+    public InfoPane(String action, Boolean isCrafting){
+
+        this.action = action;
+        this.isCrafting = isCrafting;
 
         background = new Rectangle(350,330,Color.rgb(199,211,214));
         background.setArcHeight(40);
@@ -56,32 +66,37 @@ public class CraftingPane extends StackPane {
         topContainer.getChildren().addAll(itemImageView,itemNameText);
         topContainer.setSpacing(10);
 
-        descText = new OrbitFontText("Description DescriptionDescri ptionDescriptionDescripti onDescrip tionDescription");
+        descText = new OrbitFontText("",15);
         descText.setWrappingWidth(320);
         descText.setTextAlignment(TextAlignment.CENTER);
         descContainer = new HBox(descText);
         descContainer.setAlignment(Pos.CENTER);
         descContainer.setPadding(new Insets(7 ,0,0,0));
 
-        matText = new OrbitFontText("Materials required",20);
-        matContainer = new VBox(matText);
-        matContainer.setPadding(new Insets(7,0,15,0));
-        matContainer.setAlignment(Pos.TOP_LEFT);
-        matContainer.setSpacing(3);
+        if (isCrafting){
+            matText = new OrbitFontText("Materials required",20);
+            matContainer = new VBox(matText);
+            matContainer.setPadding(new Insets(7,0,15,0));
+            matContainer.setAlignment(Pos.TOP_LEFT);
+            matContainer.setSpacing(3);
 
-        itemDisContainer = new HBox();
-        itemDisContainer.setSpacing(5);
-        for (int i=1;i<=3;i++){
-            itemDisContainer.getChildren().add(new ItemDisplay(new ItemCounter(new Berry(),10)));
+            itemDisContainer = new HBox();
+            itemDisContainer.setSpacing(5);
+            for (int i=1;i<=3;i++){
+                itemDisContainer.getChildren().add(new ItemDisplay(new ItemCounter(new Berry(),10)));
+            }
+            matContainer.getChildren().add(itemDisContainer);
         }
-        matContainer.getChildren().add(itemDisContainer);
 
         craftButton = new GameButton(120,50,20, Color.WHITE);
-        craftButton.getChildren().add(new OrbitFontText("Craft",22));
+        craftButton.getChildren().add(new OrbitFontText(action,22));
 
-
-        container.getChildren().addAll(topContainer, descContainer,matContainer,craftButton);
-
+        if (isCrafting) {
+            container.getChildren().addAll(topContainer, descContainer,matContainer,craftButton);
+        }
+        else {
+            container.getChildren().addAll(topContainer, descContainer,craftButton);
+        }
         getChildren().addAll(background, container);
     }
 
@@ -104,5 +119,9 @@ public class CraftingPane extends StackPane {
 
     public GameButton getCraftButton() {
         return craftButton;
+    }
+
+    public void setBackground(Paint paint) {
+        background.setFill(paint);
     }
 }

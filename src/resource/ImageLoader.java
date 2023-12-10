@@ -1,5 +1,9 @@
 package resource;
 
+import entity.animal.Animal;
+import entity.animal.Chicken;
+import entity.animal.Cow;
+import entity.animal.Sheep;
 import entity.base.Item;
 import entity.flower.Dandelion;
 import entity.flower.Orchid;
@@ -73,10 +77,28 @@ public enum ImageLoader {
     SWEATER("Sweater"),
 
     BREAD("Bread"),
-
     YELLOW_GROWN("YellowGrown"),
+    GREEN_GROWN("GreenGrown"),
+    CHICKEN("Chicken1"),
+    CHICKEN1("Chicken1"),
+    CHICKEN2("Chicken2"),
+    CHICKEN3("Chicken3"),
+    CHICKEN4("Chicken4"),
+    CHICKEN5("Chicken5"),
+    COW("Cow1"),
+    COW1("Cow1"),
+    COW2("Cow2"),
+    COW3("Cow3"),
+    COW4("Cow4"),
+    COW5("Cow5"),
+    SHEEP("Sheep4"),
+    SHEEP1("Sheep1"),
+    SHEEP2("Sheep2"),
+    SHEEP3("Sheep3"),
+    SHEEP4("Sheep4"),
+    SHEEP5("Sheep5"),
 
-    GREEN_GROWN("GreenGrown")
+
 
     ;
 
@@ -128,5 +150,12 @@ public enum ImageLoader {
         else if (seed instanceof TulipSeed) {return TULIP_SEED;}
         else if (seed instanceof PumpkinSeed) {return PUMPKIN_SEED;}
         else {return BERRY_SEED;}
+    }
+
+    public static ImageLoader animalToLoad(Animal animal){
+        if (animal instanceof Cow){return COW;}
+        else if (animal instanceof Chicken){return CHICKEN;}
+        else if (animal instanceof Sheep){return SHEEP;}
+        return null;
     }
 }
