@@ -55,8 +55,8 @@ public class PlotSquare extends StackPane {
             foreground.setFitWidth(65);
             getChildren().addAll(foreground);
         }
-
     }
+
     public void nextStage(){
         if (!locked){
             if (!seed.equals(null)){
@@ -92,9 +92,7 @@ public class PlotSquare extends StackPane {
                     }
                 }
             }
-
         }
-
     }
 
     public Boolean isReady(){
@@ -131,7 +129,6 @@ public class PlotSquare extends StackPane {
             getChildren().add(foreground);
         }
     }
-
 
     public Boolean isPlanted() {
         return !(seed == null);
