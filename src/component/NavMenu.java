@@ -30,7 +30,8 @@ public class NavMenu extends HBox {
         // backButton event handler
         backButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
-                System.out.println("Clicked");
+//                System.out.println("Clicked");
+                System.out.println(getParent().getParent().getParent().getId());
                 HomeMenuScene.getRoot().getChildren().remove(getParent().getParent().getParent());
             }
         });

@@ -103,9 +103,21 @@ public enum ImageLoader {
 
     HAND("Hand"),
 
-    CHICKEN_FOOD("ChickenFood")
+    CHICKEN_FOOD("ChickenFood"),
 
+    MAIN_BACKGROUND("MainBackground"),
 
+    BARN("Barn"),
+
+    CAGE("Cage"),
+
+    FACTORY("Factory"),
+
+    PLOT("Plot"),
+
+    SHOP("Shop"),
+
+    MART("Mart")
 
     ;
 
