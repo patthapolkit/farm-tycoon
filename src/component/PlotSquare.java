@@ -1,5 +1,7 @@
 package component;
 
+import entity.building.Plot;
+import entity.seed.NullSeed;
 import entity.seed.Seed;
 import entity.seed.WheatSeed;
 import javafx.scene.Cursor;
@@ -13,7 +15,6 @@ import static utility.Utility.seedToProduct;
 
 public class PlotSquare extends StackPane {
 
-
     private Boolean locked;
     private ImageView background;
 
@@ -22,6 +23,8 @@ public class PlotSquare extends StackPane {
     private int currentStage;
 
     private Seed seed;
+
+    private Plot plot;
 
     public PlotSquare(){
         locked = false;
@@ -36,14 +39,23 @@ public class PlotSquare extends StackPane {
         setCursor(Cursor.HAND);
     }
 
+    public void setPlot(Plot plot){
+        this.plot = plot;
+    }
 
+    public Plot getPlot(){
+        return plot;
+    }
 
     public Seed getSeed() {
         return seed;
     }
 
     public void setSeed(Seed seed) {
-        if (!locked){
+
+            if (seed instanceof NullSeed){
+                return;
+            }
             this.seed = seed;
             if (seed instanceof WheatSeed){
                 foreground = getImageView(ImageLoader.YELLOW_SEED);
@@ -54,11 +66,9 @@ public class PlotSquare extends StackPane {
             foreground.setFitHeight(65);
             foreground.setFitWidth(65);
             getChildren().addAll(foreground);
-        }
     }
 
     public void nextStage(){
-        if (!locked){
             if (!seed.equals(null)){
                 if (seed instanceof WheatSeed){
                     if (currentStage == 0){
@@ -71,6 +81,10 @@ public class PlotSquare extends StackPane {
                         currentStage += 1;
                     }
                     else if (currentStage == 2){
+                        foreground.setImage(getImage(ImageLoader.YELLOW_GROWN));
+                        currentStage += 1;
+                    }
+                    else if (currentStage == 3){
                         background.setImage(getImage(ImageLoader.PLOT_SQUARE));
                         foreground.setImage(getImage(ImageLoader.WHEAT));
                         currentStage += 1;
@@ -86,17 +100,20 @@ public class PlotSquare extends StackPane {
                         currentStage += 1;
                     }
                     else if (currentStage == 2){
+                        foreground.setImage(getImage(ImageLoader.GREEN_GROWN));
+                        currentStage += 1;
+                    }
+                    else if (currentStage == 3){
                         background.setImage(getImage(ImageLoader.PLOT_SQUARE));
                         foreground.setImage(getImage(itemToLoad(seedToProduct(seed))));
                         currentStage += 1;
                     }
                 }
             }
-        }
     }
 
     public Boolean isReady(){
-        return (currentStage == 3);
+        return (currentStage == 4);
     }
 
     private void clear(){
@@ -116,19 +133,6 @@ public class PlotSquare extends StackPane {
         }
     }
 
-    public Boolean getLocked() {
-        return locked;
-    }
-    public void setLocked(Boolean locked) {
-        this.locked = locked;
-        clear();
-        if (locked){
-            foreground.setImage(getImage(ImageLoader.LOCK));
-            foreground.setFitHeight(65);
-            foreground.setFitWidth(65);
-            getChildren().add(foreground);
-        }
-    }
 
     public Boolean isPlanted() {
         return !(seed == null);
