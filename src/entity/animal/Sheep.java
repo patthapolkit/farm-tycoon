@@ -24,5 +24,6 @@ public class Sheep extends Animal implements Collectable {
         if (getFoodLevel() == 100) {
             player.addItem(new Wool(), 1);
             setFoodLevel(0);
-
-
+        }
+    }
+}

@@ -3,7 +3,6 @@ package scene;
 
 import component.GameButton;
 import component.LuckyFontText;
-import component.OrbitFontText;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -34,7 +33,7 @@ public class HomeMenuScene {
     private GameButton creditButton;
     private static StackPane root;
 
-    public HomeMenuScene(Stage stage){
+    public HomeMenuScene(Stage stage) {
 
         // stage setup
         this.stage = stage;
@@ -47,7 +46,7 @@ public class HomeMenuScene {
 
         // root node setup
         root = new StackPane();
-        root.setPrefSize(800,450);
+        root.setPrefSize(800, 450);
         root.setBackground(new Background(new BackgroundImage(getImage(ImageLoader.BACKGROUND_HOME), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 new BackgroundSize(800, 450, false, false, false, false))));
@@ -61,21 +60,21 @@ public class HomeMenuScene {
 
     }
 
-    private void setup(){
+    private void setup() {
         // create game instance
         GameInstance gameInstance = new GameInstance();
 
         // title setup
         title = new LuckyFontText("Farm Tycoon", 72);
-        title.setFill(Color.rgb(172,77,73));
+        title.setFill(Color.rgb(172, 77, 73));
 
         // buttons setup
-        playButton = new GameButton(330,80,40,Color.rgb(124,153,182));
-        playButton.addText("Play",30,Color.WHITE);
-        optionButton = new GameButton(330,80,40,Color.rgb(124,153,182));
-        optionButton.addText("Options",30,Color.WHITE);
-        creditButton = new GameButton(330,80,40,Color.rgb(124,153,182));
-        creditButton.addText("Credits",30,Color.WHITE);
+        playButton = new GameButton(330, 80, 40, Color.rgb(124, 153, 182));
+        playButton.addText("Play", 30, Color.WHITE);
+        optionButton = new GameButton(330, 80, 40, Color.rgb(124, 153, 182));
+        optionButton.addText("Options", 30, Color.WHITE);
+        creditButton = new GameButton(330, 80, 40, Color.rgb(124, 153, 182));
+        creditButton.addText("Credits", 30, Color.WHITE);
 
         // buttons event handling
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -95,7 +94,7 @@ public class HomeMenuScene {
             }
         });
 
-        buttonContainer.getChildren().addAll(title,playButton, optionButton, creditButton);
+        buttonContainer.getChildren().addAll(title, playButton, optionButton, creditButton);
 
     }
 

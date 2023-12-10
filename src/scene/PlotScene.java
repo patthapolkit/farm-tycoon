@@ -53,7 +53,6 @@ public class PlotScene extends StackPane {
         topContainer.getChildren().addAll(titleContainer, new NavMenu());
 
 
-
         loadUnlockedSeed();
 
         loadPlots();
@@ -69,29 +68,27 @@ public class PlotScene extends StackPane {
     }
 
 
-    public void plotSquareEvents(){
-        for (Node i: plotGrid.getGrid().getChildren()){
-            if (i instanceof PlotSquare){
+    public void plotSquareEvents() {
+        for (Node i : plotGrid.getGrid().getChildren()) {
+            if (i instanceof PlotSquare) {
                 i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     public void handle(MouseEvent e) {
-                        if (((PlotSquare) i).isPlanted()){
-                            if (plotControl.getSelectedTool() != null){
+                        if (((PlotSquare) i).isPlanted()) {
+                            if (plotControl.getSelectedTool() != null) {
                                 System.out.println("Applied " + plotControl.getSelectedTool());
-                                if (plotControl.getSelectedTool() == "Sickle"){
+                                if (plotControl.getSelectedTool() == "Sickle") {
                                     ((PlotSquare) i).harvest();
                                     plotHarvested(((PlotSquare) i).getPlot());
-                                }
-                                else if (plotControl.getSelectedTool() == "WateringPot"){
+                                } else if (plotControl.getSelectedTool() == "WateringPot") {
                                     ((PlotSquare) i).nextStage();
                                     plotWatered(((PlotSquare) i).getPlot());
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             if (plotControl.getSelectedSeed() != null) {
                                 System.out.println("Applied " + plotControl.getSelectedSeed());
                                 ((PlotSquare) i).setSeed(stringToSeed(plotControl.getSelectedSeed()));
-                                plotPlanted(((PlotSquare) i).getPlot(),stringToSeed(plotControl.getSelectedSeed()));
+                                plotPlanted(((PlotSquare) i).getPlot(), stringToSeed(plotControl.getSelectedSeed()));
                             }
                         }
                     }
@@ -101,63 +98,29 @@ public class PlotScene extends StackPane {
 
     }
 
-    public void loadUnlockedSeed(){
-
-        // Sample ArrayList<Seed>
+    public void loadUnlockedSeed() {
         ArrayList<Seed> unlockedSeed = gameInstance.getShop().getUnlockedSeed();
-//        unlockedSeed.add(new WheatSeed());
-//        unlockedSeed.add(new BerrySeed());
-//        unlockedSeed.add(new CarrotSeed());
-
-        // EDIT HERE
-
-        // Send an ArrayList<Seed> to the PlotControl constructor
         plotControl = new PlotControl(unlockedSeed);
     }
 
-    public void loadPlots(){
-
-
-        // Sample ArrayList<Plot>
-        // Note 1: Its size will always be 14
+    public void loadPlots() {
         ArrayList<Plot> plots = gameInstance.getPlayer().getPlots();
-//        for (int i=1;i<=8;i++){
-//            plots.add(new Plot(new WheatSeed()));
-//        }
-//        for (int i=9;i<=14;i++){
-//            plots.add(new Plot());
-//            // Note 2: This constructor will create an empty plot (See NullSeed)
-//        }
-
-
-        // EDIT HERE
-
-
-        // Send an ArrayList<Plot> to the PlotGrid constructor
         plotGrid = new PlotGrid(plots);
     }
 
-    public void plotHarvested(Plot plot){
-        // This function will be called when the input plot has been harvested
+    public void plotHarvested(Plot plot) {
         System.out.println("Plot with seed: " + "Harvested " + plot.getSeed().getName());
         plot.getSeed().collect(gameInstance.getPlayer());
         plot.setSeed(new NullSeed());
-        // EDIT HERE
     }
 
-    public void plotWatered(Plot plot){
-        // This function will be called when the input plot has been watered
-        System.out.println("Plot with seed " + plot.getSeed().getName() +": Humidity " + plot.getSeed().getHumidityLevel() + " += 25");
+    public void plotWatered(Plot plot) {
+        System.out.println("Plot with seed " + plot.getSeed().getName() + ": Humidity " + plot.getSeed().getHumidityLevel() + " += 25");
         plot.getSeed().water(gameInstance.getPlayer());
-
-        // EDIT HERE
     }
 
-    public void plotPlanted(Plot plot, Seed seed){
-        // This function will be called when the input empty plot has been planted
+    public void plotPlanted(Plot plot, Seed seed) {
         System.out.println("Empty plot: " + "Planted" + seed.getName());
         plot.setSeed(seed);
-        // EDIT HERE
     }
-
 }

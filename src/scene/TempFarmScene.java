@@ -72,9 +72,9 @@ public class TempFarmScene extends StackPane {
 
         // buttonContainer setup
         buttonContainer = new VBox();
-        buttonContainer.setPadding(new Insets(20,0,0,0));
+        buttonContainer.setPadding(new Insets(20, 0, 0, 0));
         buttonContainer.setSpacing(5);
-        buttonContainer.getChildren().addAll(barnButton,plotButton,factButton,shopButton,martButton);
+        buttonContainer.getChildren().addAll(barnButton, plotButton, factButton, shopButton, martButton);
 
         // container setup
         container.getChildren().add(buttonContainer);
@@ -82,38 +82,21 @@ public class TempFarmScene extends StackPane {
 
     }
 
-    public void barnButtonSetup(){
+    public void barnButtonSetup() {
 
-        barnButton = new GameButton(200,50,40,Color.rgb(124,153,182));
-        barnButton.addText("Barn",30,Color.WHITE);
+        barnButton = new GameButton(200, 50, 40, Color.rgb(124, 153, 182));
+        barnButton.addText("Barn", 30, Color.WHITE);
         barnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
-
-                // EDIT HERE
                 ArrayList<ItemCounter> playerInventory = gameInstance.getPlayer().getInventory();
-
-                // Sample Inventory
-//                playerInventory.add(new ItemCounter(new Wheat(),10));
-//                playerInventory.add(new ItemCounter(new Carrot(),10));
-//                playerInventory.add(new ItemCounter(new Beetroot(),53));
-//                playerInventory.add(new ItemCounter(new Milk(),79));
-//                playerInventory.add(new ItemCounter(new Egg(),3));
-//                playerInventory.add(new ItemCounter(new Berry(),1));
-//                playerInventory.add(new ItemCounter(new Cake(),1));
-//                playerInventory.add(new ItemCounter(new Wool(),1));
-//                playerInventory.add(new ItemCounter(new PumpkinPie(),13));
-//                playerInventory.add(new ItemCounter(new Sweater(),1));
-//                playerInventory.add(new ItemCounter(new CarrotPie(),12));
-//                playerInventory.add(new ItemCounter(new Bread(),133));
-
                 HomeMenuScene.getRoot().getChildren().add(new BarnScene(playerInventory));
             }
         });
     }
 
-    public void plotButtonSetup(){
-        plotButton = new GameButton(200,50,40,Color.rgb(124,153,182));
-        plotButton.addText("Plot",30,Color.WHITE);
+    public void plotButtonSetup() {
+        plotButton = new GameButton(200, 50, 40, Color.rgb(124, 153, 182));
+        plotButton.addText("Plot", 30, Color.WHITE);
         plotButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 HomeMenuScene.getRoot().getChildren().add(new PlotScene(gameInstance));
@@ -121,9 +104,9 @@ public class TempFarmScene extends StackPane {
         });
     }
 
-    public void factButtonSetup(){
-        factButton = new GameButton(200,50,40,Color.rgb(124,153,182));
-        factButton.addText("Factory",30,Color.WHITE);
+    public void factButtonSetup() {
+        factButton = new GameButton(200, 50, 40, Color.rgb(124, 153, 182));
+        factButton.addText("Factory", 30, Color.WHITE);
         factButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 HomeMenuScene.getRoot().getChildren().add(new FactoryScene(gameInstance));
@@ -131,22 +114,22 @@ public class TempFarmScene extends StackPane {
         });
     }
 
-    public void shopButtonSetup(){
-        shopButton = new GameButton(200,50,40,Color.rgb(124,153,182));
-        shopButton.addText("Shop",30,Color.WHITE);
+    public void shopButtonSetup() {
+        shopButton = new GameButton(200, 50, 40, Color.rgb(124, 153, 182));
+        shopButton.addText("Shop", 30, Color.WHITE);
         shopButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
-                HomeMenuScene.getRoot().getChildren().add(new ShopScene());
+                HomeMenuScene.getRoot().getChildren().add(new ShopScene(gameInstance));
             }
         });
     }
 
-    public void martButtonSetup(){
-        martButton = new GameButton(200,50,40,Color.rgb(124,153,182));
-        martButton.addText("Mart",30,Color.WHITE);
+    public void martButtonSetup() {
+        martButton = new GameButton(200, 50, 40, Color.rgb(124, 153, 182));
+        martButton.addText("Mart", 30, Color.WHITE);
         martButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
-                HomeMenuScene.getRoot().getChildren().add(new MinimartScene());
+                HomeMenuScene.getRoot().getChildren().add(new MinimartScene(gameInstance));
             }
         });
     }
