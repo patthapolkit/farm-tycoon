@@ -1,5 +1,6 @@
 package entity.building;
 
+import entity.seed.NullSeed;
 import entity.seed.Seed;
 
 public class Plot {
@@ -7,6 +8,10 @@ public class Plot {
 
     public Plot(Seed seed) {
         this.seed = seed;
+    }
+
+    public Plot(){
+        this.seed = new NullSeed();
     }
 
     public Seed getSeed() {

@@ -132,7 +132,6 @@ public class FactoryScene extends StackPane {
 
         // EDIT HERE
 
-
         System.out.println("Crafted " + selectedRecipe);
 
     }

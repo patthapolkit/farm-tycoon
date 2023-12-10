@@ -29,7 +29,7 @@ public class WheatSeed extends Seed implements FastGrowing {
     @Override
     public void water(Player player) throws NotEnoughBalanceException {
         if (player.getBalance() >= 5) {
-            this.setHumidityLevel(this.getHumidityLevel() + 5);
+            this.setHumidityLevel(this.getHumidityLevel() + 25);
         } else {
             throw new NotEnoughBalanceException();
         }

@@ -7,6 +7,7 @@ import entity.flower.Poppy;
 import entity.flower.Tulip;
 import entity.material.*;
 import entity.product.*;
+import entity.seed.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -71,7 +72,11 @@ public enum ImageLoader {
 
     SWEATER("Sweater"),
 
-    BREAD("Bread")
+    BREAD("Bread"),
+
+    YELLOW_GROWN("YellowGrown"),
+
+    GREEN_GROWN("GreenGrown")
 
     ;
 
@@ -110,5 +115,18 @@ public enum ImageLoader {
         else if (item instanceof Sweater) {return SWEATER;}
         else if (item instanceof Wool) {return WOOL;}
         else {return BERRY;}
+    }
+
+    public static ImageLoader seedToLoad(Seed seed){
+        if (seed instanceof BeetrootSeed) {return BEETROOT_SEED;}
+        else if (seed instanceof BerrySeed) {return BERRY_SEED;}
+        else if (seed instanceof CarrotSeed) {return CARROT_SEED;}
+        else if (seed instanceof WheatSeed) {return WHEAT_SEED;}
+        else if (seed instanceof DandelionSeed) {return DANDELION_SEED;}
+        else if (seed instanceof OrchidSeed) {return ORCHID_SEED;}
+        else if (seed instanceof PoppySeed) {return POPPY_SEED;}
+        else if (seed instanceof TulipSeed) {return TULIP_SEED;}
+        else if (seed instanceof PumpkinSeed) {return PUMPKIN_SEED;}
+        else {return BERRY_SEED;}
     }
 }
