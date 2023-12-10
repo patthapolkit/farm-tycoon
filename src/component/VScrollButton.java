@@ -26,7 +26,7 @@ public class VScrollButton extends GameButton {
         itemImgView = imageView;
         itemImgView.setFitHeight(43);
         itemImgView.setFitWidth(30);
-        itemNameText = new OrbitFontText(text);
+        itemNameText = new OrbitFontText(text,14);
         container.getChildren().addAll(itemImgView, itemNameText);
         getChildren().add(container);
     }

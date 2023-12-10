@@ -24,6 +24,8 @@ public class TempFarmScene extends StackPane {
     private GameButton plotButton;
     private GameButton factButton;
 
+    private GameButton shopButton;
+
     private VBox container;
 
     private OrbitFontText title;
@@ -61,12 +63,13 @@ public class TempFarmScene extends StackPane {
         barnButtonSetup();
         plotButtonSetup();
         factButtonSetup();
+        shopButtonSetup();
 
         // buttonContainer setup
         buttonContainer = new VBox();
         buttonContainer.setPadding(new Insets(20,0,0,0));
-        buttonContainer.setSpacing(20);
-        buttonContainer.getChildren().addAll(barnButton,plotButton,factButton);
+        buttonContainer.setSpacing(5);
+        buttonContainer.getChildren().addAll(barnButton,plotButton,factButton,shopButton);
 
         // container setup
         container.getChildren().add(buttonContainer);
@@ -76,7 +79,7 @@ public class TempFarmScene extends StackPane {
 
     public void barnButtonSetup(){
 
-        barnButton = new GameButton(330,80,40,Color.rgb(124,153,182));
+        barnButton = new GameButton(200,50,40,Color.rgb(124,153,182));
         barnButton.addText("Barn",30,Color.WHITE);
         barnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
@@ -104,7 +107,7 @@ public class TempFarmScene extends StackPane {
     }
 
     public void plotButtonSetup(){
-        plotButton = new GameButton(330,80,40,Color.rgb(124,153,182));
+        plotButton = new GameButton(200,50,40,Color.rgb(124,153,182));
         plotButton.addText("Plot",30,Color.WHITE);
         plotButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
@@ -114,11 +117,21 @@ public class TempFarmScene extends StackPane {
     }
 
     public void factButtonSetup(){
-        factButton = new GameButton(330,80,40,Color.rgb(124,153,182));
+        factButton = new GameButton(200,50,40,Color.rgb(124,153,182));
         factButton.addText("Factory",30,Color.WHITE);
         factButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 HomeMenuScene.getRoot().getChildren().add(new FactoryScene());
+            }
+        });
+    }
+
+    public void shopButtonSetup(){
+        shopButton = new GameButton(200,50,40,Color.rgb(124,153,182));
+        shopButton.addText("Shop",30,Color.WHITE);
+        shopButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent e) {
+                HomeMenuScene.getRoot().getChildren().add(new ShopScene());
             }
         });
     }
