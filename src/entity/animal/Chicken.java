@@ -8,13 +8,14 @@ import logic.Player;
 public class Chicken extends Animal implements Collectable {
 
     public Chicken() {
-        super("Chicken", 300);
+        super("Chicken", 100);
     }
 
     @Override
     public void feed(Player player) throws NotEnoughBalanceException {
-        if (player.getBalance() >= 5) {
-            this.setFoodLevel(this.getFoodLevel() + 5);
+        if (player.getBalance() >= 20) {
+            increaseFoodLevel(5);
+            player.chargeMoney(20);
         } else {
             throw new NotEnoughBalanceException();
         }
@@ -24,6 +25,7 @@ public class Chicken extends Animal implements Collectable {
     public void collect(Player player) {
         if (getFoodLevel() == 100) {
             player.addItem(new Egg(), 1);
+            setFoodLevel(0);
         }
     }
 }

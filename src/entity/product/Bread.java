@@ -16,5 +16,6 @@ public class Bread extends Product{
     @Override
     public void craft(Player player) {
         player.removeItem(new Wheat(), 5);
+        player.addItem(new Bread(), 1);
     }
 }

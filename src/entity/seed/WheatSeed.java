@@ -5,9 +5,9 @@ import entity.material.Wheat;
 import logic.NotEnoughBalanceException;
 import logic.Player;
 
-public class WheatSeed extends Seed implements FastGrowing {
+public class WheatSeed extends CropSeed implements FastGrowing {
     public WheatSeed() {
-        super("Wheat Seed", 0, 0, true);
+        super("Wheat Seed", 5, 0);
     }
 
     @Override
@@ -21,6 +21,7 @@ public class WheatSeed extends Seed implements FastGrowing {
     public void fertilize(Player player) throws NotEnoughBalanceException {
         if (player.getBalance() >= 20) {
             this.setHumidityLevel((int) (this.getHumidityLevel() * 1.5));
+            player.chargeMoney(20);
         } else {
             throw new NotEnoughBalanceException();
         }
@@ -29,7 +30,8 @@ public class WheatSeed extends Seed implements FastGrowing {
     @Override
     public void water(Player player) throws NotEnoughBalanceException {
         if (player.getBalance() >= 5) {
-            this.setHumidityLevel(this.getHumidityLevel() + 5);
+            increaseHumidity(5);
+            player.chargeMoney(5);
         } else {
             throw new NotEnoughBalanceException();
         }

@@ -32,6 +32,13 @@ public abstract class Animal {
         return foodLevel;
     }
 
+    public void increaseFoodLevel(int amount) {
+        foodLevel += amount;
+        if (foodLevel > 100) {
+            foodLevel = 100;
+        }
+    }
+
     public void setFoodLevel(int foodLevel) {
         if (foodLevel < 0) foodLevel = 0;
         if (foodLevel > 100) foodLevel = 100;
