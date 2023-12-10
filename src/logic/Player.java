@@ -19,7 +19,7 @@ public class Player {
         this.inventory = new ArrayList<>();
         this.cage = new ArrayList<>();
         this.plots = new ArrayList<>();
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 14; i++) {
             plots.add(new Plot());
         }
     }

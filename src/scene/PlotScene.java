@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import logic.GameInstance;
 import logic.ItemCounter;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import static utility.Utility.stringToSeed;
 
 public class PlotScene extends StackPane {
+    private GameInstance gameInstance;
 
     private VBox container;
 
@@ -31,7 +33,8 @@ public class PlotScene extends StackPane {
     private PlotGrid plotGrid;
     private PlotControl plotControl;
 
-    public PlotScene() {
+    public PlotScene(GameInstance gameInstance) {
+        this.gameInstance = gameInstance;
 
         // stackPane(this) setup
         setPrefSize(800, 450);
@@ -101,10 +104,10 @@ public class PlotScene extends StackPane {
     public void loadUnlockedSeed(){
 
         // Sample ArrayList<Seed>
-        ArrayList<Seed> unlockedSeed = new ArrayList<Seed>();
-        unlockedSeed.add(new WheatSeed());
-        unlockedSeed.add(new BerrySeed());
-        unlockedSeed.add(new CarrotSeed());
+        ArrayList<Seed> unlockedSeed = gameInstance.getShop().getUnlockedSeed();
+//        unlockedSeed.add(new WheatSeed());
+//        unlockedSeed.add(new BerrySeed());
+//        unlockedSeed.add(new CarrotSeed());
 
         // EDIT HERE
 
@@ -117,14 +120,14 @@ public class PlotScene extends StackPane {
 
         // Sample ArrayList<Plot>
         // Note 1: Its size will always be 14
-        ArrayList<Plot> plots = new ArrayList<Plot>();
-        for (int i=1;i<=8;i++){
-            plots.add(new Plot(new WheatSeed()));
-        }
-        for (int i=9;i<=14;i++){
-            plots.add(new Plot());
-            // Note 2: This constructor will create an empty plot (See NullSeed)
-        }
+        ArrayList<Plot> plots = gameInstance.getPlayer().getPlots();
+//        for (int i=1;i<=8;i++){
+//            plots.add(new Plot(new WheatSeed()));
+//        }
+//        for (int i=9;i<=14;i++){
+//            plots.add(new Plot());
+//            // Note 2: This constructor will create an empty plot (See NullSeed)
+//        }
 
 
         // EDIT HERE
@@ -137,13 +140,15 @@ public class PlotScene extends StackPane {
     public void plotHarvested(Plot plot){
         // This function will be called when the input plot has been harvested
         System.out.println("Plot with seed: " + "Harvested " + plot.getSeed().getName());
-
+        plot.getSeed().collect(gameInstance.getPlayer());
+        plot.setSeed(new NullSeed());
         // EDIT HERE
     }
 
     public void plotWatered(Plot plot){
         // This function will be called when the input plot has been watered
         System.out.println("Plot with seed " + plot.getSeed().getName() +": Humidity " + plot.getSeed().getHumidityLevel() + " += 25");
+        plot.getSeed().water(gameInstance.getPlayer());
 
         // EDIT HERE
     }
@@ -151,7 +156,7 @@ public class PlotScene extends StackPane {
     public void plotPlanted(Plot plot, Seed seed){
         // This function will be called when the input empty plot has been planted
         System.out.println("Empty plot: " + "Planted" + seed.getName());
-
+        plot.setSeed(seed);
         // EDIT HERE
     }
 
