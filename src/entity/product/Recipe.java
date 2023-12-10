@@ -58,6 +58,5 @@ public enum Recipe {
         else if (s.equals("Sweater")) {return SWEATER;}
         else if (s.equals("Cake")) {return CAKE;}
         return null;
-
     }
 }
