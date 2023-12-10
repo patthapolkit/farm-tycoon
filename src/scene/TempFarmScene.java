@@ -1,6 +1,7 @@
 package scene;
 
 
+import component.CashDisplay;
 import component.GameButton;
 import component.NavMenu;
 import component.OrbitFontText;
@@ -28,6 +29,8 @@ public class TempFarmScene extends StackPane {
     private GameButton shopButton;
     private GameButton martButton;
 
+    private GameButton cageButton;
+
     private VBox container;
 
     private OrbitFontText title;
@@ -37,6 +40,8 @@ public class TempFarmScene extends StackPane {
     private VBox buttonContainer;
 
     private StackPane topContainer;
+
+    private CashDisplay cashDisplay;
 
 
     public TempFarmScene(GameInstance gameInstance) {
@@ -56,7 +61,12 @@ public class TempFarmScene extends StackPane {
         topContainer = new StackPane();
         topContainer.setAlignment(Pos.CENTER_LEFT);
         topContainer.setPadding(new Insets(15, 30, 0, 30));
-        topContainer.getChildren().addAll(titleContainer, new NavMenu());
+
+        // EDIT ME
+        cashDisplay = new CashDisplay(100);
+        // This constructor should receive player's currentCash
+
+        topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
 
         // container setup
         container = new VBox();
@@ -68,13 +78,15 @@ public class TempFarmScene extends StackPane {
         factButtonSetup();
         shopButtonSetup();
         martButtonSetup();
+        cageButtonSetup();
+
 
 
         // buttonContainer setup
         buttonContainer = new VBox();
         buttonContainer.setPadding(new Insets(20, 0, 0, 0));
         buttonContainer.setSpacing(5);
-        buttonContainer.getChildren().addAll(barnButton, plotButton, factButton, shopButton, martButton);
+        buttonContainer.getChildren().addAll(barnButton, plotButton, factButton, shopButton, martButton, cageButton);
 
         // container setup
         container.getChildren().add(buttonContainer);
@@ -130,6 +142,16 @@ public class TempFarmScene extends StackPane {
         martButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 HomeMenuScene.getRoot().getChildren().add(new MinimartScene(gameInstance));
+            }
+        });
+    }
+
+    public void cageButtonSetup() {
+        cageButton = new GameButton(200, 50, 40, Color.rgb(124, 153, 182));
+        cageButton.addText("Cage", 30, Color.WHITE);
+        cageButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent e) {
+                HomeMenuScene.getRoot().getChildren().add(new CageScene(gameInstance));
             }
         });
     }

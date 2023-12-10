@@ -1,6 +1,7 @@
 package scene;
 
 
+import component.CashDisplay;
 import component.InventoryGrid;
 import component.NavMenu;
 import component.OrbitFontText;
@@ -22,6 +23,8 @@ public class BarnScene extends StackPane {
 
     private OrbitFontText title;
 
+    private CashDisplay cashDisplay;
+
 
     public BarnScene(ArrayList<ItemCounter> inventory) {
 
@@ -38,8 +41,14 @@ public class BarnScene extends StackPane {
         // topContainer setup
         topContainer = new StackPane();
         topContainer.setAlignment(Pos.CENTER_LEFT);
-        topContainer.setPadding(new Insets(15, 30, 0, 30));
-        topContainer.getChildren().addAll(titleContainer, new NavMenu());
+
+        topContainer.setPadding(new Insets(15,30,0,30));
+
+        // EDIT ME
+        cashDisplay = new CashDisplay(999999);
+        // This constructor should receive player's currentCash
+
+        topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
 
         // inventoryGrid setup
         inventoryGrid = new InventoryGrid(inventory);

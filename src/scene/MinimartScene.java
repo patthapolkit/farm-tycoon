@@ -33,9 +33,10 @@ public class MinimartScene extends StackPane {
     private String selectedItem;
 
     private HBox mainContainer;
+    private CashDisplay cashDisplay;
 
-    public MinimartScene(GameInstance gameInstance) {
-        this.gameInstance = gameInstance;
+
+    public MinimartScene(GameInstance gameInstance){
 
         // stackPane(this) setup
         setPrefSize(800, 450);
@@ -51,7 +52,13 @@ public class MinimartScene extends StackPane {
         topContainer = new StackPane();
         topContainer.setAlignment(Pos.CENTER_LEFT);
         topContainer.setPadding(new Insets(15, 30, 0, 30));
-        topContainer.getChildren().addAll(titleContainer, new NavMenu());
+
+        // EDIT ME
+        cashDisplay = new CashDisplay(100);
+        // This constructor should receive player's currentCash
+
+
+        topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
 
         // infoPane & vScroll setup
         infoPaneSetup();
@@ -70,7 +77,9 @@ public class MinimartScene extends StackPane {
         getChildren().add(container);
 
     }
-
+    private void updateCashText(int x){
+        cashDisplay.setCashText(x);
+    }
 
     private void vScrollSetup() {
 

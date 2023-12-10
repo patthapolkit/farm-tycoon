@@ -18,6 +18,7 @@ import static utility.Utility.*;
 public class ShopScene extends StackPane {
     private GameInstance gameInstance;
 
+
     private VBox container;
 
     private OrbitFontText title;
@@ -33,9 +34,10 @@ public class ShopScene extends StackPane {
     private String selectedItem;
 
     private HBox mainContainer;
+    private CashDisplay cashDisplay;
 
-    public ShopScene(GameInstance gameInstance) {
-        this.gameInstance = gameInstance;
+
+    public ShopScene(GameInstance gameInstance){
 
         // stackPane(this) setup
         setPrefSize(800, 450);
@@ -51,7 +53,12 @@ public class ShopScene extends StackPane {
         topContainer = new StackPane();
         topContainer.setAlignment(Pos.CENTER_LEFT);
         topContainer.setPadding(new Insets(15, 30, 0, 30));
-        topContainer.getChildren().addAll(titleContainer, new NavMenu());
+
+        // EDIT ME
+        cashDisplay = new CashDisplay(100);
+        // This constructor should receive player's currentCash
+
+        topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
 
         // infoPane & vScroll setup
         infoPaneSetup();
@@ -72,7 +79,11 @@ public class ShopScene extends StackPane {
     }
 
 
-    private void vScrollSetup() {
+    private void updateCashText(int x){
+        cashDisplay.setCashText(x);
+    }
+    private void vScrollSetup(){
+
 
         itemSelector = new VScroll(Color.rgb(199, 211, 214));
         itemSelector.setBackground(Color.rgb(251, 240, 190), "#FBF0BE");
