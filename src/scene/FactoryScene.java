@@ -2,6 +2,7 @@ package scene;
 
 import component.*;
 import entity.base.Item;
+import entity.product.Product;
 import entity.product.Recipe;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -10,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import logic.GameInstance;
 import logic.ItemCounter;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import static resource.ImageLoader.*;
 import static utility.Utility.stringToProduct;
 
 public class FactoryScene extends StackPane {
+    private GameInstance gameInstance;
 
     private VBox container;
 
@@ -36,7 +39,8 @@ public class FactoryScene extends StackPane {
 
     private HBox mainContainer;
 
-    public FactoryScene(){
+    public FactoryScene(GameInstance gameInstance){
+        this.gameInstance = gameInstance;
 
         // stackPane(this) setup
         setPrefSize(800, 450);
@@ -126,10 +130,11 @@ public class FactoryScene extends StackPane {
 
     private void craftPressed(){
 
-        Item craftedItem = stringToProduct(selectedRecipe);
-        ArrayList<ItemCounter> ingredient = getRecipe(selectedRecipe).getIngredient();
+        Product craftedItem = stringToProduct(selectedRecipe);
+//        ArrayList<ItemCounter> ingredient = getRecipe(selectedRecipe).getIngredient();
 
         // EDIT HERE
+        gameInstance.getFactory().craft(gameInstance.getPlayer(),craftedItem);
 
         System.out.println("Crafted " + selectedRecipe);
 

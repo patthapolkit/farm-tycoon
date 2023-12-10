@@ -1,7 +1,9 @@
 package entity.flower;
 
-public class Tulip extends Flower{
+import entity.base.Item;
+
+public class Tulip extends Item {
     public Tulip() {
-        super("Tulip", 500, 5);
+        super("Tulip", 100);
     }
 }

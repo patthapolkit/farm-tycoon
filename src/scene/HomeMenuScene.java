@@ -17,6 +17,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import logic.GameInstance;
 import resource.ImageLoader;
 
 import static resource.ImageLoader.getImage;
@@ -61,6 +62,8 @@ public class HomeMenuScene {
     }
 
     private void setup(){
+        // create game instance
+        GameInstance gameInstance = new GameInstance();
 
         // title setup
         title = new LuckyFontText("Farm Tycoon", 72);
@@ -77,7 +80,7 @@ public class HomeMenuScene {
         // buttons event handling
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
-                root.getChildren().add(new TempFarmScene());
+                root.getChildren().add(new TempFarmScene(gameInstance));
             }
         });
 

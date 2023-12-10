@@ -1,6 +1,5 @@
 package entity.animal;
 
-import logic.NotEnoughBalanceException;
 import logic.Player;
 
 public abstract class Animal {
@@ -14,7 +13,7 @@ public abstract class Animal {
         this.price = price;
     }
 
-    public abstract void feed(Player player) throws NotEnoughBalanceException;
+    public abstract void feed(Player player);
 
     public boolean canBuy(Player player) {
         return player.getBalance() >= this.price;
@@ -30,6 +29,13 @@ public abstract class Animal {
 
     public int getFoodLevel() {
         return foodLevel;
+    }
+
+    public void increaseFoodLevel(int amount) {
+        foodLevel += amount;
+        if (foodLevel > 100) {
+            foodLevel = 100;
+        }
     }
 
     public void setFoodLevel(int foodLevel) {

@@ -1,24 +1,28 @@
 package entity.animal;
 
-import entity.material.Milk;
-import logic.NotEnoughBalanceException;
+
+import entity.base.Collectable;
+import entity.material.Wheat;
+import entity.material.Wool;
 import logic.Player;
 
-public class Sheep extends Animal{
+public class Sheep extends Animal implements Collectable {
     public Sheep() {
-        super("Sheep", 1000);
+        super("Sheep", 3000);
     }
+
     @Override
-    public void feed(Player player) throws NotEnoughBalanceException {
-        if (player.getBalance() >= 5) {
-            this.setFoodLevel(this.getFoodLevel() + 5);
-        } else {
-            throw new NotEnoughBalanceException();
+    public void feed(Player player) {
+        if (player.existsInInventory(new Wheat(), 1)) {
+            increaseFoodLevel(25);
+            player.removeItem(new Wheat(), 1);
         }
     }
+
+    @Override
     public void collect(Player player) {
         if (getFoodLevel() == 100) {
-            player.addItem(new Milk(), 1);
-        }
-    }
-}
+            player.addItem(new Wool(), 1);
+            setFoodLevel(0);
+
+
