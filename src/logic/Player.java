@@ -17,19 +17,19 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.balance = 100000;
+        this.balance = 1000;
         this.inventory = new ArrayList<>();
         this.cage = new ArrayList<>();
         this.plots = new ArrayList<>();
         this.flowerPlots = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            plots.add(new Plot(null));
+            plots.add(new Plot());
         }
     }
 
     public boolean existsInInventory(Item item, int amount) {
         for (ItemCounter itemCounter : this.inventory) {
-            if (itemCounter.getItem().equals(item)) {
+            if (itemCounter.getItem().getName().equals(item.getName())) {
                 if (itemCounter.getCount() >= amount) {
                     return true;
                 }
@@ -52,7 +52,7 @@ public class Player {
         if (count > 0) {
             boolean isExist = false;
             for (ItemCounter itemCounter : this.inventory) {
-                if (itemCounter.getItem().equals(newItem)) {
+                if (itemCounter.getItem().getName().equals(newItem.getName())) {
                     isExist = true;
                     itemCounter.setCount(itemCounter.getCount() + count);
                     break;
@@ -71,9 +71,10 @@ public class Player {
 
         ItemCounter itemRemoved = null;
         for (ItemCounter itemCounter : this.inventory) {
-            if (itemCounter.getItem().equals(toRemove)) {
+            if (itemCounter.getItem().getName().equals(toRemove.getName())) {
                 itemCounter.setCount(itemCounter.getCount() - count);
                 itemRemoved = itemCounter;
+                break;
             }
         }
         if (itemRemoved != null) {
@@ -89,6 +90,10 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void chargeMoney(int amount) {
+        this.balance -= amount;
     }
 
     public int getBalance() {

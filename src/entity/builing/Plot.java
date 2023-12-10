@@ -1,19 +1,52 @@
 package entity.builing;
 
-import entity.seed.Seed;
+import entity.seed.CropSeed;
 
 public class Plot {
-    private Seed seed;
+    private CropSeed seed;
+    private int humidityLevel;
 
-    public Plot(Seed seed) {
-        this.seed = seed;
+    public Plot() {
+        this.seed = null;
     }
 
-    public Seed getSeed() {
+    public void plantSeed(CropSeed seed) {
+        this.seed = seed;
+        this.humidityLevel = 0;
+    }
+
+    public void waterPlot(int amount) {
+        seed.increaseHumidity(amount);
+        humidityLevel += amount;
+    }
+
+    public boolean isReadyForHarvest() {
+        return seed != null && seed.isReadyForHarvest();
+    }
+
+    @Override
+    public String toString() {
+        if (seed == null) {
+            return "Empty plot";
+        } else {
+            return seed.toString();
+        }
+    }
+
+    public CropSeed getSeed() {
         return seed;
     }
 
-    public void setSeed(Seed seed) {
+    public void setSeed(CropSeed seed) {
         this.seed = seed;
     }
+
+    public int getHumidityLevel() {
+        return humidityLevel;
+    }
+
+    public void setHumidityLevel(int humidityLevel) {
+        this.humidityLevel = humidityLevel;
+    }
 }
+

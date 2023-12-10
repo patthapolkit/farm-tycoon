@@ -5,6 +5,7 @@ import entity.product.Product;
 import logic.Player;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Factory {
     private ArrayList<Product> allProduct;
@@ -17,7 +18,6 @@ public class Factory {
     public void craft(Player player, Product product) {
         if (product.canCraft(player)) {
             product.craft(player);
-            player.addItem(product, 1);
         }
     }
 

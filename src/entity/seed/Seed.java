@@ -8,17 +8,23 @@ public abstract class Seed implements Collectable {
     private String name;
     private int price;
     private int humidityLevel;
-    private boolean isUnlocked;
 
-
-    public Seed(String name, int price, int humidityLevel, boolean isUnlocked) {
+    public Seed(String name, int price, int humidityLevel) {
         this.name = name;
         setPrice(price);
         setHumidityLevel(humidityLevel);
-        this.isUnlocked = isUnlocked;
     }
 
     public abstract void water(Player player) throws NotEnoughBalanceException;
+
+    public boolean isReadyForHarvest() {
+        return humidityLevel >= 100;
+    }
+
+    @Override
+    public String toString() {
+        return name + "| humidity: " + humidityLevel;
+    }
 
     public String getName() {
         return name;
@@ -26,6 +32,13 @@ public abstract class Seed implements Collectable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void increaseHumidity(int amount) {
+        humidityLevel += amount;
+        if (humidityLevel > 100) {
+            humidityLevel = 100;
+        }
     }
 
     public int getHumidityLevel() {
@@ -45,13 +58,5 @@ public abstract class Seed implements Collectable {
     public void setPrice(int price) {
         if (price < 0) price = 0;
         this.price = price;
-    }
-
-    public boolean isUnlocked() {
-        return isUnlocked;
-    }
-
-    public void setUnlocked(boolean unlocked) {
-        isUnlocked = unlocked;
     }
 }

@@ -1,19 +1,20 @@
 package entity.seed;
 
 import entity.base.FastGrowing;
+import entity.material.Carrot;
 import entity.material.Wheat;
 import logic.NotEnoughBalanceException;
 import logic.Player;
 
-public class WheatSeed extends CropSeed implements FastGrowing {
-    public WheatSeed() {
-        super("Wheat Seed", 5, 0);
+public class CarrotSeed extends CropSeed implements FastGrowing {
+    public CarrotSeed() {
+        super("Carrot Seed", 10, 0);
     }
 
     @Override
     public void collect(Player player) {
-        if (getHumidityLevel() == 100) {
-            player.addItem(new Wheat(), 1);
+        if (isReadyForHarvest()) {
+            player.addItem(new Carrot(), 1);
         }
     }
 

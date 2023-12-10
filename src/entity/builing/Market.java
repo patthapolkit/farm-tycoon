@@ -9,12 +9,16 @@ public class Market {
     }
 
     public void sell(Player player, Product product, int amount) {
-        player.removeItem(product, amount);
-        player.setBalance(player.getBalance() + (product.getPrice() * amount));
+        if (player.existsInInventory(product, amount)) {
+            player.removeItem(product, amount);
+            player.setBalance(player.getBalance() + (product.getPrice() * amount));
+        }
     }
 
     public void sell(Player player, Material material, int amount) {
-        player.removeItem(material, amount);
-        player.setBalance(player.getBalance() + (material.getPrice() * amount));
+        if (player.existsInInventory(material, amount)) {
+            player.removeItem(material, amount);
+            player.setBalance(player.getBalance() + (material.getPrice() * amount));
+        }
     }
 }
