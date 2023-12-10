@@ -121,6 +121,7 @@ public class FactoryScene extends StackPane {
             ItemDisplay j = new ItemDisplay(i);
             infoPane.getItemDisContainer().getChildren().add(j);
         }
+        infoPane.setDescText(r.getDescription());
     }
 
     private void craftPressed(){

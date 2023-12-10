@@ -13,43 +13,43 @@ import java.util.Arrays;
 public enum ShopItem {
 
 
-    CARROT_SEED(10,
+    CARROT_SEED(100,
             "Make one-time purchase to unlock this. Can be grown into Carrot."
     ),
-    PUMPKIN_SEED(10,
+    PUMPKIN_SEED(100,
             "Make one-time purchase to unlock this. Can be grown into Pumpkin."
     ),
 
-    BEETROOT_SEED(10,
+    BEETROOT_SEED(500,
             "Make one-time purchase to unlock this. Can be grown into Beetroot."
     ),
-    BERRY_SEED(10,
+    BERRY_SEED(500,
             "Make one-time purchase to unlock this. Can be grown into Berry."
     ),
-    DANDELION_SEED(10,
+    DANDELION_SEED(2000,
             "Make one-time purchase to unlock this. Can be grown into Dandelion."
     ),
 
-    POPPY_SEED(10,
+    POPPY_SEED(1000,
             "Make one-time purchase to unlock this. Can be grown into Poppy."
     ),
 
-    ORCHID_SEED(10,
+    ORCHID_SEED(2500,
             "Make one-time purchase to unlock this. Can be grown into Orchid."
     ),
-    TULIP_SEED(10,
+    TULIP_SEED(1000,
             "Make one-time purchase to unlock this. Can be grown into Tulip."
     ),
 
-    CHICKEN(10,
+    CHICKEN(1000,
             "Purchase to add one into your cage. You can have this animal up to 4."
     ),
 
-    COW(10,
+    COW(3000,
             "Purchase to add one into your cage. You can have this animal up to 4."
     ),
 
-    SHEEP(10,
+    SHEEP(3000,
             "Purchase to add one into your cage. You can have this animal up to 4."
     );
 

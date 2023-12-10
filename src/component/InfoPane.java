@@ -66,7 +66,7 @@ public class InfoPane extends StackPane {
         topContainer.getChildren().addAll(itemImageView,itemNameText);
         topContainer.setSpacing(10);
 
-        descText = new OrbitFontText("Description DescriptionDescri ptionDescriptionDescripti onDescrip tionDescription");
+        descText = new OrbitFontText("",15);
         descText.setWrappingWidth(320);
         descText.setTextAlignment(TextAlignment.CENTER);
         descContainer = new HBox(descText);

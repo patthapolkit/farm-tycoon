@@ -23,8 +23,8 @@ public class TempFarmScene extends StackPane {
     private GameButton barnButton;
     private GameButton plotButton;
     private GameButton factButton;
-
     private GameButton shopButton;
+    private GameButton martButton;
 
     private VBox container;
 
@@ -64,12 +64,14 @@ public class TempFarmScene extends StackPane {
         plotButtonSetup();
         factButtonSetup();
         shopButtonSetup();
+        martButtonSetup();
+
 
         // buttonContainer setup
         buttonContainer = new VBox();
         buttonContainer.setPadding(new Insets(20,0,0,0));
         buttonContainer.setSpacing(5);
-        buttonContainer.getChildren().addAll(barnButton,plotButton,factButton,shopButton);
+        buttonContainer.getChildren().addAll(barnButton,plotButton,factButton,shopButton,martButton);
 
         // container setup
         container.getChildren().add(buttonContainer);
@@ -132,6 +134,16 @@ public class TempFarmScene extends StackPane {
         shopButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 HomeMenuScene.getRoot().getChildren().add(new ShopScene());
+            }
+        });
+    }
+
+    public void martButtonSetup(){
+        martButton = new GameButton(200,50,40,Color.rgb(124,153,182));
+        martButton.addText("Mart",30,Color.WHITE);
+        martButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent e) {
+                HomeMenuScene.getRoot().getChildren().add(new MinimartScene());
             }
         });
     }

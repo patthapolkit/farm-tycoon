@@ -64,6 +64,26 @@ public class Utility {
         return null;
     }
 
+    public static Item stringToItem(String s){
+        if (s.equals("Egg")) {return new Egg();}
+        else if (s.equals("Milk")) {return new Milk();}
+        else if (s.equals("Wool")) {return new Wool();}
+        else if (s.equals("Sweater")) {return new Sweater();}
+        else if (s.equals("Cake")) {return new Cake();}
+        else if (s.equals("Wheat")) {return new Wheat();}
+        else if (s.equals("Beetroot")) {return new Beetroot();}
+        else if (s.equals("Berry")) {return new Berry();}
+        else if (s.equals("Carrot")) {return new Carrot();}
+        else if (s.equals("Dandelion")) {return new Dandelion();}
+        else if (s.equals("Orchid")) {return new Orchid();}
+        else if (s.equals("Poppy")) {return new Poppy();}
+        else if (s.equals("Pumpkin")) {return new Pumpkin();}
+        else if (s.equals("Tulip")) {return new Tulip();}
+        return null;
+    }
+
+
+
     public static Animal stringToAnimal(String s){
         if (s.equals("Chicken")) {return new Chicken();}
         else if (s.equals("Cow")) {return new Cow();}
