@@ -45,7 +45,7 @@ public class BarnScene extends StackPane {
         topContainer.setPadding(new Insets(15,30,0,30));
 
         // EDIT ME
-        cashDisplay = new CashDisplay(999999);
+        cashDisplay = new CashDisplay(100);
         // This constructor should receive player's currentCash
 
         topContainer.getChildren().addAll(titleContainer, cashDisplay,new NavMenu());
