@@ -1,4 +1,4 @@
-package entity.builing;
+package entity.building;
 
 import entity.material.Material;
 import entity.product.Product;

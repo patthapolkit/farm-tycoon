@@ -1,11 +1,11 @@
-package entity.builing;
+package entity.building;
 
 import entity.seed.Seed;
 
-public class Plot {
+public class FlowerPlot {
     private Seed seed;
 
-    public Plot(Seed seed) {
+    public FlowerPlot(Seed seed) {
         this.seed = seed;
     }
 

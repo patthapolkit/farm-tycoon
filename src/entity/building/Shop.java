@@ -1,4 +1,4 @@
-package entity.builing;
+package entity.building;
 
 import entity.animal.Animal;
 import entity.animal.Cat;
