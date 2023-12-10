@@ -1,29 +1,17 @@
 package entity.building;
 
+import entity.seed.NullSeed;
 import entity.seed.Seed;
 
 public class Plot {
     private Seed seed;
 
-    public Plot() {
-        this.seed = null;
-    }
-
-    public void plantSeed(Seed seed) {
+    public Plot(Seed seed) {
         this.seed = seed;
     }
 
-    public void waterPlot(int amount) {
-        seed.increaseHumidity(amount);
-    }
-
-    @Override
-    public String toString() {
-        if (seed == null) {
-            return "Empty plot";
-        } else {
-            return seed.toString();
-        }
+    public Plot(){
+        this.seed = new NullSeed();
     }
 
     public Seed getSeed() {
@@ -34,4 +22,3 @@ public class Plot {
         this.seed = seed;
     }
 }
-

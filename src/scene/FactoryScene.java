@@ -137,7 +137,6 @@ public class FactoryScene extends StackPane {
         // EDIT HERE
         gameInstance.getFactory().craft(gameInstance.getPlayer(),craftedItem);
 
-
         System.out.println("Crafted " + selectedRecipe);
 
     }

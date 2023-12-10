@@ -38,6 +38,19 @@ public class Utility {
         return null;
     }
 
+    public static String seedToString(Seed s){
+        if (s instanceof WheatSeed) {return "Wheat";}
+        else if (s instanceof BeetrootSeed) {return "Beetroot";}
+        else if (s instanceof BerrySeed) {return "Berry";}
+        else if (s instanceof CarrotSeed) {return "Carrot";}
+        else if (s instanceof DandelionSeed) {return "Dandelion";}
+        else if (s instanceof OrchidSeed) {return "Orchid";}
+        else if (s instanceof PoppySeed) {return "Poppy";}
+        else if (s instanceof PumpkinSeed) {return "Pumpkin";}
+        else if (s instanceof TulipSeed) {return "Tulip";}
+        return null;
+    }
+
     public static Product stringToProduct(String s){
         if (s.equals("Bread")) {return new Bread();}
         else if (s.equals("Carrot Pie")) {return new CarrotPie();}

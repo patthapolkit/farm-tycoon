@@ -1,6 +1,8 @@
 package component;
 
+import entity.building.Plot;
 import entity.seed.PoppySeed;
+import entity.seed.Seed;
 import entity.seed.WheatSeed;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -14,6 +16,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.util.ArrayList;
+
 public class PlotGrid extends StackPane {
 
     private Rectangle background;
@@ -22,7 +26,7 @@ public class PlotGrid extends StackPane {
 
     private VBox gridContainer;
 
-    public PlotGrid(){
+    public PlotGrid(ArrayList<Plot> plots){
 
         // stackPane(this) setup
         setPadding(new Insets(20,50,20,50));
@@ -38,22 +42,31 @@ public class PlotGrid extends StackPane {
         grid.setHgap(5);
         grid.setVgap(5);
 
-        for (int i=1;i<=7;i++){
-            for (int j=1;j<=2;j++){
-                grid.add(new PlotSquare(),i-1,j-1);
+        for (int i=0; i< plots.size();i++){
+            Seed seed = plots.get(i).getSeed();
+            int humid = seed.getHumidityLevel();
+            int c = numToGridCol(i);
+            int r = numToGridRow(i);
+
+            PlotSquare sq = new PlotSquare();
+            sq.setSeed(seed);
+            sq.setPlot(plots.get(i));
+            for (int j=0;j<humid;j+=25){
+                sq.nextStage();
             }
+            grid.add(sq,c,r);
         }
-        PlotSquare x = new PlotSquare();
-        PlotSquare y = new PlotSquare();
-        x.setLocked(true);
-        y.setLocked(true);
-        grid.add(x,7,0);
-        grid.add(y,7,1);
-
-
         getChildren().addAll(background, grid);
 
     }
+
+        private int numToGridCol(int x){
+            return (x % 7);
+        }
+
+        private int numToGridRow(int x){
+            return (Math.floorDiv(x,7));
+        }
 
     public GridPane getGrid() {
         return grid;
