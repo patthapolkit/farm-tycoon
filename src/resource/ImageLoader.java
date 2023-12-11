@@ -43,12 +43,7 @@ public enum ImageLoader {
     YELLOW_SEED("YellowSeed"),
 
     YELLOW_SEEDLING("YellowSeedling"),
-
-    LOCK("Lock"),
-
     WHEAT_SEED("WheatSeed"),
-
-
     BEETROOT_SEED("BeetrootSeed"),
 
     BERRY_SEED("BerrySeed"),
@@ -117,64 +112,96 @@ public enum ImageLoader {
 
     SHOP("Shop"),
 
-    MART("Mart")
-
-    ;
+    MART("Mart");
 
     private final String name;
     private final Image image;
 
-    ImageLoader(String name){
+    ImageLoader(String name) {
         this.name = name;
         this.image = new Image("file:src/resource/image/" + name + ".png");
     }
 
-    public static Image getImage(ImageLoader i){
+    public static Image getImage(ImageLoader i) {
         return i.image;
     }
 
-    public static ImageView getImageView(ImageLoader i){
+    public static ImageView getImageView(ImageLoader i) {
         return new ImageView(i.image);
     }
 
-    public static ImageLoader itemToLoad(Item item){
-        if (item instanceof Beetroot) {return BEETROOT;}
-        else if (item instanceof Berry) {return BERRY;}
-        else if (item instanceof Carrot) {return CARROT;}
-        else if (item instanceof Egg) {return EGG;}
-        else if (item instanceof Milk) {return MILK;}
-        else if (item instanceof Wheat) {return WHEAT;}
-        else if (item instanceof Dandelion) {return DANDELION;}
-        else if (item instanceof Orchid) {return ORCHID;}
-        else if (item instanceof Poppy) {return POPPY;}
-        else if (item instanceof Tulip) {return TULIP;}
-        else if (item instanceof Pumpkin) {return PUMPKIN;}
-        else if (item instanceof Bread) {return BREAD;}
-        else if (item instanceof Cake) {return CAKE;}
-        else if (item instanceof PumpkinPie) {return PUMPKIN_PIE;}
-        else if (item instanceof CarrotPie) {return CARROT_PIE;}
-        else if (item instanceof Sweater) {return SWEATER;}
-        else if (item instanceof Wool) {return WOOL;}
-        else {return BERRY;}
+    public static ImageLoader itemToLoad(Item item) {
+        if (item instanceof Beetroot) {
+            return BEETROOT;
+        } else if (item instanceof Berry) {
+            return BERRY;
+        } else if (item instanceof Carrot) {
+            return CARROT;
+        } else if (item instanceof Egg) {
+            return EGG;
+        } else if (item instanceof Milk) {
+            return MILK;
+        } else if (item instanceof Wheat) {
+            return WHEAT;
+        } else if (item instanceof Dandelion) {
+            return DANDELION;
+        } else if (item instanceof Orchid) {
+            return ORCHID;
+        } else if (item instanceof Poppy) {
+            return POPPY;
+        } else if (item instanceof Tulip) {
+            return TULIP;
+        } else if (item instanceof Pumpkin) {
+            return PUMPKIN;
+        } else if (item instanceof Bread) {
+            return BREAD;
+        } else if (item instanceof Cake) {
+            return CAKE;
+        } else if (item instanceof PumpkinPie) {
+            return PUMPKIN_PIE;
+        } else if (item instanceof CarrotPie) {
+            return CARROT_PIE;
+        } else if (item instanceof Sweater) {
+            return SWEATER;
+        } else if (item instanceof Wool) {
+            return WOOL;
+        } else {
+            return BERRY;
+        }
     }
 
-    public static ImageLoader seedToLoad(Seed seed){
-        if (seed instanceof BeetrootSeed) {return BEETROOT_SEED;}
-        else if (seed instanceof BerrySeed) {return BERRY_SEED;}
-        else if (seed instanceof CarrotSeed) {return CARROT_SEED;}
-        else if (seed instanceof WheatSeed) {return WHEAT_SEED;}
-        else if (seed instanceof DandelionSeed) {return DANDELION_SEED;}
-        else if (seed instanceof OrchidSeed) {return ORCHID_SEED;}
-        else if (seed instanceof PoppySeed) {return POPPY_SEED;}
-        else if (seed instanceof TulipSeed) {return TULIP_SEED;}
-        else if (seed instanceof PumpkinSeed) {return PUMPKIN_SEED;}
-        else {return BERRY_SEED;}
+    public static ImageLoader seedToLoad(Seed seed) {
+        if (seed instanceof BeetrootSeed) {
+            return BEETROOT_SEED;
+        } else if (seed instanceof BerrySeed) {
+            return BERRY_SEED;
+        } else if (seed instanceof CarrotSeed) {
+            return CARROT_SEED;
+        } else if (seed instanceof WheatSeed) {
+            return WHEAT_SEED;
+        } else if (seed instanceof DandelionSeed) {
+            return DANDELION_SEED;
+        } else if (seed instanceof OrchidSeed) {
+            return ORCHID_SEED;
+        } else if (seed instanceof PoppySeed) {
+            return POPPY_SEED;
+        } else if (seed instanceof TulipSeed) {
+            return TULIP_SEED;
+        } else if (seed instanceof PumpkinSeed) {
+            return PUMPKIN_SEED;
+        } else {
+            return BERRY_SEED;
+        }
     }
 
-    public static ImageLoader animalToLoad(Animal animal){
-        if (animal instanceof Cow){return COW;}
-        else if (animal instanceof Chicken){return CHICKEN;}
-        else if (animal instanceof Sheep){return SHEEP;}
+    public static ImageLoader animalToLoad(Animal animal) {
+        if (animal instanceof Cow) {
+            return COW;
+        } else if (animal instanceof Chicken) {
+            return CHICKEN;
+        } else if (animal instanceof Sheep) {
+            return SHEEP;
+        }
         return null;
     }
 }

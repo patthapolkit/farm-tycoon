@@ -27,7 +27,7 @@ import static resource.ImageLoader.getImage;
 
 public class HomeMenuScene {
 
-    private Stage stage;
+    private final Stage stage;
     private static Scene scene;
     private VBox buttonContainer;
     private LuckyFontText title;
@@ -37,48 +37,31 @@ public class HomeMenuScene {
     private static StackPane root;
 
     public HomeMenuScene(Stage stage) {
-        // stage setup
+
         this.stage = stage;
-
-        // buttonContainer setup
-        buttonContainer = new VBox();
-        buttonContainer.setSpacing(15);
-        buttonContainer.setAlignment(Pos.CENTER);
-        setup();
-
-        // root node setup
-        root = new StackPane();
-        root.setPrefSize(800, 450);
-        root.setBackground(new Background(new BackgroundImage(getImage(ImageLoader.BACKGROUND_HOME), BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                new BackgroundSize(800, 450, false, false, false, false))));
-
-        // scene & stage setup
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Farm Tycoon");
-        stage.setResizable(false);
-        root.getChildren().add(buttonContainer);
+        GameInstance gameInstance = new GameInstance();
+        componentSetup(gameInstance);
+        stageSetup();
 
     }
 
-    private void setup() {
-        // create game instance
-        GameInstance gameInstance = new GameInstance();
-
-        // title setup
+    private void componentSetup(GameInstance gameInstance) {
+        buttonContainer = new VBox();
+        buttonContainer.setSpacing(15);
+        buttonContainer.setAlignment(Pos.CENTER);
         title = new LuckyFontText("Farm Tycoon", 72);
         title.setFill(Color.rgb(172, 77, 73));
-
-        // buttons setup
         playButton = new GameButton(330, 80, 40, Color.rgb(124, 153, 182));
         playButton.addText("Play", 30, Color.WHITE);
         tutorialButton = new GameButton(330, 80, 40, Color.rgb(124, 153, 182));
         tutorialButton.addText("Tutorial", 30, Color.WHITE);
         creditButton = new GameButton(330, 80, 40, Color.rgb(124, 153, 182));
         creditButton.addText("Credits", 30, Color.WHITE);
+        eventSetup(gameInstance);
+    }
 
-        // buttons event handling
+
+    private void eventSetup(GameInstance gameInstance) {
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 root.getChildren().add(new FarmScene(gameInstance));
@@ -89,8 +72,7 @@ public class HomeMenuScene {
             public void handle(MouseEvent e) {
                 try {
                     Desktop.getDesktop().browse(new URI("https://www.progmeth.ttontoey.com"));
-                }
-                catch (Exception err){
+                } catch (Exception err) {
                     err.printStackTrace();
                 }
             }
@@ -100,9 +82,21 @@ public class HomeMenuScene {
                 root.getChildren().add(new CreditScene());
             }
         });
-
         buttonContainer.getChildren().addAll(title, playButton, tutorialButton, creditButton);
+    }
 
+
+    private void stageSetup() {
+        root = new StackPane();
+        root.setPrefSize(800, 450);
+        root.setBackground(new Background(new BackgroundImage(getImage(ImageLoader.BACKGROUND_HOME), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(800, 450, false, false, false, false))));
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Farm Tycoon");
+        stage.setResizable(false);
+        root.getChildren().add(buttonContainer);
     }
 
     public static StackPane getRoot() {

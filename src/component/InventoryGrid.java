@@ -1,11 +1,6 @@
 package component;
 
 import entity.base.Item;
-import entity.flower.Dandelion;
-import entity.flower.Orchid;
-import entity.flower.Poppy;
-import entity.flower.Tulip;
-import entity.material.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -16,19 +11,17 @@ import logic.ItemCounter;
 
 import java.util.ArrayList;
 
-import static javafx.scene.layout.GridPane.getColumnIndex;
-import static javafx.scene.layout.GridPane.getRowIndex;
 
 public class InventoryGrid extends StackPane {
 
-    private GridPane grid;
-    private ScrollPane scrollPane;
+    private final GridPane grid;
+    private final ScrollPane scrollPane;
 
     private int uniqueItemCount;
 
-    private ArrayList<ItemCounter> inventory;
+    private final ArrayList<ItemCounter> inventory;
 
-    public InventoryGrid(ArrayList<ItemCounter> inv){
+    public InventoryGrid(ArrayList<ItemCounter> inv) {
 
         // inventory init
         inventory = new ArrayList<ItemCounter>();
@@ -37,11 +30,11 @@ public class InventoryGrid extends StackPane {
         uniqueItemCount = 0;
 
         // stackPane(this) setup
-        setPadding(new Insets(20,100,20,100));
+        setPadding(new Insets(20, 100, 20, 100));
 
         // grid setup
         grid = new GridPane();
-        grid.setPadding(new Insets(10,35,10,35));
+        grid.setPadding(new Insets(10, 35, 10, 35));
         grid.setAlignment(Pos.TOP_CENTER);
         grid.setHgap(5);
         grid.setVgap(5);
@@ -55,22 +48,22 @@ public class InventoryGrid extends StackPane {
         scrollPane.setStyle("-fx-background: #DEC2C0; -fx-border-color: #DEC2C0;");
 
         getChildren().addAll(scrollPane);
-        for (ItemCounter i: inv){
+        for (ItemCounter i : inv) {
             addItem(i);
         }
     }
 
-    public void addItem(ItemCounter itemCounter){
+    public void addItem(ItemCounter itemCounter) {
         int count = itemCounter.getCount();
         Item item = itemCounter.getItem();
         String itemType = item.getName();
 
         for (ItemCounter i : inventory) {
-            if (i.getItem().getName().equals(itemType)){
+            if (i.getItem().getName().equals(itemType)) {
                 i.setCount(i.getCount() + count);
-                for (Node j : grid.getChildren()){
-                    if ((j instanceof ItemDisplay)){
-                        if (((ItemDisplay) j).getItemDisplayed().getName().equals(itemType)){
+                for (Node j : grid.getChildren()) {
+                    if ((j instanceof ItemDisplay)) {
+                        if (((ItemDisplay) j).getItemDisplayed().getName().equals(itemType)) {
                             System.out.println(i.getCount());
                             ((ItemDisplay) j).addCount(count);
                         }
@@ -84,24 +77,23 @@ public class InventoryGrid extends StackPane {
     }
 
 
-    private int numToGridCol(int x){
+    private int numToGridCol(int x) {
         return (x % 6);
     }
 
-    private int numToGridRow(int x){
-        return (Math.floorDiv(x,6));
+    private int numToGridRow(int x) {
+        return (Math.floorDiv(x, 6));
     }
 
 
-    private void gridPush(ItemDisplay itemDisplay){
+    private void gridPush(ItemDisplay itemDisplay) {
         int c = numToGridCol(getUniqueItemCount());
         int r = numToGridRow(getUniqueItemCount());
-        grid.add(itemDisplay,c,r);
+        grid.add(itemDisplay, c, r);
         uniqueItemCount += 1;
     }
 
-
-    public int getUniqueItemCount() {
+    private int getUniqueItemCount() {
         return uniqueItemCount;
     }
 

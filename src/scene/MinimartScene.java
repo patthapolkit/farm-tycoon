@@ -16,24 +16,24 @@ import static resource.ImageLoader.*;
 import static utility.Utility.*;
 
 public class MinimartScene extends StackPane {
-    private GameInstance gameInstance;
+    private final GameInstance gameInstance;
 
-    private VBox container;
+    private final VBox container;
 
-    private OrbitFontText title;
+    private final OrbitFontText title;
 
-    private VBox titleContainer;
+    private final VBox titleContainer;
 
     private VScroll itemSelector;
 
     private InfoPane infoPane;
 
-    private StackPane topContainer;
+    private final StackPane topContainer;
 
     private String selectedItem;
 
-    private HBox mainContainer;
-    private CashDisplay cashDisplay;
+    private final HBox mainContainer;
+    private final CashDisplay cashDisplay;
 
 
     public MinimartScene(GameInstance gameInstance) {
@@ -55,7 +55,7 @@ public class MinimartScene extends StackPane {
         topContainer.setPadding(new Insets(15, 30, 0, 30));
 
         cashDisplay = new CashDisplay(gameInstance.getPlayer().getBalance());
-        topContainer.getChildren().addAll(titleContainer, cashDisplay, new NavMenu());
+        topContainer.getChildren().addAll(titleContainer, cashDisplay, new ReturnButton());
 
         // infoPane & vScroll setup
         infoPaneSetup();
@@ -77,8 +77,8 @@ public class MinimartScene extends StackPane {
 
     private void updateCashText(int x) {
         cashDisplay.setCashText(x);
-        for (Node i  : HomeMenuScene.getRoot().getChildren()){
-            if (i instanceof FarmScene){
+        for (Node i : HomeMenuScene.getRoot().getChildren()) {
+            if (i instanceof FarmScene) {
                 ((FarmScene) i).updateCashText(x);
             }
         }
@@ -88,7 +88,21 @@ public class MinimartScene extends StackPane {
 
         itemSelector = new VScroll(Color.rgb(199, 211, 214));
         itemSelector.setBackground(Color.rgb(251, 240, 190), "#FBF0BE");
+        vButtonSetup();
+        for (Node i : itemSelector.getButtonContainer().getChildren()) {
+            if (i instanceof VScrollButton) {
+                i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    public void handle(MouseEvent e) {
+                        setSelectedItem(i);
+                    }
+                });
+            }
+        }
 
+
+    }
+
+    private void vButtonSetup() {
         VScrollButton vb1 = new VScrollButton(getImageView(EGG), "Egg", "Egg");
         VScrollButton vb2 = new VScrollButton(getImageView(MILK), "Milk", "Milk");
         VScrollButton vb3 = new VScrollButton(getImageView(WOOL), "Wool", "Wool");
@@ -108,24 +122,14 @@ public class MinimartScene extends StackPane {
         VScrollButton vb17 = new VScrollButton(getImageView(TULIP), "Tulip", "Tulip");
         itemSelector.getButtonContainer().getChildren().addAll(vb1, vb2, vb3, vb4, vb5, vb6, vb7, vb8, vb9);
         itemSelector.getButtonContainer().getChildren().addAll(vb10, vb11, vb12, vb13, vb14, vb15, vb16, vb17);
-
-        for (Node i : itemSelector.getButtonContainer().getChildren()) {
-            if (i instanceof VScrollButton) {
-                i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    public void handle(MouseEvent e) {
-                        setSelectedItem(i);
-                    }
-                });
-            }
-        }
         setSelectedItem(vb1);
-
     }
+
 
     private void infoPaneSetup() {
         infoPane = new InfoPane("Sell", false);
         infoPane.setBackground(Color.rgb(251, 240, 190));
-        infoPane.getCraftButton().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        infoPane.getActionButton().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 sell();
             }
@@ -146,8 +150,8 @@ public class MinimartScene extends StackPane {
 
     private void sell() {
         Item soldItem;
-        if ((selectedItem == "Bread") || (selectedItem == "Cake") || (selectedItem == "Pumpkin Pie")
-                || (selectedItem == "Carrot Pie") || (selectedItem == "Sweater")) {
+        if ((selectedItem.equals("Bread")) || (selectedItem.equals("Cake")) || (selectedItem.equals("Pumpkin Pie"))
+                || (selectedItem.equals("Carrot Pie")) || (selectedItem.equals("Sweater"))) {
             soldItem = stringToProduct(selectedItem);
         } else {
             soldItem = stringToItem(selectedItem);
@@ -156,4 +160,5 @@ public class MinimartScene extends StackPane {
         updateCashText(gameInstance.getPlayer().getBalance());
         System.out.println("Sold " + soldItem.getName());
     }
+
 }
