@@ -8,11 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Factory {
-    private ArrayList<Product> allProduct;
-
     public Factory() {
-        this.allProduct = new ArrayList<>();
-        this.allProduct.add(new Bread());
     }
 
     public void craft(Player player, Product product) {
@@ -21,13 +17,5 @@ public class Factory {
         } else {
             System.out.println("Can't craft " + product.getName());
         }
-    }
-
-    public ArrayList<Product> getAllProduct() {
-        return allProduct;
-    }
-
-    public void setAllProduct(ArrayList<Product> allProduct) {
-        this.allProduct = allProduct;
     }
 }

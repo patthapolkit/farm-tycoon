@@ -5,7 +5,7 @@ import entity.material.Milk;
 import entity.material.Wheat;
 import logic.Player;
 
-public class Cow extends Animal implements Collectable {
+public class Cow extends Animal {
 
     public Cow() {
         super("Cow", 3000);

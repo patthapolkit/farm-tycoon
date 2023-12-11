@@ -4,7 +4,7 @@ import entity.base.Collectable;
 import entity.material.Egg;
 import logic.Player;
 
-public class Chicken extends Animal implements Collectable {
+public class Chicken extends Animal {
 
     public Chicken() {
         super("Chicken", 1000);

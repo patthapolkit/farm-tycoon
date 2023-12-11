@@ -49,8 +49,4 @@ public class Shop {
     public ArrayList<Seed> getUnlockedSeed() {
         return unlockedSeed;
     }
-
-    public void setUnlockedSeed(ArrayList<Seed> unlockedSeed) {
-        this.unlockedSeed = unlockedSeed;
-    }
 }

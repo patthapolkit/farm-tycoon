@@ -5,7 +5,7 @@ import logic.Player;
 
 public class Sweater extends Product {
     public Sweater() {
-        super("Sweater", 0);
+        super("Sweater", 600);
     }
 
     @Override

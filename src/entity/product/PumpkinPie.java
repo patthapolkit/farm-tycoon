@@ -8,7 +8,7 @@ import logic.Player;
 public class PumpkinPie extends Product {
 
     public PumpkinPie() {
-        super("Pumpkin Pie", 0);
+        super("Pumpkin Pie", 1000);
     }
 
     @Override
