@@ -19,6 +19,9 @@ import javafx.stage.Stage;
 import logic.GameInstance;
 import resource.ImageLoader;
 
+import java.awt.*;
+import java.net.URI;
+
 import static resource.ImageLoader.getImage;
 
 
@@ -29,7 +32,7 @@ public class HomeMenuScene {
     private VBox buttonContainer;
     private LuckyFontText title;
     private GameButton playButton;
-    private GameButton optionButton;
+    private GameButton tutorialButton;
     private GameButton creditButton;
     private static StackPane root;
 
@@ -70,8 +73,8 @@ public class HomeMenuScene {
         // buttons setup
         playButton = new GameButton(330, 80, 40, Color.rgb(124, 153, 182));
         playButton.addText("Play", 30, Color.WHITE);
-        optionButton = new GameButton(330, 80, 40, Color.rgb(124, 153, 182));
-        optionButton.addText("Options", 30, Color.WHITE);
+        tutorialButton = new GameButton(330, 80, 40, Color.rgb(124, 153, 182));
+        tutorialButton.addText("Tutorial", 30, Color.WHITE);
         creditButton = new GameButton(330, 80, 40, Color.rgb(124, 153, 182));
         creditButton.addText("Credits", 30, Color.WHITE);
 
@@ -82,9 +85,14 @@ public class HomeMenuScene {
             }
         });
 
-        optionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        tutorialButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
-                root.getChildren().add(new OptionScene());
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.progmeth.ttontoey.com"));
+                }
+                catch (Exception err){
+                    err.printStackTrace();
+                }
             }
         });
         creditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -93,7 +101,7 @@ public class HomeMenuScene {
             }
         });
 
-        buttonContainer.getChildren().addAll(title, playButton, optionButton, creditButton);
+        buttonContainer.getChildren().addAll(title, playButton, tutorialButton, creditButton);
 
     }
 
