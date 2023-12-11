@@ -13,11 +13,11 @@ import java.util.ArrayList;
 
 import static resource.ImageLoader.getImage;
 
-public class RealFarmScene extends Pane {
+public class FarmScene extends Pane {
     private GameInstance gameInstance;
     private CashDisplay cashDisplay;
 
-    public RealFarmScene(GameInstance gameInstance) {
+    public FarmScene(GameInstance gameInstance) {
         this.gameInstance = gameInstance;
 
         setPrefSize(800, 450);

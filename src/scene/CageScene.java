@@ -2,6 +2,8 @@ package scene;
 
 import component.*;
 import entity.animal.*;
+import entity.base.Item;
+import entity.material.Wheat;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import logic.GameInstance;
+import logic.ItemCounter;
 
 import java.util.ArrayList;
 
@@ -77,7 +80,7 @@ public class CageScene extends StackPane {
                                         animalCollected(((AnimalSquare) i).getAnimal());
                                     }
                                 } else if (animalControl.getSelectedTool() == "Wheat") {
-                                    if (!((AnimalSquare) i).isReady() && (((AnimalSquare) i).eatWheat())) {
+                                    if (!((AnimalSquare) i).isReady() && (((AnimalSquare) i).eatWheat()) && haveWheat()) {
                                         ((AnimalSquare) i).nextStage();
                                         animalFed(((AnimalSquare) i).getAnimal());
                                     }
@@ -95,7 +98,14 @@ public class CageScene extends StackPane {
         }
 
     }
-
+    private Boolean haveWheat(){
+        for (ItemCounter i :gameInstance.getPlayer().getInventory()){
+            if (i.getItem() instanceof Wheat){
+                return true;
+            }
+        }
+        return false;
+    }
     public void loadAnimal() {
         ArrayList<Animal> animal = gameInstance.getPlayer().getCage();
         animalGrid = new AnimalGrid(animal);

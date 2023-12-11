@@ -77,6 +77,11 @@ public class MinimartScene extends StackPane {
 
     private void updateCashText(int x) {
         cashDisplay.setCashText(x);
+        for (Node i  : HomeMenuScene.getRoot().getChildren()){
+            if (i instanceof FarmScene){
+                ((FarmScene) i).updateCashText(x);
+            }
+        }
     }
 
     private void vScrollSetup() {

@@ -1,6 +1,8 @@
 package logic;
 
 import entity.animal.Animal;
+import entity.animal.Chicken;
+import entity.animal.Cow;
 import entity.animal.NullAnimal;
 import entity.base.Item;
 import entity.building.Plot;
