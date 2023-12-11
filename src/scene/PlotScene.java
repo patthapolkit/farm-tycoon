@@ -83,8 +83,10 @@ public class PlotScene extends StackPane {
                                     ((PlotSquare) i).harvest();
                                     plotHarvested(((PlotSquare) i).getPlot());
                                 } else if (plotControl.getSelectedTool() == "WateringPot") {
-                                    ((PlotSquare) i).nextStage();
-                                    plotWatered(((PlotSquare) i).getPlot());
+                                    if (hasEnoughMoney(5)){
+                                        ((PlotSquare) i).nextStage();
+                                        plotWatered(((PlotSquare) i).getPlot());
+                                    }
                                 }
                             }
                         } else {
@@ -102,10 +104,21 @@ public class PlotScene extends StackPane {
     }
 
 
+    private Boolean hasEnoughMoney(int c){
+        return (gameInstance.getPlayer().getBalance() >= c);
+    }
+
+
 
     private void updateCashText(int x){
         cashDisplay.setCashText(x);
+        for (Node i  : HomeMenuScene.getRoot().getChildren()){
+            if (i instanceof FarmScene){
+                ((FarmScene) i).updateCashText(x);
+            }
+        }
     }
+
 
     public void loadUnlockedSeed(){
         ArrayList<Seed> unlockedSeed = gameInstance.getShop().getUnlockedSeed();
@@ -127,6 +140,7 @@ public class PlotScene extends StackPane {
         System.out.println("Plot with seed " + plot.getSeed().getName() + ": Humidity " + plot.getSeed().getHumidityLevel() + " += 25");
         plot.getSeed().water(gameInstance.getPlayer());
         updateCashText(gameInstance.getPlayer().getBalance());
+
     }
 
     public void plotPlanted(Plot plot, Seed seed) {

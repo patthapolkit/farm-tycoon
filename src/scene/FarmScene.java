@@ -1,28 +1,23 @@
 package scene;
 
 import component.CashDisplay;
-import component.NavMenu;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import logic.GameInstance;
 import logic.ItemCounter;
 import resource.ImageLoader;
-
-import javax.swing.text.Element;
 
 import java.util.ArrayList;
 
 import static resource.ImageLoader.getImage;
 
-public class RealFarmScene extends Pane {
+public class FarmScene extends Pane {
     private GameInstance gameInstance;
     private CashDisplay cashDisplay;
 
-    public RealFarmScene(GameInstance gameInstance) {
+    public FarmScene(GameInstance gameInstance) {
         this.gameInstance = gameInstance;
 
         setPrefSize(800, 450);
@@ -32,13 +27,10 @@ public class RealFarmScene extends Pane {
                         800, 450, false, false, false, false))));
 
         cashDisplay = new CashDisplay(gameInstance.getPlayer().getBalance());
-//        navMenu = new NavMenu();
         getChildren().addAll(cashDisplay);
         cashDisplay.setLayoutX(670);
         cashDisplay.setLayoutY(20);
         cashDisplay.setCashText(gameInstance.getPlayer().getBalance());
-//        navMenu.setLayoutX(30);
-//        navMenu.setLayoutY(20);
 
         ImageView barn = new ImageView(getImage(ImageLoader.BARN));
         barn.setFitWidth(getImage(ImageLoader.BARN).getWidth() * 0.17);
@@ -106,8 +98,10 @@ public class RealFarmScene extends Pane {
         fact.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             HomeMenuScene.getRoot().getChildren().add(new FactoryScene(gameInstance));
         });
+    }
 
-
+    public void updateCashText(int c){
+        cashDisplay.setCashText(c);
     }
 
 

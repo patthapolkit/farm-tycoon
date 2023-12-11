@@ -78,7 +78,7 @@ public class HomeMenuScene {
         // buttons event handling
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
-                root.getChildren().add(new RealFarmScene(gameInstance));
+                root.getChildren().add(new FarmScene(gameInstance));
             }
         });
 
