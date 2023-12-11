@@ -15,7 +15,7 @@ public class Player {
     private ArrayList<Animal> cage;
 
     public Player() {
-        this.balance = 10;
+        this.balance = 1000;
         this.inventory = new ArrayList<>();
         this.cage = new ArrayList<>();
         for (int i = 0; i < 12; i++) {

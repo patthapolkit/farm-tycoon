@@ -19,11 +19,6 @@ public class GameInstance {
         shop = new Shop();
         factory = new Factory();
         player = new Player();
-
-        player.addItem(new Wheat(), 5);
-        player.addItem(new Pumpkin(), 5);
-        player.addItem(new Milk(), 5);
-        player.addItem(new Wool(), 5);
     }
 
     public Minimart getMinimart() {
