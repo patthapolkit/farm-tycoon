@@ -2,7 +2,6 @@ package scene;
 
 import component.*;
 import entity.animal.*;
-import entity.base.Item;
 import entity.material.Wheat;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,20 +16,20 @@ import logic.ItemCounter;
 import java.util.ArrayList;
 
 public class CageScene extends StackPane {
-    private GameInstance gameInstance;
+    private final GameInstance gameInstance;
 
-    private VBox container;
+    private final VBox container;
 
-    private OrbitFontText title;
+    private final OrbitFontText title;
 
-    private VBox titleContainer;
+    private final VBox titleContainer;
 
-    private StackPane topContainer;
+    private final StackPane topContainer;
 
     private AnimalGrid animalGrid;
-    private AnimalControl animalControl;
+    private final AnimalControl animalControl;
 
-    private CashDisplay cashDisplay;
+    private final CashDisplay cashDisplay;
 
     public CageScene(GameInstance gameInstance) {
         this.gameInstance = gameInstance;
@@ -51,7 +50,7 @@ public class CageScene extends StackPane {
         topContainer.setPadding(new Insets(15, 30, 0, 30));
 
         cashDisplay = new CashDisplay(gameInstance.getPlayer().getBalance());
-        topContainer.getChildren().addAll(titleContainer, cashDisplay, new NavMenu());
+        topContainer.getChildren().addAll(titleContainer, cashDisplay, new ReturnButton());
 
         loadAnimal();
         animalControl = new AnimalControl();
@@ -63,61 +62,65 @@ public class CageScene extends StackPane {
 
         // animalSquare setup
         animalSquareEvents();
-
     }
 
-    public void animalSquareEvents() {
+    private void animalSquareEvents() {
         for (Node i : animalGrid.getGrid().getChildren()) {
             if (i instanceof AnimalSquare) {
                 i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     public void handle(MouseEvent e) {
                         if (((AnimalSquare) i).isOccupied()) {
-                            if (animalControl.getSelectedTool() != null) {
-                                System.out.println("Applied " + animalControl.getSelectedTool());
-                                if (animalControl.getSelectedTool() == "Hand") {
-                                    if (((AnimalSquare) i).isReady()) {
-                                        ((AnimalSquare) i).harvest();
-                                        animalCollected(((AnimalSquare) i).getAnimal());
-                                    }
-                                } else if (animalControl.getSelectedTool() == "Wheat") {
-                                    if (!((AnimalSquare) i).isReady() && (((AnimalSquare) i).eatWheat()) && haveWheat()) {
-                                        ((AnimalSquare) i).nextStage();
-                                        animalFed(((AnimalSquare) i).getAnimal());
-                                    }
-                                } else if (animalControl.getSelectedTool() == "ChickenFood") {
-                                    if (!((AnimalSquare) i).isReady() && !(((AnimalSquare) i).eatWheat())) {
-                                        ((AnimalSquare) i).nextStage();
-                                        animalFed(((AnimalSquare) i).getAnimal());
-                                    }
-                                }
-                            }
+                            animalSquareHarvest(((AnimalSquare) i));
                         }
                     }
                 });
             }
         }
-
     }
-    private Boolean haveWheat(){
-        for (ItemCounter i :gameInstance.getPlayer().getInventory()){
-            if (i.getItem() instanceof Wheat){
+
+    private void animalSquareHarvest(AnimalSquare i) {
+        if (animalControl.getSelectedTool() != null) {
+            if (animalControl.getSelectedTool().equals("Hand")) {
+                if (i.isReady()) {
+                    i.harvest();
+                    animalCollected(i.getAnimal());
+                }
+            } else if (animalControl.getSelectedTool().equals("Wheat")) {
+                if (!i.isReady() && i.eatWheat() && haveWheat()) {
+                    i.nextStage();
+                    animalFed(i.getAnimal());
+                }
+            } else if (animalControl.getSelectedTool().equals("ChickenFood")) {
+                if (!i.isReady() && !(i.eatWheat())) {
+                    i.nextStage();
+                    animalFed(i.getAnimal());
+                }
+            }
+        }
+    }
+
+
+    private Boolean haveWheat() {
+        for (ItemCounter i : gameInstance.getPlayer().getInventory()) {
+            if (i.getItem() instanceof Wheat) {
                 return true;
             }
         }
         return false;
     }
-    public void loadAnimal() {
+
+    private void loadAnimal() {
         ArrayList<Animal> animal = gameInstance.getPlayer().getCage();
         animalGrid = new AnimalGrid(animal);
     }
 
-    public void animalCollected(Animal animal) {
+    private void animalCollected(Animal animal) {
         System.out.println("Animal Collected");
         System.out.println(animal.getName());
         animal.collect(gameInstance.getPlayer());
     }
 
-    public void animalFed(Animal animal) {
+    private void animalFed(Animal animal) {
         System.out.println("Animal Fed");
         System.out.println(animal.getName());
         animal.feed(gameInstance.getPlayer());

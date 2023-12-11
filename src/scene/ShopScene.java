@@ -17,24 +17,24 @@ import static resource.ImageLoader.*;
 import static utility.Utility.*;
 
 public class ShopScene extends StackPane {
-    private GameInstance gameInstance;
+    private final GameInstance gameInstance;
 
-    private VBox container;
+    private final VBox container;
 
-    private OrbitFontText title;
+    private final OrbitFontText title;
 
-    private VBox titleContainer;
+    private final VBox titleContainer;
 
     private VScroll itemSelector;
 
     private InfoPane infoPane;
 
-    private StackPane topContainer;
+    private final StackPane topContainer;
 
     private String selectedItem;
 
-    private HBox mainContainer;
-    private CashDisplay cashDisplay;
+    private final HBox mainContainer;
+    private final CashDisplay cashDisplay;
 
 
     public ShopScene(GameInstance gameInstance) {
@@ -56,7 +56,7 @@ public class ShopScene extends StackPane {
         topContainer.setPadding(new Insets(15, 30, 0, 30));
 
         cashDisplay = new CashDisplay(gameInstance.getPlayer().getBalance());
-        topContainer.getChildren().addAll(titleContainer, cashDisplay, new NavMenu());
+        topContainer.getChildren().addAll(titleContainer, cashDisplay, new ReturnButton());
 
         // infoPane & vScroll setup
         infoPaneSetup();
@@ -79,19 +79,29 @@ public class ShopScene extends StackPane {
 
     private void updateCashText(int x) {
         cashDisplay.setCashText(x);
-        for (Node i  : HomeMenuScene.getRoot().getChildren()){
-            if (i instanceof FarmScene){
+        for (Node i : HomeMenuScene.getRoot().getChildren()) {
+            if (i instanceof FarmScene) {
                 ((FarmScene) i).updateCashText(x);
             }
         }
     }
 
     private void vScrollSetup() {
-
-
         itemSelector = new VScroll(Color.rgb(199, 211, 214));
         itemSelector.setBackground(Color.rgb(251, 240, 190), "#FBF0BE");
+        vButtonSetup();
+        for (Node i : itemSelector.getButtonContainer().getChildren()) {
+            if (i instanceof VScrollButton) {
+                i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    public void handle(MouseEvent e) {
+                        setSelectedItem(i);
+                    }
+                });
+            }
+        }
+    }
 
+    private void vButtonSetup() {
         VScrollButton vb1 = new VScrollButton(getImageView(CARROT_SEED), "Carrot Seed", "Carrot Seed");
         VScrollButton vb2 = new VScrollButton(getImageView(PUMPKIN_SEED), "Pumpkin Seed", "Pumpkin Seed");
         VScrollButton vb3 = new VScrollButton(getImageView(BEETROOT_SEED), "Beetroot Seed", "Beetroot Seed");
@@ -103,27 +113,16 @@ public class ShopScene extends StackPane {
         VScrollButton vb9 = new VScrollButton(getImageView(CHICKEN), "Chicken", "Chicken");
         VScrollButton vb10 = new VScrollButton(getImageView(COW), "Cow", "Cow");
         VScrollButton vb11 = new VScrollButton(getImageView(SHEEP), "Sheep", "Sheep");
-
         itemSelector.getButtonContainer().getChildren().addAll(vb1, vb2, vb3, vb4, vb5, vb6);
         itemSelector.getButtonContainer().getChildren().addAll(vb7, vb8, vb9, vb10, vb11);
-
-        for (Node i : itemSelector.getButtonContainer().getChildren()) {
-            if (i instanceof VScrollButton) {
-                i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    public void handle(MouseEvent e) {
-                        setSelectedItem(i);
-                    }
-                });
-            }
-        }
         setSelectedItem(vb1);
-
     }
+
 
     private void infoPaneSetup() {
         infoPane = new InfoPane("Purchase", false);
         infoPane.setBackground(Color.rgb(251, 240, 190));
-        infoPane.getCraftButton().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        infoPane.getActionButton().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 purchase();
             }
@@ -136,7 +135,7 @@ public class ShopScene extends StackPane {
         System.out.println(selectedItem);
         itemSelector.updateSelected(selectedItem);
         infoPane.setItemNameText(selectedItem);
-        if ((selectedItem == "Cow") || (selectedItem == "Chicken") || (selectedItem == "Sheep")) {
+        if ((selectedItem.equals("Cow")) || (selectedItem.equals("Chicken")) || (selectedItem.equals("Sheep"))) {
             infoPane.setItemImage(getImage(animalToLoad(stringToAnimal(selectedItem))));
         } else {
             infoPane.setItemImage(getImage(seedToLoad(stringToSeed(selectedItem))));
@@ -147,7 +146,7 @@ public class ShopScene extends StackPane {
     }
 
     private void purchase() {
-        if ((selectedItem == "Cow") || (selectedItem == "Chicken") || (selectedItem == "Sheep")) {
+        if ((selectedItem.equals("Cow")) || (selectedItem.equals("Chicken")) || (selectedItem.equals("Sheep"))) {
             Animal purchasedAnimal = stringToAnimal(selectedItem);
             gameInstance.getShop().buy(gameInstance.getPlayer(), purchasedAnimal);
             System.out.println("Bought " + purchasedAnimal.getName());

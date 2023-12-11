@@ -19,51 +19,16 @@ public class PlotControl extends HBox {
 
     private String selectedTool;
 
+    private final HScroll seedBox;
 
-    private HScroll seedBox;
-
-    private HScroll toolBox;
+    private final HScroll toolBox;
 
 
-    public PlotControl(ArrayList<Seed> unlockedSeed){
-
+    public PlotControl(ArrayList<Seed> unlockedSeed) {
         seedBox = new HScroll();
-
-        for (Seed i : unlockedSeed){
-            HScrollButton hb = new HScrollButton(seedToString(i), getImageView(seedToLoad(i)));
-            seedBox.getButtonContainer().getChildren().add(hb);
-        }
-
-        for (Node i : seedBox.getButtonContainer().getChildren()){
-            if (i instanceof HScrollButton){
-                i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    public void handle(MouseEvent e) {
-                        selectedSeed = ((HScrollButton) i).getButtonId();
-                        seedBox.updateSelected(selectedSeed);
-                    }
-                });
-            }
-        }
-
+        seedBoxSetup(unlockedSeed);
         toolBox = new HScroll();
-        HScrollButton hb11 = new HScrollButton("Sickle", getImageView(SICKLE));
-        HScrollButton hb12 = new HScrollButton("WateringPot", getImageView(WATERING_POT));
-
-        toolBox.getButtonContainer().getChildren().addAll(hb11,hb12);
-
-
-        for (Node i : toolBox.getButtonContainer().getChildren()){
-            if (i instanceof HScrollButton){
-                i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    public void handle(MouseEvent e) {
-                        selectedTool = ((HScrollButton) i).getButtonId();
-                        toolBox.updateSelected(selectedTool);
-                    }
-                });
-            }
-        }
-
-
+        toolBoxSetup();
         getChildren().addAll(seedBox, toolBox);
         setAlignment(Pos.CENTER);
         setSpacing(30);
@@ -76,4 +41,39 @@ public class PlotControl extends HBox {
     public String getSelectedTool() {
         return selectedTool;
     }
+
+    private void seedBoxSetup(ArrayList<Seed> unlockedSeed) {
+        for (Seed i : unlockedSeed) {
+            HScrollButton hb = new HScrollButton(seedToString(i), getImageView(seedToLoad(i)));
+            seedBox.getButtonContainer().getChildren().add(hb);
+        }
+        for (Node i : seedBox.getButtonContainer().getChildren()) {
+            if (i instanceof HScrollButton) {
+                i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    public void handle(MouseEvent e) {
+                        selectedSeed = ((HScrollButton) i).getButtonId();
+                        seedBox.updateSelected(selectedSeed);
+                    }
+                });
+            }
+        }
+    }
+
+    private void toolBoxSetup() {
+        HScrollButton hb1 = new HScrollButton("Sickle", getImageView(SICKLE));
+        HScrollButton hb2 = new HScrollButton("WateringPot", getImageView(WATERING_POT));
+        toolBox.getButtonContainer().getChildren().addAll(hb1, hb2);
+        for (Node i : toolBox.getButtonContainer().getChildren()) {
+            if (i instanceof HScrollButton) {
+                i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    public void handle(MouseEvent e) {
+                        selectedTool = ((HScrollButton) i).getButtonId();
+                        toolBox.updateSelected(selectedTool);
+                    }
+                });
+            }
+        }
+    }
+
+
 }

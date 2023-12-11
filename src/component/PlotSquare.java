@@ -15,7 +15,7 @@ import static utility.Utility.seedToProduct;
 
 public class PlotSquare extends StackPane {
 
-    private ImageView background;
+    private final ImageView background;
 
     private ImageView foreground;
 
@@ -25,7 +25,7 @@ public class PlotSquare extends StackPane {
 
     private Plot plot;
 
-    public PlotSquare(){
+    public PlotSquare() {
         seed = null;
         currentStage = 0;
         background = new ImageView();
@@ -37,11 +37,11 @@ public class PlotSquare extends StackPane {
         setCursor(Cursor.HAND);
     }
 
-    public void setPlot(Plot plot){
+    public void setPlot(Plot plot) {
         this.plot = plot;
     }
 
-    public Plot getPlot(){
+    public Plot getPlot() {
         return plot;
     }
 
@@ -51,79 +51,82 @@ public class PlotSquare extends StackPane {
 
     public void setSeed(Seed seed) {
 
-            if (seed instanceof NullSeed){
-                return;
-            }
-            this.seed = seed;
-            if (seed instanceof WheatSeed){
-                foreground = getImageView(ImageLoader.YELLOW_SEED);
-            }
-            else {
-                foreground = getImageView(ImageLoader.GREEN_SEED);
-            }
-            foreground.setFitHeight(65);
-            foreground.setFitWidth(65);
-            getChildren().addAll(foreground);
+        if (seed instanceof NullSeed) {
+            return;
+        }
+        this.seed = seed;
+        if (seed instanceof WheatSeed) {
+            foreground = getImageView(ImageLoader.YELLOW_SEED);
+        } else {
+            foreground = getImageView(ImageLoader.GREEN_SEED);
+        }
+        foreground.setFitHeight(65);
+        foreground.setFitWidth(65);
+        getChildren().addAll(foreground);
     }
-    public void nextStage(){
-            if (!seed.equals(null)){
-                if (seed instanceof WheatSeed){
-                    if (currentStage == 0){
-                        System.out.println("OK");
-                        background.setImage(getImage(ImageLoader.WET_PLOT_SQUARE));
-                        currentStage += 1;
-                    }
-                    else if (currentStage == 1){
-                        foreground.setImage(getImage(ImageLoader.YELLOW_SEEDLING));
-                        currentStage += 1;
-                    }
-                    else if (currentStage == 2){
-                        foreground.setImage(getImage(ImageLoader.YELLOW_GROWN));
-                        currentStage += 1;
-                    }
-                    else if (currentStage == 3){
-                        background.setImage(getImage(ImageLoader.PLOT_SQUARE));
-                        foreground.setImage(getImage(ImageLoader.WHEAT));
-                        currentStage += 1;
-                    }
-                }
-                else {
-                    if (currentStage == 0){
-                        background.setImage(getImage(ImageLoader.WET_PLOT_SQUARE));
-                        currentStage += 1;
-                    }
-                    else if (currentStage == 1){
-                        foreground.setImage(getImage(ImageLoader.GREEN_SEEDLING));
-                        currentStage += 1;
-                    }
-                    else if (currentStage == 2){
-                        foreground.setImage(getImage(ImageLoader.GREEN_GROWN));
-                        currentStage += 1;
-                    }
-                    else if (currentStage == 3){
-                        background.setImage(getImage(ImageLoader.PLOT_SQUARE));
-                        foreground.setImage(getImage(itemToLoad(seedToProduct(seed))));
-                        currentStage += 1;
-                    }
-                }
-            }
+
+
+    private void wheatNextStage() {
+        if (currentStage == 0) {
+            System.out.println("OK");
+            background.setImage(getImage(ImageLoader.WET_PLOT_SQUARE));
+            currentStage += 1;
+        } else if (currentStage == 1) {
+            foreground.setImage(getImage(ImageLoader.YELLOW_SEEDLING));
+            currentStage += 1;
+        } else if (currentStage == 2) {
+            foreground.setImage(getImage(ImageLoader.YELLOW_GROWN));
+            currentStage += 1;
+        } else if (currentStage == 3) {
+            background.setImage(getImage(ImageLoader.PLOT_SQUARE));
+            foreground.setImage(getImage(ImageLoader.WHEAT));
+            currentStage += 1;
+        }
     }
-    public Boolean isReady(){
+
+    private void othersNextStage() {
+        if (currentStage == 0) {
+            background.setImage(getImage(ImageLoader.WET_PLOT_SQUARE));
+            currentStage += 1;
+        } else if (currentStage == 1) {
+            foreground.setImage(getImage(ImageLoader.GREEN_SEEDLING));
+            currentStage += 1;
+        } else if (currentStage == 2) {
+            foreground.setImage(getImage(ImageLoader.GREEN_GROWN));
+            currentStage += 1;
+        } else if (currentStage == 3) {
+            background.setImage(getImage(ImageLoader.PLOT_SQUARE));
+            foreground.setImage(getImage(itemToLoad(seedToProduct(seed))));
+            currentStage += 1;
+        }
+    }
+
+
+    public void nextStage() {
+        if (!seed.equals(null)) {
+            if (seed instanceof WheatSeed) {
+                wheatNextStage();
+            } else {
+                othersNextStage();
+            }
+        }
+    }
+
+    public Boolean isReady() {
         return (currentStage == 4);
     }
 
-    private void clear(){
+    private void clear() {
         currentStage = 0;
         seed = null;
-        if (background != null){
+        if (background != null) {
             background.setImage(getImage(ImageLoader.PLOT_SQUARE));
         }
-        if (getChildren().contains(foreground)){
-            getChildren().remove(foreground);
-        }
+        getChildren().remove(foreground);
     }
-    public void harvest(){
-        if (isReady()){
+
+    public void harvest() {
+        if (isReady()) {
             clear();
         }
     }

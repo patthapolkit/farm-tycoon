@@ -16,26 +16,22 @@ public class VScrollButton extends GameButton {
 
     private OrbitFontText itemNameText;
 
-    public VScrollButton(ImageView imageView, String text, String buttonId){
-        super(160,50,20, Color.WHITE);
+    public VScrollButton(ImageView imageView, String text, String buttonId) {
+        super(160, 50, 20, Color.WHITE);
         this.buttonId = buttonId;
         container = new HBox();
         container.setAlignment(Pos.CENTER_LEFT);
         container.setSpacing(10);
-        container.setPadding(new Insets(0,0,0,12));
+        container.setPadding(new Insets(0, 0, 0, 12));
         itemImgView = imageView;
         itemImgView.setFitHeight(43);
         itemImgView.setFitWidth(30);
-        itemNameText = new OrbitFontText(text,14);
+        itemNameText = new OrbitFontText(text, 14);
         container.getChildren().addAll(itemImgView, itemNameText);
         getChildren().add(container);
     }
 
     public String getButtonId() {
         return buttonId;
-    }
-
-    public void setButtonId(String buttonId) {
-        this.buttonId = buttonId;
     }
 }

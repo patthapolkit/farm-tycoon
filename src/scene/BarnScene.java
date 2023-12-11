@@ -3,7 +3,7 @@ package scene;
 
 import component.CashDisplay;
 import component.InventoryGrid;
-import component.NavMenu;
+import component.ReturnButton;
 import component.OrbitFontText;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,15 +15,15 @@ import java.util.ArrayList;
 
 public class BarnScene extends StackPane {
 
-    private StackPane topContainer;
-    private VBox container;
-    private VBox titleContainer;
+    private final StackPane topContainer;
+    private final VBox container;
+    private final VBox titleContainer;
 
-    private InventoryGrid inventoryGrid;
+    private final InventoryGrid inventoryGrid;
 
-    private OrbitFontText title;
+    private final OrbitFontText title;
 
-    private CashDisplay cashDisplay;
+    private final CashDisplay cashDisplay;
 
 
     public BarnScene(ArrayList<ItemCounter> inventory, int balance) {
@@ -37,7 +37,6 @@ public class BarnScene extends StackPane {
         title.setFill(Color.WHITE);
         titleContainer = new VBox(title);
         titleContainer.setAlignment(Pos.CENTER);
-
         // topContainer setup
         topContainer = new StackPane();
         topContainer.setAlignment(Pos.CENTER_LEFT);
@@ -46,16 +45,14 @@ public class BarnScene extends StackPane {
 
         cashDisplay = new CashDisplay(balance);
 
-        topContainer.getChildren().addAll(titleContainer, cashDisplay, new NavMenu());
+        topContainer.getChildren().addAll(titleContainer, cashDisplay, new ReturnButton());
 
         // inventoryGrid setup
         inventoryGrid = new InventoryGrid(inventory);
-
         // container setup
         container = new VBox();
         container.getChildren().addAll(topContainer, inventoryGrid);
         getChildren().add(container);
-
 
     }
 
