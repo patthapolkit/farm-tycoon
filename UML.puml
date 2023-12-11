@@ -1,0 +1,769 @@
+@startuml
+class entity.product.Bread {
++ <<Create>> Bread()
++ boolean canCraft(Player)
++ void craft(Player)
+}
+class scene.PlotScene {
+- GameInstance gameInstance
+- VBox container
+- OrbitFontText title
+- VBox titleContainer
+- StackPane topContainer
+- PlotGrid plotGrid
+- PlotControl plotControl
+- CashDisplay cashDisplay
++ <<Create>> PlotScene(GameInstance)
+- void plotSquareEvents()
+- Boolean hasEnoughMoney(int)
+- void updateCashText(int)
+- void loadUnlockedSeed()
+- void loadPlots()
+- void plotHarvested(Plot)
+- void plotWatered(Plot)
+- void plotPlanted(Plot,Seed)
+}
+class entity.flower.Orchid {
++ <<Create>> Orchid()
+}
+class component.InfoPane {
+- Boolean isCrafting
+- Rectangle background
+- ImageView itemImageView
+- OrbitFontText itemNameText
+- OrbitFontText descText
+- OrbitFontText matText
+- VBox matContainer
+- HBox itemDisContainer
+- HBox descContainer
+- VBox container
+- HBox topContainer
+- GameButton actionButton
++ <<Create>> InfoPane(String,Boolean)
++ void setItemNameText(String)
++ void setItemImage(Image)
++ void setDescText(String)
++ HBox getItemDisContainer()
++ GameButton getActionButton()
++ void setBackground(Paint)
+- void craftingSetup()
+- void containerSetup()
+- void componentSetup()
+}
+class entity.seed.TulipSeed {
++ <<Create>> TulipSeed()
++ void collect(Player)
+}
+class entity.building.Factory {
++ <<Create>> Factory()
++ void craft(Player,Product)
+}
+class entity.material.Wheat {
++ <<Create>> Wheat()
+}
+class entity.seed.OrchidSeed {
++ <<Create>> OrchidSeed()
++ void collect(Player)
+}
+class component.AnimalControl {
+- String selectedTool
+- HScroll toolBox
++ <<Create>> AnimalControl()
++ String getSelectedTool()
+}
+class entity.product.Sweater {
++ <<Create>> Sweater()
++ boolean canCraft(Player)
++ void craft(Player)
+}
+class entity.product.CarrotPie {
++ <<Create>> CarrotPie()
++ boolean canCraft(Player)
++ void craft(Player)
+}
+class logic.Player {
+- int balance
+- ArrayList<ItemCounter> inventory
+- ArrayList<Plot> plots
+- ArrayList<Animal> cage
++ <<Create>> Player()
++ boolean existsInInventory(Item,int)
++ boolean canAddToCage(Animal,int)
++ void addToCage(Animal)
++ void addItem(Item,int)
++ void removeItem(Item,int)
++ void chargeMoney(int)
++ int getBalance()
++ void setBalance(int)
++ ArrayList<Plot> getPlots()
++ void setPlots(ArrayList<Plot>)
++ ArrayList<ItemCounter> getInventory()
++ void setInventory(ArrayList<ItemCounter>)
++ ArrayList<Animal> getCage()
++ void setCage(ArrayList<Animal>)
+}
+class component.AnimalGrid {
+- Rectangle background
+- GridPane grid
++ <<Create>> AnimalGrid(ArrayList<Animal>)
+- int numToGridCol(int)
+- int numToGridRow(int)
++ GridPane getGrid()
+}
+class entity.seed.WheatSeed {
++ <<Create>> WheatSeed()
++ void collect(Player)
+}
+enum resource.ImageLoader {
++  BACKGROUND_HOME
++  BEETROOT
++  BERRY
++  CARROT
++  DANDELION
++  EGG
++  MILK
++  ORCHID
++  POPPY
++  TULIP
++  WHEAT
++  WOOL
++  PUMPKIN
++  BACK
++  PLOT_SQUARE
++  WET_PLOT_SQUARE
++  GREEN_SEED
++  GREEN_SEEDLING
++  YELLOW_SEED
++  YELLOW_SEEDLING
++  WHEAT_SEED
++  BEETROOT_SEED
++  BERRY_SEED
++  CARROT_SEED
++  DANDELION_SEED
++  ORCHID_SEED
++  POPPY_SEED
++  TULIP_SEED
++  PUMPKIN_SEED
++  WATERING_POT
++  SICKLE
++  PUMPKIN_PIE
++  CAKE
++  CARROT_PIE
++  SWEATER
++  BREAD
++  YELLOW_GROWN
++  GREEN_GROWN
++  CHICKEN
++  CHICKEN1
++  CHICKEN2
++  CHICKEN3
++  CHICKEN4
++  CHICKEN5
++  COW
++  COW1
++  COW2
++  COW3
++  COW4
++  COW5
++  SHEEP
++  SHEEP1
++  SHEEP2
++  SHEEP3
++  SHEEP4
++  SHEEP5
++  ANIMAL_SQUARE
++  HAND
++  CHICKEN_FOOD
++  MAIN_BACKGROUND
++  BARN
++  CAGE
++  FACTORY
++  PLOT
++  SHOP
++  MART
+- String name
+- Image image
+~ <<Create>> ImageLoader(String)
++ {static} Image getImage(ImageLoader)
++ {static} ImageView getImageView(ImageLoader)
++ {static} ImageLoader itemToLoad(Item)
++ {static} ImageLoader seedToLoad(Seed)
++ {static} ImageLoader animalToLoad(Animal)
+}
+class scene.FarmScene {
+- GameInstance gameInstance
+- CashDisplay cashDisplay
+- ImageView barn
+- ImageView shop
+- ImageView mart
+- ImageView plot
+- ImageView cage
+- ImageView factory
++ <<Create>> FarmScene(GameInstance)
++ void updateCashText(int)
+- void imageViewSetup()
+- void cursorSetup()
+- void eventSetup()
+- void cashDisplaySetup()
+- void relocateImageView()
+}
+class scene.CreditScene {
+- VBox container
+- OrbitFontText title
+- VBox titleContainer
+- StackPane topContainer
+- VBox textContainer
++ <<Create>> CreditScene()
+- void textContainerSetup()
+}
+class component.ItemDisplay {
+- Rectangle background
+- Item itemDisplayed
+- ImageView itemImageView
+- VBox countContainer
+- VBox imageViewContainer
+- OrbitFontText countText
+- int count
++ <<Create>> ItemDisplay(ItemCounter)
++ Item getItemDisplayed()
++ void addCount(int)
+}
+class entity.animal.Cow {
++ <<Create>> Cow()
++ void feed(Player)
++ void collect(Player)
+}
+class main.Main {
++ void start(Stage)
++ {static} void main(String[])
+}
+abstract class entity.base.Item {
+- String name
+- int price
++ <<Create>> Item(String,int)
++ String getName()
++ void setName(String)
++ int getPrice()
++ void setPrice(int)
+}
+class entity.material.Beetroot {
++ <<Create>> Beetroot()
+}
+class component.VScrollButton {
+- String buttonId
+- HBox container
+- ImageView itemImgView
+- OrbitFontText itemNameText
++ <<Create>> VScrollButton(ImageView,String,String)
++ String getButtonId()
+}
+class entity.seed.BeetrootSeed {
++ <<Create>> BeetrootSeed()
++ void collect(Player)
+}
+class entity.seed.DandelionSeed {
++ <<Create>> DandelionSeed()
++ void collect(Player)
+}
+class entity.building.Shop {
+- ArrayList<Seed> unlockedSeed
++ <<Create>> Shop()
++ boolean isUnlocked(Seed)
++ void unlock(Player,Seed)
++ void buy(Player,Animal)
++ ArrayList<Seed> getUnlockedSeed()
+}
+class entity.seed.PumpkinSeed {
++ <<Create>> PumpkinSeed()
++ void collect(Player)
+}
+class component.PlotGrid {
+- Rectangle background
+- GridPane grid
++ <<Create>> PlotGrid(ArrayList<Plot>)
+- int numToGridCol(int)
+- int numToGridRow(int)
++ GridPane getGrid()
+- void gridSetup(ArrayList<Plot>)
+}
+class component.GameButton {
+- Rectangle background
+- OrbitFontText text
++ <<Create>> GameButton(int,int,int,Paint)
++ <<Create>> GameButton()
++ void addText(String,int,Paint)
++ void setColor(Paint)
+}
+class component.OrbitFontText {
++ <<Create>> OrbitFontText(String,Integer,Paint)
++ <<Create>> OrbitFontText(String,Integer)
++ <<Create>> OrbitFontText(String)
+}
+class entity.seed.NullSeed {
++ <<Create>> NullSeed()
++ void collect(Player)
+}
+class logic.GameInstance {
+- Minimart minimart
+- Shop shop
+- Factory factory
+- Player player
++ <<Create>> GameInstance()
++ Minimart getMinimart()
++ void setMinimart(Minimart)
++ Shop getShop()
++ void setShop(Shop)
++ Factory getFactory()
++ void setFactory(Factory)
++ Player getPlayer()
++ void setPlayer(Player)
+}
+class component.AnimalSquare {
+- ImageView background
+- ImageView foreground
+- int currentStage
+- Animal animal
++ <<Create>> AnimalSquare()
++ Animal getAnimal()
++ void setAnimal(Animal)
+- void cowNextStage()
+- void chickenNextStage()
+- void sheepNextStage()
++ void nextStage()
++ Boolean isReady()
+- void clear()
++ void harvest()
++ Boolean isOccupied()
++ Boolean eatWheat()
+}
+class entity.material.Milk {
++ <<Create>> Milk()
+}
+class entity.flower.Tulip {
++ <<Create>> Tulip()
+}
+class component.LuckyFontText {
++ <<Create>> LuckyFontText(String,Integer)
+}
+class component.ReturnButton {
+- GameButton backButton
++ <<Create>> ReturnButton()
+}
+class entity.material.Wool {
++ <<Create>> Wool()
+}
+abstract class entity.material.Material {
++ <<Create>> Material(String,int)
+}
+class entity.building.Plot {
+- Seed seed
++ <<Create>> Plot()
++ Seed getSeed()
++ void setSeed(Seed)
+}
+class component.VScroll {
+- VBox buttonContainer
+- Rectangle background
+- ScrollPane scrollPane
+- Paint onClickColor
++ <<Create>> VScroll(Paint)
++ VBox getButtonContainer()
++ void updateSelected(String)
++ void setBackground(Paint,String)
+- void componentSetup()
+}
+class entity.product.PumpkinPie {
++ <<Create>> PumpkinPie()
++ boolean canCraft(Player)
++ void craft(Player)
+}
+class entity.material.Berry {
++ <<Create>> Berry()
+}
+class entity.material.Egg {
++ <<Create>> Egg()
+}
+class entity.product.Cake {
++ <<Create>> Cake()
++ boolean canCraft(Player)
++ void craft(Player)
+}
+class logic.ItemCounter {
+- Item item
+- int count
++ <<Create>> ItemCounter(Item)
++ <<Create>> ItemCounter(Item,int)
++ String toString()
++ Item getItem()
++ void setItem(Item)
++ int getCount()
++ void setCount(int)
+}
+class component.InventoryGrid {
+- GridPane grid
+- ScrollPane scrollPane
+- int uniqueItemCount
+- ArrayList<ItemCounter> inventory
++ <<Create>> InventoryGrid(ArrayList<ItemCounter>)
++ void addItem(ItemCounter)
+- int numToGridCol(int)
+- int numToGridRow(int)
+- void gridPush(ItemDisplay)
+- int getUniqueItemCount()
+}
+abstract class entity.product.Product {
++ <<Create>> Product(String,int)
++ {abstract}boolean canCraft(Player)
++ {abstract}void craft(Player)
+}
+class component.CashDisplay {
+- GameButton cashBox
+- OrbitFontText cashText
++ <<Create>> CashDisplay(int)
++ void setCashText(int)
+}
+class scene.FactoryScene {
+- GameInstance gameInstance
+- VBox container
+- OrbitFontText title
+- VBox titleContainer
+- VScroll recipeSelector
+- InfoPane infoPane
+- StackPane topContainer
+- String selectedRecipe
+- HBox mainContainer
+- CashDisplay cashDisplay
++ <<Create>> FactoryScene(GameInstance)
+- void vScrollSetup()
+- void craftPaneSetup()
+- void setSelectedRecipe(Node)
+- void craftPressed()
+- void containerSetup()
+}
+class entity.material.Carrot {
++ <<Create>> Carrot()
+}
+interface entity.base.Collectable {
+~ void collect(Player)
+}
+enum entity.product.Recipe {
++  BREAD
++  SWEATER
++  CAKE
++  PUMPKIN_PIE
++  CARROT_PIE
+- ArrayList<ItemCounter> ingredient
+- String description
+~ <<Create>> Recipe(ArrayList<ItemCounter>,String)
++ ArrayList<ItemCounter> getIngredient()
++ String getDescription()
++ {static} Recipe getRecipe(String)
+}
+class entity.flower.Dandelion {
++ <<Create>> Dandelion()
+}
+enum entity.building.MartItem {
++  BREAD
++  SWEATER
++  PUMPKIN_PIE
++  CARROT_PIE
++  CAKE
++  EGG
++  MILK
++  WOOL
++  WHEAT
++  CARROT
++  PUMPKIN
++  BEETROOT
++  BERRY
++  DANDELION
++  POPPY
++  ORCHID
++  TULIP
+- int sellPrice
+- String description
+~ <<Create>> MartItem(int,String)
++ int getSellPrice()
++ String getDescription()
++ {static} MartItem getMartItem(String)
+}
+class scene.ShopScene {
+- GameInstance gameInstance
+- VBox container
+- OrbitFontText title
+- VBox titleContainer
+- VScroll itemSelector
+- InfoPane infoPane
+- StackPane topContainer
+- String selectedItem
+- HBox mainContainer
+- CashDisplay cashDisplay
++ <<Create>> ShopScene(GameInstance)
+- void updateCashText(int)
+- void vScrollSetup()
+- void vButtonSetup()
+- void infoPaneSetup()
+- void setSelectedItem(Node)
+- void purchase()
+}
+abstract class entity.animal.Animal {
+- String name
+- int foodLevel
+- int price
++ <<Create>> Animal(String,int)
++ {abstract}void feed(Player)
++ String getName()
++ void setName(String)
++ int getFoodLevel()
++ void increaseFoodLevel(int)
++ void setFoodLevel(int)
++ int getPrice()
++ void setPrice(int)
+}
+class scene.HomeMenuScene {
+- Stage stage
+- {static} Scene scene
+- VBox buttonContainer
+- LuckyFontText title
+- GameButton playButton
+- GameButton tutorialButton
+- GameButton creditButton
+- {static} StackPane root
++ <<Create>> HomeMenuScene(Stage)
+- void componentSetup(GameInstance)
+- void eventSetup(GameInstance)
+- void stageSetup()
++ {static} StackPane getRoot()
++ {static} Scene getScene()
+}
+enum entity.building.ShopItem {
++  CARROT_SEED
++  PUMPKIN_SEED
++  BEETROOT_SEED
++  BERRY_SEED
++  DANDELION_SEED
++  POPPY_SEED
++  ORCHID_SEED
++  TULIP_SEED
++  CHICKEN
++  COW
++  SHEEP
+- int price
+- String description
+~ <<Create>> ShopItem(int,String)
++ int getPrice()
++ String getDescription()
++ {static} ShopItem getShopItem(String)
+}
+class utility.Utility {
++ {static} Item seedToProduct(Seed)
++ {static} Seed stringToSeed(String)
++ {static} String seedToString(Seed)
++ {static} Product stringToProduct(String)
++ {static} Item stringToItem(String)
++ {static} Animal stringToAnimal(String)
+}
+class scene.BarnScene {
+- StackPane topContainer
+- VBox container
+- VBox titleContainer
+- InventoryGrid inventoryGrid
+- OrbitFontText title
+- CashDisplay cashDisplay
++ <<Create>> BarnScene(ArrayList<ItemCounter>,int)
+}
+class scene.MinimartScene {
+- GameInstance gameInstance
+- VBox container
+- OrbitFontText title
+- VBox titleContainer
+- VScroll itemSelector
+- InfoPane infoPane
+- StackPane topContainer
+- String selectedItem
+- HBox mainContainer
+- CashDisplay cashDisplay
++ <<Create>> MinimartScene(GameInstance)
+- void updateCashText(int)
+- void vScrollSetup()
+- void vButtonSetup()
+- void infoPaneSetup()
+- void setSelectedItem(Node)
+- void sell()
+}
+abstract class entity.seed.Seed {
+- String name
+- int price
+- int humidityLevel
++ <<Create>> Seed(String,int,int)
++ void water(Player)
++ String getName()
++ void setName(String)
++ void increaseHumidity(int)
++ int getHumidityLevel()
++ void setHumidityLevel(int)
++ int getPrice()
++ void setPrice(int)
+}
+class entity.animal.NullAnimal {
++ <<Create>> NullAnimal()
++ void feed(Player)
++ void collect(Player)
+}
+class entity.seed.BerrySeed {
++ <<Create>> BerrySeed()
++ void collect(Player)
+}
+class component.PlotControl {
+- String selectedSeed
+- String selectedTool
+- HScroll seedBox
+- HScroll toolBox
++ <<Create>> PlotControl(ArrayList<Seed>)
++ String getSelectedSeed()
++ String getSelectedTool()
+- void seedBoxSetup(ArrayList<Seed>)
+- void toolBoxSetup()
+}
+class entity.building.Minimart {
++ <<Create>> Minimart()
++ void sell(Player,Item,int)
+}
+class entity.seed.CarrotSeed {
++ <<Create>> CarrotSeed()
++ void collect(Player)
+}
+class component.PlotSquare {
+- ImageView background
+- ImageView foreground
+- int currentStage
+- Seed seed
+- Plot plot
++ <<Create>> PlotSquare()
++ void setPlot(Plot)
++ Plot getPlot()
++ Seed getSeed()
++ void setSeed(Seed)
+- void wheatNextStage()
+- void othersNextStage()
++ void nextStage()
++ Boolean isReady()
+- void clear()
++ void harvest()
++ Boolean isPlanted()
+}
+class entity.animal.Chicken {
++ <<Create>> Chicken()
++ void feed(Player)
++ void collect(Player)
+}
+class entity.flower.Poppy {
++ <<Create>> Poppy()
+}
+class entity.material.Pumpkin {
++ <<Create>> Pumpkin()
+}
+class component.HScroll {
+- HBox buttonContainer
+- Rectangle background
+- ScrollPane scrollPane
++ <<Create>> HScroll()
++ void updateSelected(String)
++ HBox getButtonContainer()
+}
+class entity.animal.Sheep {
++ <<Create>> Sheep()
++ void feed(Player)
++ void collect(Player)
+}
+class component.HScrollButton {
+- String buttonId
++ <<Create>> HScrollButton(String,ImageView)
++ String getButtonId()
+}
+class scene.CageScene {
+- GameInstance gameInstance
+- VBox container
+- OrbitFontText title
+- VBox titleContainer
+- StackPane topContainer
+- AnimalGrid animalGrid
+- AnimalControl animalControl
+- CashDisplay cashDisplay
++ <<Create>> CageScene(GameInstance)
+- void animalSquareEvents()
+- void animalSquareHarvest(AnimalSquare)
+- Boolean haveWheat()
+- void loadAnimal()
+- void animalCollected(Animal)
+- void animalFed(Animal)
+}
+class entity.seed.PoppySeed {
++ <<Create>> PoppySeed()
++ void collect(Player)
+}
+
+
+entity.product.Product <|-- entity.product.Bread
+scene.StackPane <|-- scene.PlotScene
+entity.base.Item <|-- entity.flower.Orchid
+javafx.scene.layout.StackPane <|-- component.InfoPane
+entity.seed.Seed <|-- entity.seed.TulipSeed
+entity.material.Material <|-- entity.material.Wheat
+entity.seed.Seed <|-- entity.seed.OrchidSeed
+javafx.scene.layout.HBox <|-- component.AnimalControl
+entity.product.Product <|-- entity.product.Sweater
+entity.product.Product <|-- entity.product.CarrotPie
+javafx.scene.layout.StackPane <|-- component.AnimalGrid
+entity.seed.Seed <|-- entity.seed.WheatSeed
+scene.Pane <|-- scene.FarmScene
+scene.StackPane <|-- scene.CreditScene
+component.StackPane <|-- component.ItemDisplay
+entity.animal.Animal <|-- entity.animal.Cow
+javafx.application.Application <|-- main.Main
+entity.material.Material <|-- entity.material.Beetroot
+component.GameButton <|-- component.VScrollButton
+entity.seed.Seed <|-- entity.seed.BeetrootSeed
+entity.seed.Seed <|-- entity.seed.DandelionSeed
+entity.seed.Seed <|-- entity.seed.PumpkinSeed
+javafx.scene.layout.StackPane <|-- component.PlotGrid
+javafx.scene.layout.StackPane <|-- component.GameButton
+javafx.scene.text.Text <|-- component.OrbitFontText
+entity.seed.Seed <|-- entity.seed.NullSeed
+javafx.scene.layout.StackPane <|-- component.AnimalSquare
+entity.material.Material <|-- entity.material.Milk
+entity.base.Item <|-- entity.flower.Tulip
+javafx.scene.text.Text <|-- component.LuckyFontText
+javafx.scene.layout.HBox <|-- component.ReturnButton
+entity.material.Material <|-- entity.material.Wool
+entity.base.Item <|-- entity.material.Material
+javafx.scene.layout.StackPane <|-- component.VScroll
+entity.product.Product <|-- entity.product.PumpkinPie
+entity.material.Material <|-- entity.material.Berry
+entity.material.Material <|-- entity.material.Egg
+entity.product.Product <|-- entity.product.Cake
+javafx.scene.layout.StackPane <|-- component.InventoryGrid
+entity.base.Item <|-- entity.product.Product
+javafx.scene.layout.HBox <|-- component.CashDisplay
+scene.StackPane <|-- scene.FactoryScene
+entity.material.Material <|-- entity.material.Carrot
+entity.base.Item <|-- entity.flower.Dandelion
+scene.StackPane <|-- scene.ShopScene
+entity.base.Collectable <|.. entity.animal.Animal
+scene.StackPane <|-- scene.BarnScene
+scene.StackPane <|-- scene.MinimartScene
+entity.base.Collectable <|.. entity.seed.Seed
+entity.animal.Animal <|-- entity.animal.NullAnimal
+entity.seed.Seed <|-- entity.seed.BerrySeed
+javafx.scene.layout.HBox <|-- component.PlotControl
+entity.seed.Seed <|-- entity.seed.CarrotSeed
+javafx.scene.layout.StackPane <|-- component.PlotSquare
+entity.animal.Animal <|-- entity.animal.Chicken
+entity.base.Item <|-- entity.flower.Poppy
+entity.material.Material <|-- entity.material.Pumpkin
+javafx.scene.layout.StackPane <|-- component.HScroll
+entity.animal.Animal <|-- entity.animal.Sheep
+component.GameButton <|-- component.HScrollButton
+scene.StackPane <|-- scene.CageScene
+entity.seed.Seed <|-- entity.seed.PoppySeed
+@enduml

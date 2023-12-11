@@ -1,0 +1,108 @@
+@startuml
+class component.InfoPane {
+- Boolean isCrafting
+- Rectangle background
+- ImageView itemImageView
+- OrbitFontText itemNameText
+- OrbitFontText descText
+- OrbitFontText matText
+- VBox matContainer
+- HBox itemDisContainer
+- HBox descContainer
+- VBox container
+- HBox topContainer
+- GameButton actionButton
++ <<Create>> InfoPane(String,Boolean)
++ void setItemNameText(String)
++ void setItemImage(Image)
++ void setDescText(String)
++ HBox getItemDisContainer()
++ GameButton getActionButton()
++ void setBackground(Paint)
+- void craftingSetup()
+- void containerSetup()
+- void componentSetup()
+}
+class component.GameButton {
+- Rectangle background
+- OrbitFontText text
++ <<Create>> GameButton(int,int,int,Paint)
++ <<Create>> GameButton()
++ void addText(String,int,Paint)
++ void setColor(Paint)
+}
+class component.AnimalControl {
+- String selectedTool
+- HScroll toolBox
++ <<Create>> AnimalControl()
++ String getSelectedTool()
+}
+class component.InventoryGrid {
+- GridPane grid
+- ScrollPane scrollPane
+- int uniqueItemCount
+- ArrayList<ItemCounter> inventory
++ <<Create>> InventoryGrid(ArrayList<ItemCounter>)
++ void addItem(ItemCounter)
+- int numToGridCol(int)
+- int numToGridRow(int)
+- void gridPush(ItemDisplay)
+- int getUniqueItemCount()
+}
+class component.CashDisplay {
+- GameButton cashBox
+- OrbitFontText cashText
++ <<Create>> CashDisplay(int)
++ void setCashText(int)
+}
+class component.AnimalSquare {
+- ImageView background
+- ImageView foreground
+- int currentStage
+- Animal animal
++ <<Create>> AnimalSquare()
++ Animal getAnimal()
++ void setAnimal(Animal)
+- void cowNextStage()
+- void chickenNextStage()
+- void sheepNextStage()
++ void nextStage()
++ Boolean isReady()
+- void clear()
++ void harvest()
++ Boolean isOccupied()
++ Boolean eatWheat()
+}
+class component.HScroll {
+- HBox buttonContainer
+- Rectangle background
+- ScrollPane scrollPane
++ <<Create>> HScroll()
++ void updateSelected(String)
++ HBox getButtonContainer()
+}
+class component.HScrollButton {
+- String buttonId
++ <<Create>> HScrollButton(String,ImageView)
++ String getButtonId()
+}
+class component.AnimalGrid {
+- Rectangle background
+- GridPane grid
++ <<Create>> AnimalGrid(ArrayList<Animal>)
+- int numToGridCol(int)
+- int numToGridRow(int)
++ GridPane getGrid()
+}
+
+
+javafx.scene.layout.StackPane <|-- component.InfoPane
+javafx.scene.layout.StackPane <|-- component.GameButton
+javafx.scene.layout.HBox <|-- component.AnimalControl
+javafx.scene.layout.StackPane <|-- component.InventoryGrid
+javafx.scene.layout.HBox <|-- component.CashDisplay
+javafx.scene.layout.StackPane <|-- component.AnimalSquare
+javafx.scene.layout.StackPane <|-- component.HScroll
+component.GameButton <|-- component.HScrollButton
+javafx.scene.layout.StackPane <|-- component.AnimalGrid
+@enduml

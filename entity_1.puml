@@ -1,0 +1,137 @@
+@startuml
+class entity.flower.Orchid {
++ <<Create>> Orchid()
+}
+abstract class entity.base.Item {
+- String name
+- int price
++ <<Create>> Item(String,int)
++ String getName()
++ void setName(String)
++ int getPrice()
++ void setPrice(int)
+}
+class entity.flower.Dandelion {
++ <<Create>> Dandelion()
+}
+class entity.building.Plot {
+- Seed seed
++ <<Create>> Plot()
++ Seed getSeed()
++ void setSeed(Seed)
+}
+class entity.building.Factory {
++ <<Create>> Factory()
++ void craft(Player,Product)
+}
+enum entity.building.MartItem {
++  BREAD
++  SWEATER
++  PUMPKIN_PIE
++  CARROT_PIE
++  CAKE
++  EGG
++  MILK
++  WOOL
++  WHEAT
++  CARROT
++  PUMPKIN
++  BEETROOT
++  BERRY
++  DANDELION
++  POPPY
++  ORCHID
++  TULIP
+- int sellPrice
+- String description
+~ <<Create>> MartItem(int,String)
++ int getSellPrice()
++ String getDescription()
++ {static} MartItem getMartItem(String)
+}
+abstract class entity.animal.Animal {
+- String name
+- int foodLevel
+- int price
++ <<Create>> Animal(String,int)
++ {abstract}void feed(Player)
++ String getName()
++ void setName(String)
++ int getFoodLevel()
++ void increaseFoodLevel(int)
++ void setFoodLevel(int)
++ int getPrice()
++ void setPrice(int)
+}
+enum entity.building.ShopItem {
++  CARROT_SEED
++  PUMPKIN_SEED
++  BEETROOT_SEED
++  BERRY_SEED
++  DANDELION_SEED
++  POPPY_SEED
++  ORCHID_SEED
++  TULIP_SEED
++  CHICKEN
++  COW
++  SHEEP
+- int price
+- String description
+~ <<Create>> ShopItem(int,String)
++ int getPrice()
++ String getDescription()
++ {static} ShopItem getShopItem(String)
+}
+class entity.building.Shop {
+- ArrayList<Seed> unlockedSeed
++ <<Create>> Shop()
++ boolean isUnlocked(Seed)
++ void unlock(Player,Seed)
++ void buy(Player,Animal)
++ ArrayList<Seed> getUnlockedSeed()
+}
+class entity.animal.NullAnimal {
++ <<Create>> NullAnimal()
++ void feed(Player)
++ void collect(Player)
+}
+class entity.building.Minimart {
++ <<Create>> Minimart()
++ void sell(Player,Item,int)
+}
+class entity.animal.Chicken {
++ <<Create>> Chicken()
++ void feed(Player)
++ void collect(Player)
+}
+class entity.flower.Poppy {
++ <<Create>> Poppy()
+}
+class entity.animal.Sheep {
++ <<Create>> Sheep()
++ void feed(Player)
++ void collect(Player)
+}
+class entity.flower.Tulip {
++ <<Create>> Tulip()
+}
+interface entity.base.Collectable {
+~ void collect(Player)
+}
+class entity.animal.Cow {
++ <<Create>> Cow()
++ void feed(Player)
++ void collect(Player)
+}
+
+
+entity.base.Item <|-- entity.flower.Orchid
+entity.base.Item <|-- entity.flower.Dandelion
+entity.base.Collectable <|.. entity.animal.Animal
+entity.animal.Animal <|-- entity.animal.NullAnimal
+entity.animal.Animal <|-- entity.animal.Chicken
+entity.base.Item <|-- entity.flower.Poppy
+entity.animal.Animal <|-- entity.animal.Sheep
+entity.base.Item <|-- entity.flower.Tulip
+entity.animal.Animal <|-- entity.animal.Cow
+@enduml

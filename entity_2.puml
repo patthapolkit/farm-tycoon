@@ -1,0 +1,89 @@
+@startuml
+class entity.product.Bread {
++ <<Create>> Bread()
++ boolean canCraft(Player)
++ void craft(Player)
+}
+abstract class entity.material.Material {
++ <<Create>> Material(String,int)
+}
+enum entity.product.Recipe {
++  BREAD
++  SWEATER
++  CAKE
++  PUMPKIN_PIE
++  CARROT_PIE
+- ArrayList<ItemCounter> ingredient
+- String description
+~ <<Create>> Recipe(ArrayList<ItemCounter>,String)
++ ArrayList<ItemCounter> getIngredient()
++ String getDescription()
++ {static} Recipe getRecipe(String)
+}
+class entity.material.Beetroot {
++ <<Create>> Beetroot()
+}
+class entity.material.Wheat {
++ <<Create>> Wheat()
+}
+class entity.product.Sweater {
++ <<Create>> Sweater()
++ boolean canCraft(Player)
++ void craft(Player)
+}
+class entity.product.CarrotPie {
++ <<Create>> CarrotPie()
++ boolean canCraft(Player)
++ void craft(Player)
+}
+class entity.product.PumpkinPie {
++ <<Create>> PumpkinPie()
++ boolean canCraft(Player)
++ void craft(Player)
+}
+class entity.material.Berry {
++ <<Create>> Berry()
+}
+class entity.material.Egg {
++ <<Create>> Egg()
+}
+class entity.product.Cake {
++ <<Create>> Cake()
++ boolean canCraft(Player)
++ void craft(Player)
+}
+class entity.material.Pumpkin {
++ <<Create>> Pumpkin()
+}
+abstract class entity.product.Product {
++ <<Create>> Product(String,int)
++ {abstract}boolean canCraft(Player)
++ {abstract}void craft(Player)
+}
+class entity.material.Milk {
++ <<Create>> Milk()
+}
+class entity.material.Carrot {
++ <<Create>> Carrot()
+}
+class entity.material.Wool {
++ <<Create>> Wool()
+}
+
+
+entity.product.Product <|-- entity.product.Bread
+entity.base.Item <|-- entity.material.Material
+entity.material.Material <|-- entity.material.Beetroot
+entity.material.Material <|-- entity.material.Wheat
+entity.product.Product <|-- entity.product.Sweater
+entity.product.Product <|-- entity.product.CarrotPie
+entity.product.Product <|-- entity.product.PumpkinPie
+entity.material.Material <|-- entity.material.Berry
+entity.material.Material <|-- entity.material.Egg
+entity.product.Product <|-- entity.product.Cake
+entity.material.Material <|-- entity.material.Pumpkin
+entity.base.Item <|-- entity.product.Product
+entity.material.Material <|-- entity.material.Milk
+entity.material.Material <|-- entity.material.Carrot
+entity.material.Material <|-- entity.material.Wool
+@enduml

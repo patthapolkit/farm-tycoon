@@ -1,0 +1,69 @@
+@startuml
+class entity.seed.WheatSeed {
++ <<Create>> WheatSeed()
++ void collect(Player)
+}
+class entity.seed.TulipSeed {
++ <<Create>> TulipSeed()
++ void collect(Player)
+}
+class entity.seed.OrchidSeed {
++ <<Create>> OrchidSeed()
++ void collect(Player)
+}
+class entity.seed.NullSeed {
++ <<Create>> NullSeed()
++ void collect(Player)
+}
+class entity.seed.CarrotSeed {
++ <<Create>> CarrotSeed()
++ void collect(Player)
+}
+class entity.seed.BeetrootSeed {
++ <<Create>> BeetrootSeed()
++ void collect(Player)
+}
+class entity.seed.DandelionSeed {
++ <<Create>> DandelionSeed()
++ void collect(Player)
+}
+class entity.seed.PumpkinSeed {
++ <<Create>> PumpkinSeed()
++ void collect(Player)
+}
+abstract class entity.seed.Seed {
+- String name
+- int price
+- int humidityLevel
++ <<Create>> Seed(String,int,int)
++ void water(Player)
++ String getName()
++ void setName(String)
++ void increaseHumidity(int)
++ int getHumidityLevel()
++ void setHumidityLevel(int)
++ int getPrice()
++ void setPrice(int)
+}
+class entity.seed.BerrySeed {
++ <<Create>> BerrySeed()
++ void collect(Player)
+}
+class entity.seed.PoppySeed {
++ <<Create>> PoppySeed()
++ void collect(Player)
+}
+
+
+entity.seed.Seed <|-- entity.seed.WheatSeed
+entity.seed.Seed <|-- entity.seed.TulipSeed
+entity.seed.Seed <|-- entity.seed.OrchidSeed
+entity.seed.Seed <|-- entity.seed.NullSeed
+entity.seed.Seed <|-- entity.seed.CarrotSeed
+entity.seed.Seed <|-- entity.seed.BeetrootSeed
+entity.seed.Seed <|-- entity.seed.DandelionSeed
+entity.seed.Seed <|-- entity.seed.PumpkinSeed
+entity.base.Collectable <|.. entity.seed.Seed
+entity.seed.Seed <|-- entity.seed.BerrySeed
+entity.seed.Seed <|-- entity.seed.PoppySeed
+@enduml

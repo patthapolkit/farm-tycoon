@@ -1,0 +1,140 @@
+@startuml
+enum resource.ImageLoader {
++  BACKGROUND_HOME
++  BEETROOT
++  BERRY
++  CARROT
++  DANDELION
++  EGG
++  MILK
++  ORCHID
++  POPPY
++  TULIP
++  WHEAT
++  WOOL
++  PUMPKIN
++  BACK
++  PLOT_SQUARE
++  WET_PLOT_SQUARE
++  GREEN_SEED
++  GREEN_SEEDLING
++  YELLOW_SEED
++  YELLOW_SEEDLING
++  WHEAT_SEED
++  BEETROOT_SEED
++  BERRY_SEED
++  CARROT_SEED
++  DANDELION_SEED
++  ORCHID_SEED
++  POPPY_SEED
++  TULIP_SEED
++  PUMPKIN_SEED
++  WATERING_POT
++  SICKLE
++  PUMPKIN_PIE
++  CAKE
++  CARROT_PIE
++  SWEATER
++  BREAD
++  YELLOW_GROWN
++  GREEN_GROWN
++  CHICKEN
++  CHICKEN1
++  CHICKEN2
++  CHICKEN3
++  CHICKEN4
++  CHICKEN5
++  COW
++  COW1
++  COW2
++  COW3
++  COW4
++  COW5
++  SHEEP
++  SHEEP1
++  SHEEP2
++  SHEEP3
++  SHEEP4
++  SHEEP5
++  ANIMAL_SQUARE
++  HAND
++  CHICKEN_FOOD
++  MAIN_BACKGROUND
++  BARN
++  CAGE
++  FACTORY
++  PLOT
++  SHOP
++  MART
+- String name
+- Image image
+~ <<Create>> ImageLoader(String)
++ {static} Image getImage(ImageLoader)
++ {static} ImageView getImageView(ImageLoader)
++ {static} ImageLoader itemToLoad(Item)
++ {static} ImageLoader seedToLoad(Seed)
++ {static} ImageLoader animalToLoad(Animal)
+}
+class logic.ItemCounter {
+- Item item
+- int count
++ <<Create>> ItemCounter(Item)
++ <<Create>> ItemCounter(Item,int)
++ String toString()
++ Item getItem()
++ void setItem(Item)
++ int getCount()
++ void setCount(int)
+}
+class logic.GameInstance {
+- Minimart minimart
+- Shop shop
+- Factory factory
+- Player player
++ <<Create>> GameInstance()
++ Minimart getMinimart()
++ void setMinimart(Minimart)
++ Shop getShop()
++ void setShop(Shop)
++ Factory getFactory()
++ void setFactory(Factory)
++ Player getPlayer()
++ void setPlayer(Player)
+}
+class utility.Utility {
++ {static} Item seedToProduct(Seed)
++ {static} Seed stringToSeed(String)
++ {static} String seedToString(Seed)
++ {static} Product stringToProduct(String)
++ {static} Item stringToItem(String)
++ {static} Animal stringToAnimal(String)
+}
+class logic.Player {
+- int balance
+- ArrayList<ItemCounter> inventory
+- ArrayList<Plot> plots
+- ArrayList<Animal> cage
++ <<Create>> Player()
++ boolean existsInInventory(Item,int)
++ boolean canAddToCage(Animal,int)
++ void addToCage(Animal)
++ void addItem(Item,int)
++ void removeItem(Item,int)
++ void chargeMoney(int)
++ int getBalance()
++ void setBalance(int)
++ ArrayList<Plot> getPlots()
++ void setPlots(ArrayList<Plot>)
++ ArrayList<ItemCounter> getInventory()
++ void setInventory(ArrayList<ItemCounter>)
++ ArrayList<Animal> getCage()
++ void setCage(ArrayList<Animal>)
+}
+class main.Main {
++ void start(Stage)
++ {static} void main(String[])
+}
+
+
+javafx.application.Application <|-- main.Main
+@enduml

@@ -1,0 +1,95 @@
+@startuml
+class component.PlotGrid {
+- Rectangle background
+- GridPane grid
++ <<Create>> PlotGrid(ArrayList<Plot>)
+- int numToGridCol(int)
+- int numToGridRow(int)
++ GridPane getGrid()
+- void gridSetup(ArrayList<Plot>)
+}
+class component.OrbitFontText {
++ <<Create>> OrbitFontText(String,Integer,Paint)
++ <<Create>> OrbitFontText(String,Integer)
++ <<Create>> OrbitFontText(String)
+}
+class component.VScroll {
+- VBox buttonContainer
+- Rectangle background
+- ScrollPane scrollPane
+- Paint onClickColor
++ <<Create>> VScroll(Paint)
++ VBox getButtonContainer()
++ void updateSelected(String)
++ void setBackground(Paint,String)
+- void componentSetup()
+}
+class component.PlotSquare {
+- ImageView background
+- ImageView foreground
+- int currentStage
+- Seed seed
+- Plot plot
++ <<Create>> PlotSquare()
++ void setPlot(Plot)
++ Plot getPlot()
++ Seed getSeed()
++ void setSeed(Seed)
+- void wheatNextStage()
+- void othersNextStage()
++ void nextStage()
++ Boolean isReady()
+- void clear()
++ void harvest()
++ Boolean isPlanted()
+}
+class component.ItemDisplay {
+- Rectangle background
+- Item itemDisplayed
+- ImageView itemImageView
+- VBox countContainer
+- VBox imageViewContainer
+- OrbitFontText countText
+- int count
++ <<Create>> ItemDisplay(ItemCounter)
++ Item getItemDisplayed()
++ void addCount(int)
+}
+class component.VScrollButton {
+- String buttonId
+- HBox container
+- ImageView itemImgView
+- OrbitFontText itemNameText
++ <<Create>> VScrollButton(ImageView,String,String)
++ String getButtonId()
+}
+class component.LuckyFontText {
++ <<Create>> LuckyFontText(String,Integer)
+}
+class component.PlotControl {
+- String selectedSeed
+- String selectedTool
+- HScroll seedBox
+- HScroll toolBox
++ <<Create>> PlotControl(ArrayList<Seed>)
++ String getSelectedSeed()
++ String getSelectedTool()
+- void seedBoxSetup(ArrayList<Seed>)
+- void toolBoxSetup()
+}
+class component.ReturnButton {
+- GameButton backButton
++ <<Create>> ReturnButton()
+}
+
+
+javafx.scene.layout.StackPane <|-- component.PlotGrid
+javafx.scene.text.Text <|-- component.OrbitFontText
+javafx.scene.layout.StackPane <|-- component.VScroll
+javafx.scene.layout.StackPane <|-- component.PlotSquare
+component.StackPane <|-- component.ItemDisplay
+component.GameButton <|-- component.VScrollButton
+javafx.scene.text.Text <|-- component.LuckyFontText
+javafx.scene.layout.HBox <|-- component.PlotControl
+javafx.scene.layout.HBox <|-- component.ReturnButton
+@enduml
